@@ -43,7 +43,7 @@ io.on('connection', function(socket){
 
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  console.log('Escuchando en el puerto *:3000');
 });
 
 
@@ -60,6 +60,7 @@ io.on('connection', function(socket){
   
   
   all_clts.push(cliente);
+  io.emit('cliente_conectado', cliente );
   
   
   socket.on('mensaje', (data)=>{
@@ -99,5 +100,20 @@ io.on('connection', function(socket){
     console.log(all_clts);
     self.io.sockets.emit('clientes_traidos', all_clts );
   });
+
+
+  socket.on('necesito_puestos', (data)=>{
+    console.log('Alguien escribió: que necesito_puestos', all_clts);
+    
+    puestos = [];
+
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].tipo == 'Puesto'){
+        puestos.push(all_clts[i]);
+      }
+    }
+    socket.emit('toma_los_puestos', {puestos: all_clts} );
+  });
+
 
 });
