@@ -116,4 +116,10 @@ io.on('connection', function(socket){
   });
 
 
+  socket.on('toma_mis_datos', (data)=>{
+    console.log('Alguien escribió: toma_mis_datos', data);
+    
+  });
+
+
 });
