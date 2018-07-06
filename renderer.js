@@ -117,8 +117,21 @@ io.on('connection', function(socket){
 
 
   socket.on('toma_mis_datos', (data)=>{
+    
+
     console.log('Alguien escribió: toma_mis_datos', data);
     
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].id == socket.id){
+        
+        all_clts[i] = Object.assign({}, all_clts[i], data.usuario);
+        self.io.sockets.emit('alguien_logueado', all_clts[i]);
+        console.log('Alguien se logueó ' , all_clts);
+      }
+    }
+
+
+
   });
 
 
