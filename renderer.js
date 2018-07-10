@@ -108,8 +108,7 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('traer_clientes', (data)=>{
-    console.log('Alguien escribió: Traer clientes');
-    console.log(all_clts);
+    //console.log('Alguien escribió: Traer clientes', all_clts);
     self.io.sockets.emit('clientes_traidos', all_clts );
   });
 
@@ -162,8 +161,6 @@ self.io.on('connection', (socket)=> {
   socket.on('toma_mis_datos', (data)=>{
     
 
-    console.log('Alguien escribió: toma_mis_datos', data);
-    
     for (var i = 0; i < all_clts.length; i++) {
       if (all_clts[i].id == socket.id){
         

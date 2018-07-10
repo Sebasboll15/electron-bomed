@@ -18,14 +18,14 @@ function crearDatosIniciales() {
                 }else{
                     
                     hash_password   = '123';
-                    consulta = "INSERT INTO `usuarios` VALUES (1,'JORGE', 'CELEDON', 'jorge', '" + hash_password + "', 1, 'Admin', 'M')," +
-                                                             "(2,'JUAN CAMILO', 'MANRRIQUE', 'juan','" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(3,'EDILSON', 'MARQUEZ', 'edilson', '" + hash_password + "', 1, 'Usuario', 'M')," +
-                                                             "(4,'FELIX', 'DÍAZ', 'felix', '" + hash_password + "', 1, 'Usuario',  'M')," +
-                                                             "(5,'ERIK', 'ESLAVA', 'erik', '" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(6,'MEMO', 'SILVA', 'memo','" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(7,'JOSETH', 'GUERRERO', 'joseth', '" + hash_password + "',  1, 'Usuario', 'M')," +
-                                                             "(8,'DANIEL', 'GRANDAS', 'daniel',  '" + hash_password + "', 1, 'Usuario', 'M')" ; 
+                    consulta = "INSERT INTO `usuarios` VALUES (1,'JORGE', 'CELEDON', 'M', 'jorge', '" + hash_password + "', 1, 'Admin')," +
+                                                             "(2,'JUAN CAMILO', 'MANRRIQUE', 'M', 'juan','" + hash_password + "',  1, 'Usuario')," +
+                                                             "(3,'EDILSON', 'MARQUEZ', 'M', 'edilson', '" + hash_password + "', 1, 'Usuario')," +
+                                                             "(4,'FELIX', 'DÍAZ', 'M', 'felix', '" + hash_password + "', 1, 'Usuario')," +
+                                                             "(5,'ERIK', 'ESLAVA', 'M', 'erik', '" + hash_password + "',  1, 'Usuario')," +
+                                                             "(6,'MEMO', 'SILVA', 'M', 'memo','" + hash_password + "',  1, 'Usuario')," +
+                                                             "(7,'JOSETH', 'GUERRERO', 'M', 'joseth', '" + hash_password + "',  1, 'Usuario')," +
+                                                             "(8,'DANIEL', 'GRANDAS', 'M', 'daniel',  '" + hash_password + "', 1, 'Usuario')" ; 
                                                              
                     db.query(consulta).then(function(res){
                         resolve2('Usuarios Insertados');

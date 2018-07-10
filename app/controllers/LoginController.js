@@ -24,18 +24,20 @@ function putLogout(req, res) {
 }
 
 function postLogin(req, res) {
+    
     User = require('../conexion/Models/User');
     
-    User.login(req.body).then((user)=>{
+    User.login(req.body).then(function(user){
         
-        return User.datos_usuario_logueado(user);
+        //return User.datos_usuario_logueado(user);
+        return user;
         
-    }, (r2)=>{
+    }, function(r2){
         
         console.log(r2);
         res.status(400).send({ error: r2 })
         
-    }).then((user)=>{
+    }).then(function(user){
         
         res.send(user);
         
