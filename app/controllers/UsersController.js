@@ -72,10 +72,8 @@ function getInsertarHandler(req, res) {
 	params = req.query;
 	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.password, params.tipo];     
 	db.query(consulta, datos).then (function(result){
-        console.log('Se insertaron los datos con exito', req);
-        res.send('Editado');
+        res.send('Insertado');
 	}, function(error){
-       console.log('No se pudo insertar los datos', error);
        res.status(400).send({ error: error })
 	})
 }
