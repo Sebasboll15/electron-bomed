@@ -65,7 +65,7 @@ function createTable() {
             console.log('tabla Respuestas creada');
             return db.query(sqlPruebas);
         }).then(function(res){
-            console.log('tabla user_event creada');
+            console.log('tabla Pruebas creada');
             console.log('TODAS LAS TABLAS CREADAS');
         })
         

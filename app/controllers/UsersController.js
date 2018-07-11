@@ -9,10 +9,6 @@ router.route('/')
 router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
-
-
-
-
 router.route('/cambiar-pass').get(getCambiarPassHandler)
 
 function getRouteHandler(req, res) {
@@ -32,7 +28,15 @@ function postRouteHandler(req, res) {
 }
 
 function getCambiarPassHandler(req, res) {
-    res.send('Cambiado');
+   consulta = "update  usuarios set password=? where rowid=?";
+	
+	db.query(consulta, [ req.query.password, req.query.rowid]).then (function(result){
+		res.send('Cambiado');
+	}, function(error){
+		console.log('No se pudo cambiar la contra', error);
+		res.status(400).send({ error: error })
+	})	
+    
 }
 
 
@@ -64,9 +68,9 @@ function getEditarHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 
-	consulta = "Insert into usuarios(nombres, apellidos, sexo, username, password, prueba_id, tipo) values(?,?,?,?,?,?,?)";
+	consulta = "INSERT into usuarios(nombres, apellidos, sexo, username, password, tipo) VALUES(?,?,?,?,?,?)";
 	params = req.query;
-	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.prueba_id, params.tipo, params.rowid];     
+	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.password, params.tipo];     
 	db.query(consulta, datos).then (function(result){
         console.log('Se insertaron los datos con exito', req);
         res.send('Editado');
