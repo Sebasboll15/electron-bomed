@@ -11,6 +11,7 @@ router.route('/eliminar').delete(deletePruebaHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/Detalles').get(getDetallesHandler);
+router.route('/Seleccionar_Prueba').get(getSeleccionar_PruebaHandler);
 
 function getRouteHandler(req, res) {
 	 consulta = "Select p.rowid, p.* from pruebas p";
@@ -72,22 +73,42 @@ function getDetallesHandler(req, res) {
    consulta1 = "SELECT u.nombres, u.apellidos, u.rowid FROM usuarios u INNER JOIN pruebas p ON p.rowid= u.prueba_id"
               
 	
-	db.query(consulta1).then(function(result){
-        console.log(result);
-        usuarios = result ;
-    	res.json(usuarios_and_preg);
-    })
+	db.query(consulta1).then(function(usuarios){
 
-	consulta2 = "SELECT preg.tipo, preg.rowid FROM preguntas preg INNER JOIN pruebas prueba ON prueba.rowid= p.prueba_id";
-   
+		consulta2 = "SELECT preg.tipo, preg.rowid FROM preguntas preg INNER JOIN pruebas prueba ON prueba.rowid= preg.prueba_id";
+	   
 
-	db.query(consulta2).then(function(result){
-        console.log(result);
-        preguntas = result ;
-    	res.json(usuarios_and_preg);
+		db.query(consulta2).then(function(preguntas){
+	    	res.json({preguntas: preguntas, usuarios: usuarios});
+	    })
+
     })
 
 }
+
+function getSeleccionar_PruebaHandler(req, res) {
+
+		consulta = "UPDATE pruebas SET actual=0";
+		db.query(consulta, []).then (function(result){
+			
+			consulta = "UPDATE pruebas SET actual=1 WHERE rowid=?";
+			
+			db.query(consulta, [req.query.rowid]).then (function(result){
+				
+				pruebas = result.data ;
+				res.send('Editado');
+			}, function(error){
+				console.log('No se pudo establecer como actual', error);
+				res.status(400).send({ error: error })
+			})
+
+		}, function(error){
+			console.log('No se pudo quitar actuales', error);
+			res.status(400).send({ error: error })
+
+		})
+}
+
 
 
 module.exports = router;
