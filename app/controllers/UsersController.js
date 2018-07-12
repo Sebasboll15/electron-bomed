@@ -9,7 +9,8 @@ router.route('/')
 router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
-router.route('/cambiar-pass').get(getCambiarPassHandler)
+router.route('/cambiar-pass').get(getCambiarPassHandler);
+
 
 function getRouteHandler(req, res) {
 
@@ -18,7 +19,7 @@ function getRouteHandler(req, res) {
         usuarios = result ;
     	res.json(usuarios);
     }, function(error){
-		console.log('No se pudo traer los datos', error);
+		
 	})
 
 }
@@ -33,7 +34,7 @@ function getCambiarPassHandler(req, res) {
 	db.query(consulta, [ req.query.password, req.query.rowid]).then (function(result){
 		res.send('Cambiado');
 	}, function(error){
-		console.log('No se pudo cambiar la contra', error);
+		
 		res.status(400).send({ error: error })
 	})	
     
@@ -46,7 +47,7 @@ function deleteUsuarioHandler(req, res) {
 	db.query(consulta, [req.query.id]).then (function(result){
 		res.send('Eliminado');
 	}, function(error){
-		console.log('No se pudo borrarlos datos', error);
+		
 		res.status(400).send({ error: error })
 	})
 }
@@ -58,10 +59,10 @@ function getEditarHandler(req, res) {
 
 	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.prueba_id, params.tipo, params.rowid];     
 	db.query(consulta, datos).then (function(result){
-        console.log('Se actualizaron los datos con exito', req);
+     
         res.send('Editado');
 	}, function(error){
-       console.log('No se pudo actualizar los datos', error);
+      
        res.status(400).send({ error: error })
 	})
 }
@@ -76,7 +77,7 @@ function getInsertarHandler(req, res) {
 	}, function(error){
        res.status(400).send({ error: error })
 	})
-}
+};
 
 
                   
