@@ -57,8 +57,8 @@ self.io.on('connection', (socket)=> {
 
     count_clients++;
 
-    datos 					= {};
-    datos.logged 			= false;
+    datos 					    = {};
+    datos.logged 			  = false;
     datos.registered 		= false;
     datos.resourceId		= socket.id;
     datos.categsel			= 0;
@@ -95,10 +95,10 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('disconnect', (data)=>{
-    
+
     for (let i = 0; i < all_clts.length; i++) {
 
-      if (all_clts[i].id == socket.id) {
+      if (all_clts[i].resourceId == socket.id) {
         all_clts.splice(i, 1);
       }
     }
