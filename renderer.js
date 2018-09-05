@@ -162,8 +162,10 @@ self.io.on('connection', (socket)=> {
     
 
     for (var i = 0; i < all_clts.length; i++) {
-      if (all_clts[i].id == socket.id){
-        
+      if (all_clts[i].resourceId == socket.id){
+          all_clts[i].user_data == data.usuario
+       
+
         all_clts[i] = Object.assign({}, all_clts[i], data.usuario);
         self.io.sockets.emit('alguien_logueado', all_clts[i]);
         console.log('Alguien se logueó ' , all_clts);
