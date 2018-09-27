@@ -11,4 +11,5 @@ router.use('/pruebas', require('./TestsController'));
 router.use('/Prueba_en_curso', require('./Prueba_RespuestasController'));
 router.use('/respuestas', require('./AnswerController'));
 router.use('/Dashboard', require('./DashboardController'));
+router.use('/Control', require('./ControlController'));
 module.exports = router;

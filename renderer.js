@@ -140,6 +140,23 @@ self.io.on('connection', (socket)=> {
       }
   });
 
+  socket.on('cierra_ su_sesion', function(data){
+     
+     for(var i=0; i < all_clts.length; i++){
+        if (all_clts[i].resourceId == socket.id) {
+           all_clts[i].user_data == data.usuario
+        }
+    }
+    
+
+
+    socket.broadcast.emit('sesion_a_cerrar', )
+
+
+
+  })
+
+
   socket.on('liberar_hasta_pregunta', function(data){
       info_evento.free_till_question 	= data.numero;
       info_evento.preg_actual 		= data.numero;
