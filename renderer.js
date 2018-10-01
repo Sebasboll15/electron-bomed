@@ -140,17 +140,12 @@ self.io.on('connection', (socket)=> {
       }
   });
 
-  socket.on('cierra_ su_sesion', function(data){
+  socket.on('cierra_ su_sesion', function(id){
      
-     for(var i=0; i < all_clts.length; i++){
-        if (all_clts[i].resourceId == socket.id) {
-           all_clts[i].user_data == data.usuario
-        }
-    }
+     
     
 
-
-    socket.broadcast.emit('sesion_a_cerrar', )
+    socket.broadcast.emit('sesion_a_cerrar', {resourceId: id} )
 
 
 
@@ -185,6 +180,7 @@ self.io.on('connection', (socket)=> {
 
         all_clts[i] = Object.assign({}, all_clts[i], data.usuario);
         self.io.sockets.emit('alguien_logueado', all_clts[i]);
+        
         console.log('Alguien se logueó ' , all_clts);
       }
     }
@@ -192,6 +188,7 @@ self.io.on('connection', (socket)=> {
 
 
   });
+
 
 
 });
