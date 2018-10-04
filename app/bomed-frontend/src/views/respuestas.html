@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+  <h1>
+ Respuestas
+    <small>Control panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Olimpiadas2019</li>
+  </ol>
+</section>
+
+
+
+<section class="content">
+    <div class="row">
+    <section class="col-lg-12 connectedSortable">
+
+        <div class="box box-primary" style="overflow: auto;">
+          <table class="table table-hover table-dark">
+            <thead>
+                 <th>Id</th>
+                 <th>Pregunta</th>
+                 <th>Usuario</th> 
+                 <th>Opción elegida</th> 
+                 <th>Opción correcta</th>
+                 <th>Duración</th>
+                 <th style="min-width: 100px;">Opciones</th>
+            </thead>
+             
+             <tbody> 
+               <tr  ng-repeat="r in respuestas">
+                    
+                    <th scope="row">{{r.rowid}}</th>
+                    
+                    <td>
+                     
+
+                      <span>pregunta {{r.preg_id}}</span>
+                     
+                        
+                     
+                    </td>
+                    
+                    <td>
+                     
+                      <span>{{r.usuario_id}}</span>
+                    
+                    </td>
+                    
+                    <td>
+                      
+                      <span>{{r.opcion_elegida}}</span>
+
+                    </td>
+                     
+                     <td>
+                      
+                      <span>{{r.correcta}}</span>
+
+                    </td>
+                    <td>
+
+                      <span>{{r.duracion}}</span>
+                    
+                    </td>
+                    
+                    <td style="padding: 0px;">
+                      
+                      <span>
+                        
+                        <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ans(r.rowid)" uib-tooltip="Eliminar"></button> 
+                        
+
+                      </span>
+                        
+                    </td>
+                
+               </tr>
+             </tbody> 
+          </table>
+
+            
+   </section>
+   </div>
+
+</div>

@@ -1,0 +1,78 @@
+
+<!-- Main content -->
+   
+  <div class="animated fadeIn">
+
+  <!-- Main row -->
+  <div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+
+      <!-- TO DO List -->
+      <div class="box box-primary">
+        <div class="box-header">
+
+          <h3>
+              Pregunta {{preguntas[indice_preg].rowid }}
+          </h3>
+
+
+                      
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+       
+          <ul class="todo-list">
+            <li>
+             
+             
+               <h4>{{preguntas[indice_preg].definicion}}</h4>
+            
+                <div class="row">
+                   <div class="col-sm-12"> 
+                      <div class="col-sm-3 ">  
+                        <span class="opcion-pregunta label label-default" 
+                         ng-click="seleccionarOpcion('A')">A.     {{preguntas[indice_preg].opc_a}}  </span> 
+                      </div>  
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_b" 
+                            ng-click="seleccionarOpcion('B')" class="opcion-pregunta label label-default">B. {{preguntas[indice_preg].opc_b}}</span>
+                        </div>
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_c" 
+                            ng-click="seleccionarOpcion('C')" class="opcion-pregunta label label-default">C. {{preguntas[indice_preg].opc_c}}</span>
+                        </div>
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_d" 
+                            ng-click="seleccionarOpcion('D')" class="opcion-pregunta label label-default">D. {{preguntas[indice_preg].opc_d}}</span>
+                        </div>
+
+                   </div>
+                </div>
+
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                  
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- /.box-body -->
+        
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- right col -->
+  </div>
+  <!-- /.row (main row) -->
+     
+ 
+</div>
+

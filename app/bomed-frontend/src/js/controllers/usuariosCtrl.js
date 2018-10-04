@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('usersCtrl', function($scope, ConexionServ, $http, $filter, $uibModal){
+.controller('usuariosCtrl', function($scope, ConexionServ, $http, $filter, $uibModal){
 	$scope.mostrando= false;
 	$scope.boton1= true;
 	$scope.usuarios= {};

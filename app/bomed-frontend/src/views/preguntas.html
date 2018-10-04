@@ -1,0 +1,272 @@
+<div class="animated fadeIn">
+  <h1>
+  Preguntas
+    <small>Principal</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Olimpiadas2019</li>
+  </ol>
+</section>
+
+
+
+<section class="content">
+    <div class="row">
+    <section class="col-lg-12 connectedSortable">
+
+        <div class="box box-primary" style="overflow: auto;">
+          <table class="table table-hover table-dark">
+            <thead> <th>Id</th> 
+              <th>Definición</th> 
+              <th>Tipo</th> 
+              <th>Pertenece a:</th> 
+              <th>Opción A</th> 
+              <th>Opción B</th>
+              <th>Opción C</th> 
+              <th>Opción D</th> 
+              <th>Respuesta Correcta</th> 
+              <th style="min-width: 100px;">Opciones</th>
+            </thead>
+            
+            <tbody> 
+               <tr  ng-repeat="p in preguntas">
+                    
+                    <th scope="row">{{p.rowid}}</th>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.definicion}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.definicion"></span>
+
+                    </td>
+                    <td>
+                        <span ng-show="!p.editando">{{p.tipo}}</span>
+                     
+                        <span ng-show="p.editando">
+                            
+                            <label>
+                              <input type="radio" ng-model="p.tipo" value="Multiple">Múltiple
+                            </label>
+                            
+                            <label>
+                              <input type="radio" ng-model="p.tipo" value="Falso/Verdadero">Falso/Verdadero
+                            </label>
+                           
+                        </span> 
+                       
+                    </td>
+
+                    <td>
+                      <span ng-show="!p.editando">Prueba {{p.prueba_id}}</span>
+                        <span ng-show="p.editando">
+                             <select class="form-control"  ng-model="p.prueba_id">
+                                   <option ng-repeat="prueba in pruebas" value="{{prueba.rowid}}">{{prueba.alias}}</option>
+                                 </select> 
+                        
+                        </span>
+                       
+                    </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_a}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_a"></span>
+                     </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_b}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_b"></span>
+                    </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_c}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_c"></span>
+                    </td>
+                     
+                     <td>
+                      <span ng-show="!p.editando">{{p.opc_d}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_d"></span>
+                    </td>
+
+                    <td>
+                        <span ng-show="!p.editando">{{p.correcta}}</span>
+                        <span ng-show="p.tipo == 'Multiple'"> 
+                            <span ng-show="p.editando">
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="A">A
+                              </label>
+                              
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="B">B
+                              </label>
+
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="C">C
+                              </label>
+
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="D">D
+                              </label>
+                              
+                            </span>
+                         </span>
+                             <span ng-show="p.tipo == 'Falso/Verdadero'">
+                                 <span ng-show="p.editando">
+                                  <label>
+                                    <input type="radio" ng-model="p.correcta" value="Verdadero">Verdadero
+                                  </label>
+                                  
+                                  <label>
+                                    <input type="radio" ng-model="p.correcta" value="Falso">Falso
+                                  </label>
+
+                                </span>
+                             </span>
+                    </td>
+                    <td style="padding: 0px;">
+                      <span ng-show="!p.editando">
+                        <div class="btn-group">
+                            <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ask(p.rowid)" uib-tooltip="Eliminar"></button> 
+                            <button ng-click="editarP(p)" class="btn-xs btn btn-info glyphicon glyphicon-pencil" uib-tooltip="Editar"></button> 
+                        </div>
+                      </span>
+                       <button ng-click="editarAsk(p)" ng-show="p.editando" class="btn-xs btn btn-info glyphicon glyphicon-ok" ></button> 
+                    </td>
+                
+               </tr>
+             </tbody> 
+          </table>
+
+        <div class="box-body">
+
+          <button type="button" class="btn btn-info" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
+            
+                  <div  ng-show="mostrando">
+                    <h2>Crea tus preguntas</h2>
+
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="row">
+                          <div class="col-sm-3">
+                           <label>Definición:</label> 
+                          </div>
+                          <div class="col-sm-3">
+                           <input type="text" ng-model="preg_nueva.definicion">
+                          </div>
+                        </div>
+                         <div class="row">
+                          <div class="col-sm-3">
+                           <label>Tipo:</label> 
+                          </div>
+                          <div class="col-sm-4">
+                           <label>
+                            <input type="radio" ng-model="preg_nueva.tipo" value="Multiple">Múltiple
+                          </label>
+                           </div>
+                          <div class="col-sm-5">
+                          <label>
+                            <input type="radio" ng-model="preg_nueva.tipo" value="Falso-Verdadero">Falso/Verdadero
+                          </label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-3">
+                           <label>Pertenece a:</label> 
+                          </div>
+                          <div class="col-sm-3">
+                       
+                         <select class="form-control"  ng-model="preg_nueva.prueba_id">
+                             <option ng-repeat="n in pruebas" value="{{n.rowid}}">{{n.alias}}</option>
+                           </select> 
+                          
+                          </div>
+                        </div>
+
+                          <div ng-show="preg_nueva.tipo == 'Multiple' ">
+                          <div class="row"> 
+                                    <label>Opciones:</label> 
+                                   <div class="row">
+                                      <div class="col-sm-3">
+                                         <label>A:</label>
+                                      </div>
+                                <div class="col-sm-3"> 
+                                 <input type="text" ng-model="preg_nueva.opc_a" value="A">
+                                </div>
+                              </div>    
+                                  <div class="row">  
+                                   <div class="col-sm-3">
+                                   <label>B:</label>
+                                </div>
+                                <div class="col-sm-3"> 
+                                 <input type="text" ng-model="preg_nueva.opc_b" value="B">
+                                </div>
+                               </div> 
+                                 <div class="row"> 
+                                  <div class="col-sm-3">
+                                   <label>C:</label>
+                                </div>
+                                <div class="col-sm-3"> 
+                                 <input type="text" ng-model="preg_nueva.opc_c" value="C">
+                                </div>
+                               </div>
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                   <label>D:</label>
+                                </div>
+                                <div class="col-sm-3"> 
+                                 <input type="text" ng-model="preg_nueva.opc_d" value="D">
+                              
+                                
+                                </div>
+                                 </div>
+                                <div class="row">
+                                <div class="col-sm-3">
+                                 <label>Respuesta correcta:</label> 
+                                </div>
+                                <div class="col-sm-3">
+                                   <label>
+                                  <input type="radio" ng-model="preg_nueva.correcta" value="A">A 
+                                </label>
+                                
+                                <label>
+                                  <input type="radio" ng-model="preg_nueva.correcta" value="B">B
+                                  <label>
+                                  <input type="radio" ng-model="preg_nueva.correcta" value="C">C
+                                   </label>
+                                  <label>
+                                  <input type="radio" ng-model="preg_nueva.correcta" value="D">D
+                                </label>
+                                </div>
+                              </div>
+                          
+                       
+                      </div> 
+                     </div>       
+                            <div ng-show="preg_nueva.tipo == 'Falso-Verdadero' ">
+                               
+                                  <div class="row">
+                                    <div class="col-sm-3">
+                                     <label>Elija respuesta:</label> 
+                                    </div>
+                                  <div class="col-sm-3">
+                                     <label>
+                                    <input type="radio" ng-model="preg_nueva.correcta" value="Falso">Falso 
+                                  </label>
+                                   </div>
+                                   <div class="col-sm-3">
+                                  <label>
+                                    <input type="radio" ng-model="preg_nueva.correcta" value="Verdadero">Verdadero
+                                    <label>
+                                  </div>
+                            </div>
+                          </div>
+                        <button type="button" class="btn btn-info" ng-click="insertarAsk(preg_nueva)">Insertar</button>
+                        <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
+
+                 
+                  </div>
+             </div>
+         </div>
+   </section>
+   </div>
+
+</div>

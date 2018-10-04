@@ -116,7 +116,75 @@ angular
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
-          files: ['js/controllers/usuarios.js']
+          files: ['js/controllers/usuariosCtrl.js']
+        });
+      }]
+    }
+  })
+
+  .state('app.pruebas', {
+    url: '/pruebas',
+    templateUrl: 'views/pruebas.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para ver y editar las pruebas' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/pruebasCtrl.js']
+        });
+      }]
+    }
+  })
+
+  .state('app.preguntas', {
+    url: '/preguntas',
+    templateUrl: 'views/preguntas.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para ver y editar las preguntas' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/preguntasCtrl.js']
+        });
+      }]
+    }
+  })
+
+  .state('app.respuestas', {
+    url: '/respuestas',
+    templateUrl: 'views/respuestas.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para ver  las respuestas' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/respuestasCtrl.js']
+        });
+      }]
+    }
+  })
+
+  .state('app.control', {
+    url: '/control',
+    templateUrl: 'views/control.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para coordinar las pruebas' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/ControlCtrl.js']
         });
       }]
     }

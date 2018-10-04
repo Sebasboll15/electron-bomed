@@ -1,0 +1,50 @@
+<div class="animated fadeIn">
+  <h1>
+ Control
+    <small>Control panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Olimpiadas2019</li>
+  </ol>
+</section>
+
+
+
+<section class="content">
+    <div class="row">
+    <section class="col-lg-12 connectedSortable">
+
+        
+        <div class="box box-primary" style="overflow: auto;">
+            
+            <div>
+               <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Conectados</h4>
+                    </div>
+                    
+                  </div> 
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="" ng-repeat="cliente in clientes" >
+                  <h3 class="panel-title">cliente.nombre_punto</h3>
+                <div class="panel panel-success" ng-click="OpenModalUser(cliente)">   
+                   <div>{{cliente.nombres}}</div>
+                    <div>{{cliente.apellidos}}</div>
+                     <div>{{cliente.nombre_punto}}</div>
+                  
+                 </div>   
+
+                     
+                </div>
+              </div>
+            </div>
+        </div>
+
+   </section>
+   </div>
+
+</div>
