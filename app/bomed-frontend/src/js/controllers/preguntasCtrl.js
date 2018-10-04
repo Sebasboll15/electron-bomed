@@ -1,7 +1,8 @@
 angular.module('app')
 
 
-.controller('preguntasCtrl', function($scope, ConexionServ, $filter, $http){
+.controller('preguntasCtrl', function($scope, $filter, $http){
+	console.log('dfvsd');
    $scope.mostrando = false;
 	$scope.boton1 	= true;
 	$scope.usuarios	= {};

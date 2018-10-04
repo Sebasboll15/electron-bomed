@@ -141,6 +141,7 @@ angular
 
   .state('app.preguntas', {
     url: '/preguntas',
+    controller: 'preguntasCtrl',
     templateUrl: 'views/preguntas.html',
     ncyBreadcrumb: {
       label: 'Font Awesome'
