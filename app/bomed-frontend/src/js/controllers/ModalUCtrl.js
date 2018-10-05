@@ -1,6 +1,7 @@
-angular.module('olimpiada_boom')
+angular.module('app')
 
-.controller('ModalUCtrl', function($scope, $uibModalInstance, ConexionServ, usuario, $http){
+.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http){
+
    
     $scope.usuario = usuario;
 

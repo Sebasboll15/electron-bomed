@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('usuariosCtrl', function($scope, $http, $filter){
+.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal){
 	$scope.mostrando= false;
 	$scope.boton1= true;
 	$scope.usuarios= {};
@@ -53,14 +53,17 @@ angular.module('app')
 	$scope.abrirModal = function (usuario) {
 
     	var modalInstance = $uibModal.open({
-			templateUrl: 'dist/templates/modalUsuario.html',
+			templateUrl: 'views/modalUsuario.html',
 			controller: 'ModalUCtrl',
+			animation: false,
 			resolve: {
 			    usuario: function () {
 			    	return usuario;
 			    }
 			},
-      	})
+      	});
+
+      	console.log(modalInstance);
             
   		modalInstance.result.then(function (usuariores) {
 	     console.log(usuariores);
@@ -119,6 +122,36 @@ angular.module('app')
        
 
   
-});
+})
  
 
+
+
+
+
+.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http){
+
+   
+    $scope.usuario = usuario;
+
+	$scope.ok = function(usuario){
+		
+		$http.get('::usuarios/cambiar-pass', {params: {rowid: usuario.rowid, password: usuario.password}}).then (function(result){
+
+			alert('Presionaste');
+			$uibModalInstance.close($scope.usuario);
+			console.log('Se actualizaron los datos con exito', result);
+
+		}, function(error){
+			console.log('No se pudo actualizar los datos', error);
+
+		})
+			  
+
+			
+	};
+
+	$scope.cancel = function () {
+	   $uibModalInstance.dismiss('cancel');
+	}; 
+});
