@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('respuestasCtrl', function($scope, ConexionServ, $filter, $http){
+.controller('respuestasCtrl', function($scope, $filter, $http){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
 	$scope.usuarios	= {};

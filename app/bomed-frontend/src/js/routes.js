@@ -107,6 +107,7 @@ angular
   
   .state('app.usuarios', {
     url: '/usuarios',
+     controller: 'usuariosCtrl',
     templateUrl: 'views/usuarios.html',
     ncyBreadcrumb: {
       label: 'Font Awesome'
@@ -124,6 +125,7 @@ angular
 
   .state('app.pruebas', {
     url: '/pruebas',
+     controller: 'pruebasCtrl',
     templateUrl: 'views/pruebas.html',
     ncyBreadcrumb: {
       label: 'Font Awesome'
@@ -159,6 +161,7 @@ angular
 
   .state('app.respuestas', {
     url: '/respuestas',
+     controller: 'respuestasCtrl',
     templateUrl: 'views/respuestas.html',
     ncyBreadcrumb: {
       label: 'Font Awesome'
@@ -176,6 +179,7 @@ angular
 
   .state('app.control', {
     url: '/control',
+     controller: 'ControlCtrl',
     templateUrl: 'views/control.html',
     ncyBreadcrumb: {
       label: 'Font Awesome'

@@ -19,6 +19,7 @@
               <th>Opción D</th> 
               <th>Respuesta Correcta</th> 
               <th style="min-width: 100px;">Opciones</th>
+            </tr>
             </thead>
             
             <tbody> 
@@ -117,11 +118,11 @@
                     <td style="padding: 0px;">
                       <span ng-show="!p.editando">
                         <div class="btn-group">
-                            <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ask(p.rowid)" uib-tooltip="Eliminar"></button> 
-                            <button ng-click="editarP(p)" class="btn-xs btn btn-info glyphicon glyphicon-pencil" uib-tooltip="Editar"></button> 
+                            <button class="btn-sm btn btn-danger fa fa-close" ng-click="eliminar_ask(p.rowid)" uib-tooltip="Eliminar"></button> 
+                            <button ng-click="editarP(p)" class="btn-sm btn btn-info fa fa-pencil" uib-tooltip="Editar"></button> 
                         </div>
                       </span>
-                       <button ng-click="editarAsk(p)" ng-show="p.editando" class="btn-xs btn btn-info glyphicon glyphicon-ok" ></button> 
+                       <button ng-click="editarAsk(p)" ng-show="p.editando" class="btn-sm btn btn-info fa fa-check" ></button> 
                     </td>
                 
                </tr>
@@ -258,7 +259,7 @@
                   </div>
              </div>
          </div>
-   </section>
+   
    </div>
 
 </div>
