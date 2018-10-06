@@ -664,3 +664,5 @@ function barChartCtrl($scope) {
     pointborderColor: '#000'
   }];
 }
+
+ 

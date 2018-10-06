@@ -52,6 +52,11 @@ angular
           ]
         }]);
       }],
+
+        USER: ['AuthServ', function(AuthServ, MySocket){
+          return AuthServ.verificar_user_logueado();
+        }]
+      
     }
   })
   .state('app.main', {
@@ -195,11 +200,26 @@ angular
     }
   })
 
-  // Additional Pages
-  .state('appSimple.login', {
+  .state('login', {
     url: '/login',
-    templateUrl: 'views/pages/login.html'
+     controller: 'loginCtrl',
+    templateUrl: 'views/login.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para ver y editar los usuarios' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/loginCtrl.js']
+        });
+      }]
+    }
   })
+
+  // Additional Pages
+  
   .state('appSimple.register', {
     url: '/register',
     templateUrl: 'views/pages/register.html'

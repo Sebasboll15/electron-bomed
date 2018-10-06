@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('ControlCtrl', function($scope, ConexionServ, $filter, MySocket, $uibModal){
+.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
      $scope.clientes = [];

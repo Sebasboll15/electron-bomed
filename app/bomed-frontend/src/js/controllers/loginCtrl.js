@@ -1,12 +1,11 @@
-angular.module('olimpiada_boom')
+angular.module('app')
 
 
-  .controller('MainCtrl', function(MySocket){
-
-  })
+  
 
 
-  .controller('loginCtrl', function($scope, MySocket, $state, ConexionServ, $http, $filter, $uibModal, AuthServ){
+  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $uibModal, AuthServ){
+       
        $scope.user = {username: 'jorge', password: '123'}
     
     if (localStorage.servidor) {
@@ -30,7 +29,7 @@ angular.module('olimpiada_boom')
 
         AuthServ.loguear(user).then(function(){
         	
-            $state.go('main');
+            $state.go('app.main');
         }, function(){
             alert('Datos incorrectos');
         })
