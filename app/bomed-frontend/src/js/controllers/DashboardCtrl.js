@@ -1,4 +1,4 @@
-angular.module('olimpiada_boom')
+angular.module('app')
 
 .controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http){
 	

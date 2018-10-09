@@ -2,7 +2,7 @@ angular
 .module('app')
 .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$breadcrumbProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $breadcrumbProvider) {
 
-  $urlRouterProvider.otherwise('/dashboard');
+  $urlRouterProvider.otherwise('/login');
 
   $ocLazyLoadProvider.config({
     // Set to true if you want to see what and when is dynamically loaded
@@ -85,7 +85,8 @@ angular
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         // you can lazy load controllers
         return $ocLazyLoad.load({
-          files: ['js/controllers/main.js']
+          files: ['js/controllers/main.js', 
+                  'js/controllers/DashboardCtrl.js']
         });
       }]
     }
@@ -208,7 +209,7 @@ angular
       label: 'Font Awesome'
     },
     //page subtitle goes here
-    params: { subtitle: 'Para ver y editar los usuarios' },
+    params: { subtitle: 'Para ingresar a inicio' },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({

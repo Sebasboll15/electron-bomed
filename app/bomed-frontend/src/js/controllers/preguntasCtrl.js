@@ -8,22 +8,37 @@ angular.module('app')
 	$scope.usuarios	= {};
 	$scope.preg_nueva 	= {};
 	$scope.preg_edit 	= {};
-	 $scope.preguntas = {};
+	$scope.preguntas = {};
+	$scope.pruebas = {};
 	
+
+        
+
         $scope.traer_datos= function(){
 
 
-			$http.get('::preguntas').then (function(result){
+			$http.get('::preguntas').then (function(result1){
 				
-				$scope.preguntas = result.data ;
-				console.log(result);
-				console.log('Se trajo los datos con exito', result);
+				$scope.preguntas = result1.data ;
+  
+				console.log('Se trajo los datos con exito', result1);
 			}, function(error){
 				console.log('No se pudo traer los datos', error);
 
 			})
 			
-        };
+			$http.get('::pruebas').then (function(result2){
+   
+                $scope.pruebas = result2.data  ;
+				                
+				                
+				     console.log('Se trajo los datos con exito', result2);
+				    }, function(error){
+				      console.log('No se pudo traer los datos', error);
+
+		    })
+        }
+
          $scope.traer_datos();
 
 			$scope.mostrar= function(){
@@ -39,13 +54,19 @@ angular.module('app')
   	$scope.insertarAsk = function(crea){
         
         $scope.mostrando = false;
+  		
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			alert('Debe escribir la definición');
   			return;
   		}
+
+  		if (crea.correcta == '' || crea.correcta == undefined) {
+  			alert('Debe escribir la respuesta correcta');
+  			return;
+  		}
        
   		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: crea.correcta  }  }).then (function(result){
-	     
+	      
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);
 	        
