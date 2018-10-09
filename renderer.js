@@ -13,7 +13,7 @@ var bodyParser      = require('body-parser');
 
 app.use(cors());
 app.use(bodyParser.json()); // Para recibir json desde Angular
-app.use("/app/bomed-frontend", express.static(path.join(__dirname, 'app/bomed-frontend')));
+app.use("/app/bomed-frontend/dist", express.static(path.join(__dirname, 'app/bomed-frontend/dist')));
 app.use("/images", express.static(path.join(__dirname, 'app/images')));
 app.use('/api', require('./app/controllers/routes'));
 
@@ -24,7 +24,7 @@ app.get('/chat', function(req, res){
 
 app.get('/', function(req, res){
     res.writeHead(301,
-        { Location: 'app/bomed-frontend/' }
+        { Location: 'app/bomed-frontend/dist' }
     );
     res.end();
 });

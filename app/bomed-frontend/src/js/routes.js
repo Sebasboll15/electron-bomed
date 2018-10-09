@@ -19,6 +19,7 @@ angular
   .state('app', {
     abstract: true,
     templateUrl: 'views/common/layouts/full.html',
+    controller: 'DashboardCtrl',
     //page title goes here
     ncyBreadcrumb: {
       label: 'Root',
@@ -48,14 +49,14 @@ angular
           name: 'chart.js',
           files: [
             'node_modules/chart.js/dist/Chart.min.js',
-            'node_modules/angular-chart.js/dist/angular-chart.min.js'
+            'node_modules/angular-chart.js/dist/angular-chart.min.js',
+            'js/controllers/DashboardCtrl.js'
           ]
         }]);
       }],
-
-        USER: ['AuthServ', function(AuthServ, MySocket){
-          return AuthServ.verificar_user_logueado();
-        }]
+      USER: ['AuthServ', function(AuthServ, MySocket){
+        return AuthServ.verificar_user_logueado();
+      }]
       
     }
   })
@@ -85,8 +86,7 @@ angular
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         // you can lazy load controllers
         return $ocLazyLoad.load({
-          files: ['js/controllers/main.js', 
-                  'js/controllers/DashboardCtrl.js']
+          files: ['js/controllers/main.js']
         });
       }]
     }

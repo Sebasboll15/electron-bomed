@@ -17,7 +17,9 @@ angular
   'oc.lazyLoad',
   'ncy-angular-breadcrumb',
   'angular-loading-bar',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ckeditor',
+  'toastr'
 ])
 
 .config(['cfpLoadingBarProvider', '$httpProvider', function(cfpLoadingBarProvider, $httpProvider) {

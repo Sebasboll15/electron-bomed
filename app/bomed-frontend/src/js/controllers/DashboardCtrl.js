@@ -1,7 +1,8 @@
 angular.module('app')
 
-.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http){
+.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER){
 	
+	$scope.USER = USER;
 	
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
@@ -45,26 +46,18 @@ angular.module('app')
 
 
 
-	
-	
-          
-       
+		//$scope.anadir= function(id){
+			//  console.log('hol', id); 
+			//   consulta = "update  usuarios set  prueba_id= ?  where rowid= ?";
+		// datos= [id, 2];
+		//  ConexionServ.query(consulta, datos).then (function(result){
+				
+			//   console.log('Se actualizaron los datos con exito', result);
 			
-			  
+		// }, function(error){
+			//  console.log('No se pudo actualizar los datos', error);
 
-
-			//$scope.anadir= function(id){
-             //  console.log('hol', id); 
-              //   consulta = "update  usuarios set  prueba_id= ?  where rowid= ?";
-	        // datos= [id, 2];
-	       //  ConexionServ.query(consulta, datos).then (function(result){
-                   
-             //   console.log('Se actualizaron los datos con exito', result);
-                
-	        // }, function(error){
-	         //  console.log('No se pudo actualizar los datos', error);
-
-	       //  })
+		//  })
 		  
 
 
@@ -74,12 +67,11 @@ angular.module('app')
 
 			//};
              
-			$scope.acceder= function(){
-              
-
-             AuthServ.cerrar_sesion();
-              
-
-
-              };
+	$scope.cerrar_sesion= function(){
+		console.log('casjdnc');
+		AuthServ.cerrar_sesion();
+		
+	};
+	
+	
 });

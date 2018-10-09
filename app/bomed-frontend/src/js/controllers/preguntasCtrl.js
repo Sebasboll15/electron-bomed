@@ -1,54 +1,71 @@
 angular.module('app')
 
 
-.controller('preguntasCtrl', function($scope, $filter, $http){
+.controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll){
 	console.log('dfvsd');
-   $scope.mostrando = false;
-	$scope.boton1 	= true;
-	$scope.usuarios	= {};
-	$scope.preg_nueva 	= {};
+   $scope.mostrando 	= false;
+	$scope.boton1 		= true;
+	$scope.usuarios		= {};
 	$scope.preg_edit 	= {};
-	$scope.preguntas = {};
-	$scope.pruebas = {};
+	$scope.preguntas 	= {};
+	$scope.pruebas 		= {};
+	$scope.preg_nueva 	= { 
+		definicion: '',
+		tipo: 		'Multiple'
+	};
 	
+	$location.hash('');
+	
+	
+	// Editor options.
+	$scope.options = {
+		language: 'es',
+		allowedContent: true,
+		entities: false
+	};
 
         
 
-        $scope.traer_datos= function(){
+	$scope.traer_datos= function(){
 
 
-			$http.get('::preguntas').then (function(result1){
-				
-				$scope.preguntas = result1.data ;
-  
-				console.log('Se trajo los datos con exito', result1);
-			}, function(error){
-				console.log('No se pudo traer los datos', error);
-
-			})
+		$http.get('::preguntas').then (function(result1){
 			
-			$http.get('::pruebas').then (function(result2){
-   
-                $scope.pruebas = result2.data  ;
-				                
-				                
-				     console.log('Se trajo los datos con exito', result2);
-				    }, function(error){
-				      console.log('No se pudo traer los datos', error);
+			$scope.preguntas = result1.data ;
 
-		    })
-        }
+			console.log('Se trajo los datos con exito', result1);
+		}, function(error){
+			console.log('No se pudo traer los datos', error);
 
-         $scope.traer_datos();
+		})
+		
+		$http.get('::pruebas').then (function(result2){
 
-			$scope.mostrar= function(){
-				$scope.mostrando= true;
-				$scope.boton1= false;
-			
-			};
-			 $scope.salir = function(){
-              $scope.mostrando= false
-             };
+			$scope.pruebas 					= result2.data ;
+			$scope.preg_nueva.prueba_id 	= $scope.pruebas[0].rowid;
+
+		}, function(error){
+			console.log('No se pudo traer los datos', error);
+
+		})
+	}
+
+	$scope.traer_datos();
+
+	$scope.mostrar_crear = function(){
+
+		$scope.mostrando= true;
+		$scope.boton1= false;
+		
+		$location.hash('crear-pregunta-div');
+    	$anchorScroll();
+	
+	};
+	
+	$scope.salir_crear = function(){
+		$location.hash('');
+		$scope.mostrando= false
+	};
 	
 	
   	$scope.insertarAsk = function(crea){
