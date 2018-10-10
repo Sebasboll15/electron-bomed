@@ -1,7 +1,7 @@
-angular.module('olimpiada_boom')
+angular.module('app')
 
-.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, ConexionServ, $http, cliente, AuthServ, MySocket){
-   
+.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket){
+   console.log( 'jjjffffff');
     $scope.cliente = cliente;
    
 	$scope.ok = function(){
