@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER){
+.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER, toastr){
 	
 	$scope.USER = USER;
 	
@@ -72,6 +72,20 @@ angular.module('app')
 		AuthServ.cerrar_sesion();
 		
 	};
+
+
+	 MySocket.on('sesion_A_cerrar', function (){
+               
+        toastr.info('Cerrando sesión...');
+
+        MySocket.emit('disconnect');
+        	      
+        AuthServ.cerrar_sesion();
+
+
+
+            })
+
 	
 	
 });

@@ -28,8 +28,19 @@
 
 .clt-conect{
 	padding-left: 0px;
+	cursor: pointer;
+	transition: all .4s;
+	margin-left: 3px;
 	
 	.card-body{
 		padding: 0px;
 	}
+}
+
+.clt-conect:hover{
+	background-color: #eee; 
+}
+
+.tooltip.fade{
+	opacity: 1;
 }

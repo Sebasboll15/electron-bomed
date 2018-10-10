@@ -28,6 +28,28 @@ angular.module('app')
 			localStorage.registered_boolean = false
 		}
 
+		if (localStorage.getItem('registered_boolean')) {
+			registered = localStorage.getItem('registered_boolean')
+		}else{
+			registered = false
+		}
+
+		if (registered=='false') {
+			registered = false;
+		}
+
+		
+
+		if (localStorage.USER){
+			usu = JSON.parse(localStorage.USER);
+
+			if (usu.rowid) {
+				
+				socket.emit('loguear', {usuario: usu, registered: registered } )
+			}
+		}
+
+
 
 	});
 
@@ -54,7 +76,6 @@ angular.module('app')
 		},
 
 		emit: function(eventName, data, callback){
-			console.log(eventName, data);
 			socket.emit(eventName, data, function(){
 				args = arguments;
 				$rootScope.$apply( function(){

@@ -38,6 +38,9 @@ angular.module('app')
     }
        
    
+    MySocket.on('te_conectaste', function(data){
+       $scope.nombre_punto = data.datos.nombre_punto;
+    });   
 				
 				
 				

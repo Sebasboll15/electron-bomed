@@ -53,26 +53,28 @@ http.listen(process.env.NODE_PORT, function(){
 
 
 self.io.on('connection', (socket)=> {
-    console.log('New connection: '+socket.id);
+  console.log('New connection: '+socket.id);
 
-    count_clients++;
+  count_clients++;
 
-    datos 					    = {};
-    datos.logged 			  = false;
-    datos.registered 		= false;
-    datos.resourceId		= socket.id;
-    datos.categsel			= 0;
-    datos.respondidas		= 0;
-    datos.correctas			= 0;
-    datos.tiempo			= 0;
-    datos.nombre_punto		= 'Punto_' + count_clients;
-    datos.user_data 		= {};
-    socket.datos 			= datos;
+  datos 					    = {};
+  datos.logged 			  = false;
+  datos.registered 		= false;
+  datos.resourceId		= socket.id;
+  datos.categsel			= 0;
+  datos.respondidas		= 0;
+  datos.correctas			= 0;
+  datos.tiempo			= 0;
+  datos.nombre_punto		= 'Punto_' + count_clients;
+  datos.user_data 		= {};
+  socket.datos 			= datos;
 
-    all_clts.push(socket.datos);
+  all_clts.push(socket.datos);
 
+  setTimeout(function(){
     socket.emit('te_conectaste', {datos: socket.datos});
     socket.broadcast.emit('conectado:alguien', {clt: socket.datos} );
+  }, 500);
 
   
   socket.on('mensaje', (data)=>{
@@ -94,7 +96,7 @@ self.io.on('connection', (socket)=> {
   });
 
   
-  socket.on('disconnect', (data)=>{
+  socket.on('disconnect', function (data){
 
     for (let i = 0; i < all_clts.length; i++) {
 
@@ -108,8 +110,8 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('traer_clientes', (data)=>{
-    //console.log('Alguien escribió: Traer clientes', all_clts);
-    self.io.sockets.emit('clientes_traidos', all_clts );
+    console.log('Alguien escribió: Traer clientes', all_clts);
+    socket.emit('clientes_traidos', all_clts );
   });
 
 
@@ -140,16 +142,44 @@ self.io.on('connection', (socket)=> {
       }
   });
 
-  socket.on('cierra_ su_sesion', function(id){
-     
-     
+
+  socket.on('loguear', (data)=> {
+
+    datos               = {};
+    datos.logged        = true;
+    datos.registered    = data.registered?true:false;
+    datos.resourceId    = socket.id;
+    datos.nombre_punto  = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
+    datos.user_data     = data.usuario;
+    socket.datos        = datos;
+
+    console.log('loguear', all_clts);
+
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].resourceId == socket.id) {
+        all_clts.splice(i, 1, socket.datos);
+      }
+    }
+    console.log('loguear2', all_clts);
+
+    socket.broadcast.emit('logueado:alguien', {clt: socket.datos} );
+
     
+  });
 
-    socket.broadcast.emit('sesion_a_cerrar', {resourceId: id} )
+  
+
+  socket.on('cerrar_su_sesion', function(data){
+     
+      for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].resourceId == data.resourceId) {
+           
+            io.to(all_clts[i].resourceId).emit('sesion_A_cerrar');
+          }
+      }
 
 
-
-  })
+  });
 
 
   socket.on('liberar_hasta_pregunta', function(data){
