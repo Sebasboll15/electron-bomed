@@ -181,6 +181,21 @@ self.io.on('connection', (socket)=> {
 
   });
 
+  socket.on('abrirle_la_sesion', function(data){
+      
+     for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].nombre_punto == data.nombre_punto) {
+            user =  {username: data.username, password: data.password}  
+            
+            io.to(all_clts[i].nombre_punto).emit('a_abrir_sesion', user  ); 
+          };
+      };
+
+     
+
+
+  });
+
 
   socket.on('liberar_hasta_pregunta', function(data){
       info_evento.free_till_question 	= data.numero;

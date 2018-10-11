@@ -6,7 +6,6 @@ router.route('/')
     .get(getRouteHandler)
     .post(postRouteHandler);
 
-    router.route('/insertar').get(getCambiarHandler);
    
 
     function postRouteHandler(req, res) {

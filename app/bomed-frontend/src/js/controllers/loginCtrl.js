@@ -40,7 +40,14 @@ angular.module('app')
    
     MySocket.on('te_conectaste', function(data){
        $scope.nombre_punto = data.datos.nombre_punto;
+    });
+
+     
+    MySocket.on('a_abrir_sesion', function(data){
+       console.log('hola burras', data);
+
     });   
+           
 				
 				
 				

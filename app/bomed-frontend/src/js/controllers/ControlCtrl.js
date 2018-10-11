@@ -15,7 +15,10 @@ angular.module('app')
   MySocket.on('alguien_logueado', function(datos){
     console.log(datos, 'ertyuytr')
     $scope.actualizarClientes();
-    toastr.success('Alguien ha ingresado al sistema');
+    if (datos.tipo == 'Admin') 
+     { toastr.success('Alguien ha ingresado al sistema');
+     } 
+    
   });
     
 
@@ -67,7 +70,25 @@ angular.module('app')
 .controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket, toastr){
 
     $scope.cliente = cliente;
-    
+
+    $scope.cliente_existe = false;
+
+    if ($scope.cliente.user_data.rowid) {
+      $scope.cliente_existe = true;
+
+    }else{
+
+       $http.get('::usuarios_de_control').then (function(result){
+        $scope.usuarios = result.data ;
+        console.log('Se trajo los datos con exito', result);
+      }, function(error){
+        console.log('No se pudo traer los datos', error);
+
+      })
+
+    }
+
+
     $scope.ok = function(){
         
       $uibModalInstance.close($scope.cliente);  
@@ -76,11 +97,18 @@ angular.module('app')
             
     $scope.cerrar_se = function(datos){  
 
-      console.log(datos, 'jjjjj');
-
+      
       MySocket.emit('cerrar_su_sesion', datos);
       toastr.success('Se ha cerrado la sesión con éxito')
            
+    };
+
+    $scope.put_user = function(user){  
+      console.log('usuario', user);
+      
+      data = {username: user.username , password: user.password, nombre_punto: $scope.cliente.nombre_punto};
+      
+      MySocket.emit('abrirle_la_sesion', data);
     };
           
     $scope.cancel = function () {

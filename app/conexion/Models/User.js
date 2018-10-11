@@ -43,6 +43,38 @@ class User {
     
     
     
+    static login(user_data) {
+
+        let promesa = new Promise(function(resolve, reject){
+
+            db.query('SELECT *, rowid FROM usuarios WHERE username=?', [user_data.username]).then(function(result){
+
+                if(result.length > 0){
+                    let user = result[0];
+                    
+
+                    let compatible = User.comparar(user_data.password, user.password);
+                    if (! compatible) reject('invalid_password');
+
+                        let token               = jwt.sign({ rowid: user.rowid }, process.env.JWT_SECRET);
+                        user.remember_token     = token;
+                        delete user.password;
+
+                        resolve(user);
+                }else{
+                    reject('invalid_username')
+                }
+                
+            })
+
+        });
+        
+        return promesa;
+        
+    }
+    
+    
+    
     static comparar(password, hash_password) {
         return (password == hash_password);
         return bcrypt.compareSync(password, hash_password);
