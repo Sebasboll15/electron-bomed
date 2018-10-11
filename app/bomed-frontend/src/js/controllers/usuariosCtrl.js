@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal){
+.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal, toastr){
 	$scope.mostrando= false;
 	$scope.boton1= true;
 	$scope.usuarios= {};
@@ -37,7 +37,7 @@ angular.module('app')
   		}
 	    
 	     $http.get('::usuarios/insertar', {params: {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, tipo: crea.tipo  }  }).then (function(result){
-	     
+	       toastr.success('Usuario creado con éxito');
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);
 	        
@@ -87,6 +87,7 @@ angular.module('app')
 	        
 	         $http.get('::usuarios/editar',  {params: { rowid: cambia.rowid, nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: cambia.sexo, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo  } }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
+                 toastr.success('Usuario editado con éxito');
                  $scope.traer_datos();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
@@ -101,6 +102,7 @@ angular.module('app')
     $scope.eliminar_user = function(rowid){
 
 		$http.delete('::usuarios/eliminar', {params: { id: rowid } }).then (function(result){
+			toastr.success('Usuario eliminado con éxito');
 			console.log('Se borraron los datos con exito', result);
             $scope.traer_datos();
 		}, function(error){
@@ -129,7 +131,7 @@ angular.module('app')
 
 
 
-.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http){
+.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http, toastr){
 
    
     $scope.usuario = usuario;
@@ -138,7 +140,7 @@ angular.module('app')
 		
 		$http.get('::usuarios/cambiar-pass', {params: {rowid: usuario.rowid, password: usuario.password}}).then (function(result){
 
-			alert('Presionaste');
+			toastr.success('Se ha cambiado la contraseña con éxito');
 			$uibModalInstance.close($scope.usuario);
 			console.log('Se actualizaron los datos con exito', result);
 

@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http){
+.controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http, toastr){
 
    
     $scope.usuario = usuario;
@@ -9,7 +9,7 @@ angular.module('app')
 		
 		$http.get('::usuarios/cambiar-pass', {params: {rowid: usuario.rowid, password: usuario.password}}).then (function(result){
 
-			alert('Presionaste');
+			toastr.success('Se ha cambiado la contraseña con éxito');
 			$uibModalInstance.close($scope.usuario);
 			console.log('Se actualizaron los datos con exito', result);
 

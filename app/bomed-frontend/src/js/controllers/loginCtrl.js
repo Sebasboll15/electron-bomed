@@ -4,7 +4,7 @@ angular.module('app')
   
 
 
-  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $uibModal, AuthServ){
+  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $uibModal, AuthServ, toastr){
        
        $scope.user = {username: 'jorge', password: '123'}
     
@@ -28,10 +28,10 @@ angular.module('app')
     $scope.iniciar = function(user){
 
         AuthServ.loguear(user).then(function(){
-        	
+        	    toastr.info('Iniciando sesión...');
             $state.go('app.main');
         }, function(){
-            alert('Datos incorrectos');
+            toastr.error('Datos incorrectos');
         })
     
         

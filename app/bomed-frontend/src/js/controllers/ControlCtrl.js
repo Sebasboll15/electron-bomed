@@ -13,7 +13,9 @@ angular.module('app')
     
    
   MySocket.on('alguien_logueado', function(datos){
+    console.log(datos, 'ertyuytr')
     $scope.actualizarClientes();
+    toastr.success('Alguien ha ingresado al sistema');
   });
     
 
@@ -62,7 +64,7 @@ angular.module('app')
 
 })
 
-.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket){
+.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket, toastr){
 
     $scope.cliente = cliente;
     
@@ -77,6 +79,7 @@ angular.module('app')
       console.log(datos, 'jjjjj');
 
       MySocket.emit('cerrar_su_sesion', datos);
+      toastr.success('Se ha cerrado la sesión con éxito')
            
     };
           
