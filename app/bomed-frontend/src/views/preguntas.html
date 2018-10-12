@@ -30,7 +30,7 @@
                             <th scope="row">{{p.rowid}}</th>
                             
                             <td>
-                              <span>{{p.definicion}}</span>
+                              <span ng-bind-html="p.definicion"></span>
                             </td>
                             <td>
                               <span>{{p.tipo}}</span>
@@ -108,7 +108,7 @@
                           </div>
                         </div>
 
-                        <div  ng-show="preg_nueva.tipo == 'Multiple' ">
+                        <div  ng-show="preg_nueva.tipo == 'Múltiple' ">
 
                                 <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
@@ -188,6 +188,11 @@
                     </div>
               </div>
             </div>
+            
+            
+            
+            
+            
               <div  ng-show="mostrando_edit" id="editar-pregunta-div"  >
                                         
                   <div class="card">
@@ -215,17 +220,23 @@
                           <label class="col-md-3 col-form-label"><h5>Tipo de pregunta:</h5></label>
                           <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-multiple"  ng-model="pregunta.tipo" value="Multiple" name="inline-radios">
-                              <label class="form-check-label" for="inline-multiple">Múltiple</label>
+                              
+                              <label class="form-check-label" for="inline-multiple-editar">
+                                  <input class="form-check-input" type="radio" id="inline-multiple-editar"  ng-model="pregunta.tipo" value="Múltiple">
+                                  Múltiple
+                              </label>
                             </div>
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-verdadero-falso" ng-model="pregunta.tipo" value="Falso-Verdadero" name="inline-radios">
-                              <label class="form-check-label" for="inline-verdadero-falso">Falso/Verdadero</label>
+                              
+                              <label class="form-check-label" for="inline-verdadero-falso-editar">
+                                  <input class="form-check-input" type="radio" id="inline-verdadero-falso-editar" ng-model="pregunta.tipo" value="Falso-Verdadero">
+                                  Falso/Verdadero
+                              </label>
                             </div>
                           </div>
                         </div>
 
-                        <div  ng-show="pregunta.tipo == 'Multiple' ">
+                        <div  ng-show="pregunta.tipo == 'Múltiple' " style="background-color: #eee; padding: 8px;">
 
                                 <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
@@ -278,7 +289,7 @@
                           </div>
                         </div>
 
-                        <div ng-show="p.tipo == 'Falso-Verdadero' ">
+                        <div ng-show="pregunta.tipo == 'Falso-Verdadero' " style="background-color: #eee; padding: 8px;">
                           
                           <div class="form-group row">
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
@@ -297,7 +308,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                      <button type="button" class="btn btn-primary" ng-click="editarAsk(p)"><i class="fa fa-dot-circle-o"></i>&nbsp; Editar</button>
+                      <button type="button" class="btn btn-primary" ng-click="editarAsk(pregunta)"><i class="fa fa-dot-circle-o"></i>&nbsp; Guardar cambios</button>
 
 
                       <button type="button" class="btn btn-danger" ng-click="salir_editar()"><i class="fa fa-ban"></i>&nbsp; Cerrar</button>

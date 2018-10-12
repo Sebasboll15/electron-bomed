@@ -68,23 +68,16 @@ angular.module('app')
 			//};
              
 	$scope.cerrar_sesion= function(){
-		console.log('casjdnc');
 		AuthServ.cerrar_sesion();
-		
 	};
 
 
 	 MySocket.on('sesion_A_cerrar', function (){
                
         toastr.info('Cerrando sesión...');
-
-        MySocket.emit('disconnect');
-        	      
-        AuthServ.cerrar_sesion();
-
-
-
-            })
+		AuthServ.cerrar_sesion();
+		
+    })
 
 	
 	

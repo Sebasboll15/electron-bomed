@@ -44,3 +44,10 @@
 .tooltip.fade{
 	opacity: 1;
 }
+.opcion-pregunta{
+	transition: all .3s;
+	cursor: pointer;
+}
+.opcion-pregunta:hover{
+	box-shadow: 1px 0 10px 1px rgba(0,0,0,.3);
+}

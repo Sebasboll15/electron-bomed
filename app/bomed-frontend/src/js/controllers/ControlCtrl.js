@@ -14,8 +14,14 @@ angular.module('app')
    
   MySocket.on('alguien_logueado', function(datos){
     $scope.actualizarClientes();
+  });
     
-    
+  MySocket.on('datos_logueo_recibidos', function(datos){
+    $scope.actualizarClientes();
+  });
+  
+  MySocket.on('te_logueaste', function(datos){
+    $scope.actualizarClientes();
   });
     
 
@@ -33,6 +39,7 @@ angular.module('app')
      
 
   MySocket.on('clientes_traidos',function(res){
+    console.log(res);
     $scope.clientes = res ;
   
 

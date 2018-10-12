@@ -1,6 +1,6 @@
 angular.module('app')
 
-.factory('AuthServ', function($q, $http, $timeout, $state) {
+.factory('AuthServ', function($q, $http, $timeout, $state, $rootScope) {
 
     var consulta_user = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.tipo, u.username, u.sexo, prueba_id  '+
                             'FROM usuarios u '+
@@ -98,7 +98,8 @@ angular.module('app')
         },
         
         cerrar_sesion: function(datos){
-            localStorage.logueado   = false
+            $rootScope.sesion_cerrada   = true
+            localStorage.logueado       = false
             delete localStorage.USER;
             $state.go('login');
         },

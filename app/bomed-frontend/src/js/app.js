@@ -14,6 +14,7 @@ var grayLightest =  '#f8f9fa';
 angular
 .module('app', [
   'ui.router',
+  'ngSanitize',
   'oc.lazyLoad',
   'ncy-angular-breadcrumb',
   'angular-loading-bar',
