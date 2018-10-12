@@ -4,9 +4,13 @@ angular.module('app')
   
 
 
-  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $uibModal, AuthServ, toastr){
+  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $rootScope, AuthServ, toastr){
        
-       $scope.user = {username: 'jorge', password: '123'}
+    $scope.user = {username: 'jorge', password: '123'}
+    
+    if ($rootScope.sesion_cerrada) {
+        location.reload();
+    }
     
     if (localStorage.servidor) {
     	$scope.servidor = localStorage.servidor
