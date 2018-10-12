@@ -188,7 +188,7 @@
                     </div>
               </div>
             </div>
-              <div  ng-show="mostrando_edit" id="editar-pregunta-div">
+              <div  ng-show="mostrando_edit" id="editar-pregunta-div"  >
                                         
                   <div class="card">
                     <div class="card-header">
@@ -198,14 +198,14 @@
                         <div class="form-group row">
                           <label class="col-md-12 col-form-label" for="textarea-input"><h5>Definición:</h5></label>
                           <div class="col-md-12">
-                            <div ckeditor="options" rows="9" ng-model="preg_nueva.definicion" id="textarea-input" name="textarea-input"></div>
+                            <div ckeditor="options" rows="9" ng-model="pregunta.definicion" id="textarea-input" name="textarea-input"></div>
                           </div>
                         </div>
                         
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
                           <div class="col-md-9">
-                            <select id="select1" name="select" class="form-control" ng-model="preg_nueva.prueba_id" size="1">
+                            <select id="select1" name="select" class="form-control" ng-model="pregunta.prueba_id" size="1">
                               <option ng-repeat="n in pruebas" ng-value="{{n.rowid}}">{{n.alias}}</option>
                             </select>
                           </div>
@@ -215,43 +215,43 @@
                           <label class="col-md-3 col-form-label"><h5>Tipo de pregunta:</h5></label>
                           <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-multiple"  ng-model="preg_nueva.tipo" value="Multiple" name="inline-radios">
+                              <input class="form-check-input" type="radio" id="inline-multiple"  ng-model="pregunta.tipo" value="Multiple" name="inline-radios">
                               <label class="form-check-label" for="inline-multiple">Múltiple</label>
                             </div>
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-verdadero-falso" ng-model="preg_nueva.tipo" value="Falso-Verdadero" name="inline-radios">
+                              <input class="form-check-input" type="radio" id="inline-verdadero-falso" ng-model="pregunta.tipo" value="Falso-Verdadero" name="inline-radios">
                               <label class="form-check-label" for="inline-verdadero-falso">Falso/Verdadero</label>
                             </div>
                           </div>
                         </div>
 
-                        <div  ng-show="preg_nueva.tipo == 'Multiple' ">
+                        <div  ng-show="pregunta.tipo == 'Multiple' ">
 
                                 <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
                                 <div class="col-md-9">
-                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_a" value="A" placeholder="..." style="height: 80px"></textarea>
+                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_a" value="A" placeholder="..." style="height: 80px"></textarea>
                                 </div>
                               </div>
 
                               <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción B:</h5></label>
                                 <div class="col-md-9">
-                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_b" value="B" placeholder="..." style="height: 80px"></textarea>
+                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_b" value="B" placeholder="..." style="height: 80px"></textarea>
                                 </div>
                               </div>
 
                               <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción C:</h5></label>
                                 <div class="col-md-9">
-                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_c" value="C" placeholder="..." style="height: 80px"></textarea>
+                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_c" value="C" placeholder="..." style="height: 80px"></textarea>
                                 </div>
                               </div>
 
                               <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción D:</h5></label>
                                 <div class="col-md-9">
-                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_d" value="D" placeholder="..." style="height: 80px"></textarea>
+                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_d" value="D" placeholder="..." style="height: 80px"></textarea>
                                 </div>
                               </div>
 
@@ -259,36 +259,36 @@
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
                                 <div class="col-md-9 col-form-label">
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-a"  ng-model="preg_nueva.correcta" value="A" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-opc-a"  ng-model="pregunta.correcta" value="A" name="radio-preg-correcta">
                                     <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-a">A</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-b" ng-model="preg_nueva.correcta" value="B" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-opc-b" ng-model="pregunta.correcta" value="B" name="radio-preg-correcta">
                                     <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-b">B</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-c" ng-model="preg_nueva.correcta" value="C" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-opc-c" ng-model="pregunta.correcta" value="C" name="radio-preg-correcta">
                                     <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-c">C</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-d" ng-model="preg_nueva.correcta" value="D" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-opc-d" ng-model="pregunta.correcta" value="D" name="radio-preg-correcta">
                                     <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-d">D</label>
                                   </div>
                                 </div>
                           </div>
                         </div>
 
-                        <div ng-show="preg_nueva.tipo == 'Falso-Verdadero' ">
+                        <div ng-show="p.tipo == 'Falso-Verdadero' ">
                           
                           <div class="form-group row">
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
                                 <div class="col-md-9 col-form-label">
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio1"  ng-model="preg_nueva.correcta" value="Falso" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-radio1"  ng-model="pregunta.correcta" value="Falso" name="radio-preg-correcta">
                                     <label class="form-check-label" for="inline-radio1">Falso</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio2" ng-model="preg_nueva.correcta" value="Verdadero" name="radio-preg-correcta">
+                                    <input class="form-check-input" type="radio" id="inline-radio2" ng-model="pregunta.correcta" value="Verdadero" name="radio-preg-correcta">
                                     <label class="form-check-label" for="inline-radio2">Verdadero</label>
                                   </div>
                                 </div>
@@ -297,7 +297,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                      <button type="button" class="btn btn-primary" ng-click="insertarAsk(preg_nueva)"><i class="fa fa-dot-circle-o"></i>&nbsp; Editar</button>
+                      <button type="button" class="btn btn-primary" ng-click="editarAsk(p)"><i class="fa fa-dot-circle-o"></i>&nbsp; Editar</button>
 
 
                       <button type="button" class="btn btn-danger" ng-click="salir_editar()"><i class="fa fa-ban"></i>&nbsp; Cerrar</button>

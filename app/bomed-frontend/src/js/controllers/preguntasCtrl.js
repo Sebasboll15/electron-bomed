@@ -57,7 +57,8 @@ angular.module('app')
 
 		$scope.mostrando= true;
 		$scope.boton1= false;
-		
+		$scope.mostrando_edit= false
+
 		$location.hash('crear-pregunta-div');
     	$anchorScroll();
 	
@@ -105,9 +106,12 @@ angular.module('app')
 	};
   
     $scope.editarP = function(cambia){
-        
+           console.log(cambia); 
+        $scope.mostrando = false;
         $scope.mostrando_edit= true;
 		
+		$scope.pregunta = cambia;
+
 		$location.hash('editar-pregunta-div');
     	$anchorScroll();
 	
@@ -122,7 +126,8 @@ angular.module('app')
     
     };
     $scope.editarAsk = function(cambia){
-	           console.log(cambia);
+	           
+	           console.log(cambia); 
 	           $http.get('::preguntas/editar',  {params: {definicion: cambia.definicion, tipo: cambia.tipo, prueba_id: cambia.prueba_id, opc_a: cambia.opc_a, opc_b: cambia.opc_b, opc_c: cambia.opc_c, opc_d: cambia.opc_d, correcta: cambia.correcta, rowid: cambia.rowid }}).then (function(result){
          
                  toastr.success('Se ha editado la pregunta con éxito')
