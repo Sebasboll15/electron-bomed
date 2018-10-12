@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('pruebasCtrl', function($scope, $filter, $http){
+.controller('pruebasCtrl', function($scope, $filter, $http, toastr){
     $scope.mostrando= false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
@@ -111,7 +111,8 @@ angular.module('app')
   	$scope.insertarPrueba = function(crea){
 	         
   			$http.get('::pruebas/insertar', {params: {nombre: crea.nombre, alias: crea.alias, dirigido: crea.dirigido, mostrar_respuesta: crea.mostrar_respuesta, puntos_promedio: crea.puntos_promedio, tiempo_preg: crea.tiempo_preg, tiempo_exam: crea.tiempo_exam}}).then (function(result){
-	     
+	     toastr.success('Se ha insertado la prueba con éxito')
+           
 	     $scope.traer_datos();
 
 
@@ -126,6 +127,7 @@ angular.module('app')
 	};
   
     $scope.editarP = function(cambia){
+      
       for (var i = 0; i < $scope.pruebas.length; i++) {
 			$scope.pruebas[i].editando = false;
 		}
@@ -141,6 +143,9 @@ angular.module('app')
 		  
 		  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
+              
+              toastr.success('Se ha editado la prueba con éxito')
+           
               $scope.traer_datos();
 
 
@@ -159,9 +164,11 @@ angular.module('app')
 	          
 	    $http.delete('::pruebas/eliminar', {params: { id: rowid } }).then (function(result){
 			console.log('Se borraron los datos con exito', result);
+         
+		 toastr.success('Se ha eliminado la prueba con éxito')
+           	
          $scope.traer_datos();
  
-
 
 		}, function(error){
 			console.log('No se pudo borrarlos datos', error);

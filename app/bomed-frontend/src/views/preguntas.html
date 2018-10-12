@@ -7,13 +7,7 @@
                 </div>
                 <div class="card-body">
                   
-                  <div ng-show="mostrar_alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                     <strong>¡Correcto!</strong> la pregunta ha sido {{}} con éxito.
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-
+                 
                   <table class="table table-striped table-sm">
                     <thead>
                       <tr>
@@ -36,95 +30,31 @@
                             <th scope="row">{{p.rowid}}</th>
                             
                             <td>
-                              <span ng-show="!p.editando">{{p.definicion}}</span>
-                              <span ng-show="p.editando"><input type="text" ng-model="p.definicion"></span>
-
+                              <span>{{p.definicion}}</span>
                             </td>
                             <td>
-                                <span ng-show="!p.editando">{{p.tipo}}</span>
-                             
-                                <span ng-show="p.editando">
-                                    
-                                    <label>
-                                      <input type="radio" ng-model="p.tipo" value="Multiple">Múltiple
-                                    </label>
-                                    
-                                    <label>
-                                      <input type="radio" ng-model="p.tipo" value="Falso/Verdadero">Falso/Verdadero
-                                    </label>
-                                   
-                                </span> 
-                               
+                              <span>{{p.tipo}}</span>
                             </td>
-
                             <td>
-                              <span ng-show="!p.editando">Prueba {{p.prueba_id}}</span>
-                                <span ng-show="p.editando">
-                                     <select class="form-control"  ng-model="p.prueba_id">
-                                           <option ng-repeat="prueba in pruebas" value="{{prueba.rowid}}">{{prueba.alias}}</option>
-                                         </select> 
-                                
-                                </span>
-                               
+                              <span>Prueba {{p.prueba_id}}</span>  
                             </td>
-                            
                             <td>
-                              <span ng-show="!p.editando">{{p.opc_a}}</span>
-                              <span ng-show="p.editando"><input type="text" ng-model="p.opc_a"></span>
+                              <span>{{p.opc_a}}</span>
                              </td>
-                            
                             <td>
-                              <span ng-show="!p.editando">{{p.opc_b}}</span>
-                              <span ng-show="p.editando"><input type="text" ng-model="p.opc_b"></span>
+                              <span>{{p.opc_b}}</span>
                             </td>
-                            
                             <td>
-                              <span ng-show="!p.editando">{{p.opc_c}}</span>
-                              <span ng-show="p.editando"><input type="text" ng-model="p.opc_c"></span>
+                              <span>{{p.opc_c}}</span>
                             </td>
-                             
                              <td>
-                              <span ng-show="!p.editando">{{p.opc_d}}</span>
-                              <span ng-show="p.editando"><input type="text" ng-model="p.opc_d"></span>
+                              <span>{{p.opc_d}}</span>
                             </td>
-
                             <td>
-                                <span ng-show="!p.editando">{{p.correcta}}</span>
-                                <span ng-show="p.tipo == 'Multiple'"> 
-                                    <span ng-show="p.editando">
-                                      <label>
-                                        <input type="radio" ng-model="p.correcta" value="A">A
-                                      </label>
-                                      
-                                      <label>
-                                        <input type="radio" ng-model="p.correcta" value="B">B
-                                      </label>
-
-                                      <label>
-                                        <input type="radio" ng-model="p.correcta" value="C">C
-                                      </label>
-
-                                      <label>
-                                        <input type="radio" ng-model="p.correcta" value="D">D
-                                      </label>
-                                      
-                                    </span>
-                                 </span>
-                                     <span ng-show="p.tipo == 'Falso/Verdadero'">
-                                         <span ng-show="p.editando">
-                                          <label>
-                                            <input type="radio" ng-model="p.correcta" value="Verdadero">Verdadero
-                                          </label>
-                                          
-                                          <label>
-                                            <input type="radio" ng-model="p.correcta" value="Falso">Falso
-                                          </label>
-
-                                        </span>
-                                     </span>
+                                <span>{{p.correcta}}</span>
                             </td>
                             <td style="padding: 0px;">
-                              <span ng-show="!p.editando">
+                              <span>
                                 <div class="btn-group">
                                     <button class="btn-sm btn btn-danger fa fa-close" ng-click="eliminar_ask(p.rowid)" uib-tooltip="Eliminar"></button> 
                                     

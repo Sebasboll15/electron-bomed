@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('respuestasCtrl', function($scope, $filter, $http){
+.controller('respuestasCtrl', function($scope, $filter, $http, toastr){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
 	$scope.usuarios	= {};
@@ -17,18 +17,6 @@ angular.module('app')
 			console.log('No se pudo traer los datos', error);
 
 		})
-
-		
-
-		//consulta = "Select r.*, r.rowid from respuestas r INNER JOIN preguntas p ON r.preg_id= p.rowid";
-		//ConexionServ.query(consulta, []).then (function(result){
-		//	$scope.respuestas= result ;
-		//	console.log(result);
-		//	console.log('Se trajo los datos con exito', result);
-		//}, function(error){
-		//	console.log('No se pudo traer los datos', error);
-
-		//})
    
     };
     
@@ -52,7 +40,8 @@ angular.module('app')
 
     $scope.eliminar_ans = function(rowid){
 	    $http.delete('::respuestas/eliminar', {params: { id: rowid } }).then(function(result){
-      		
+      	
+      	toastr.success('Se ha borrado la respuesta con éxito')	
         $scope.traer_dato();
 	    }, function(error){
 	    

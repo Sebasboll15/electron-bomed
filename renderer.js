@@ -110,6 +110,7 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('traer_clientes', (data)=>{
+    
     console.log('Alguien escribió: Traer clientes', all_clts);
     socket.emit('clientes_traidos', all_clts );
   });
@@ -184,10 +185,10 @@ self.io.on('connection', (socket)=> {
   socket.on('abrirle_la_sesion', function(data){
       
      for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].nombre_punto == data.nombre_punto) {
-            user =  {username: data.username, password: data.password}  
+          if (all_clts[i].resourceId == data.resourceId) {
+            user =  {username: data.username, password: data.password, nombre_punto: data.nombre_punto}  
             
-            io.to(all_clts[i].nombre_punto).emit('a_abrir_sesion', user  ); 
+            io.to(all_clts[i].resourceId).emit('a_abrir_sesion', user  ); 
           };
       };
 

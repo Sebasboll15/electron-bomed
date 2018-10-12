@@ -13,11 +13,8 @@ angular.module('app')
     
    
   MySocket.on('alguien_logueado', function(datos){
-    console.log(datos, 'ertyuytr')
     $scope.actualizarClientes();
-    if (datos.tipo == 'Admin') 
-     { toastr.success('Alguien ha ingresado al sistema');
-     } 
+    
     
   });
     
@@ -37,6 +34,8 @@ angular.module('app')
 
   MySocket.on('clientes_traidos',function(res){
     $scope.clientes = res ;
+  
+
   });
       
 
@@ -106,9 +105,10 @@ angular.module('app')
     $scope.put_user = function(user){  
       console.log('usuario', user);
       
-      data = {username: user.username , password: user.password, nombre_punto: $scope.cliente.nombre_punto};
+      data = {username: user.username , password: user.password, nombre_punto: $scope.cliente.nombre_punto, resourceId: $scope.cliente.resourceId};
       
       MySocket.emit('abrirle_la_sesion', data);
+       toastr.success('Usuario asignado');
     };
           
     $scope.cancel = function () {

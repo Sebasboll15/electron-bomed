@@ -201,6 +201,24 @@ angular
     }
   })
 
+  .state('app.prueba_respuestas', {
+    url: '/Prueba_en_curso',
+     controller: 'Prueba_respuestasCtrl',
+    templateUrl: 'views/prueba_respuestas.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Realizar la prueba' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/Prueba_respuestasCtrl.js']
+        });
+      }]
+    }
+  })
+
   .state('login', {
     url: '/login',
      controller: 'loginCtrl',

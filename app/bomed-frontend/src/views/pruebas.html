@@ -88,8 +88,8 @@
 
                       <td style="padding: 0px;">
                         <span ng-show="!p.editando">
-                          <button class="btn-sm btn btn-danger fa fa-close" ng-click="eliminar_test(p.rowid)"></button> 
-                          <button ng-click="editarP(p)" class="btn-sm btn btn-info fa fa-pencil"></button> 
+                          <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p.rowid)"></button> 
+                          <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
                           <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
                         </span>
                          <button ng-click="editarPrueba(p)" ng-show="p.editando" class="btn-sm btn btn-info fa fa-check"></button> 
@@ -99,8 +99,9 @@
                </tbody> 
             </table>
 
-            <button type="button" class="btn btn-info" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
-              
+            <button type="button" class="btn btn-info btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
+                    
+           
                     <div  ng-show="mostrando">
                       <h2>Crea tus pruebas</h2>
 

@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll){
+.controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll, toastr){
 	console.log('dfvsd');
    $scope.mostrando 	= false;
 	$scope.boton1 		= true;
@@ -73,17 +73,18 @@ angular.module('app')
         $scope.mostrando = false;
   		
   		if (crea.definicion == '' || crea.definicion == undefined) {
-  			alert('Debe escribir la definición');
+  			toastr.error('Debe escribir la definición');
   			return;
   		}
 
   		if (crea.correcta == '' || crea.correcta == undefined) {
-  			alert('Debe escribir la respuesta correcta');
+  			toastr.error('Debe escribir la respuesta correcta');
   			return;
   		}
        
   		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: crea.correcta  }  }).then (function(result){
-	      
+	       toastr.success('Se ha insertado la pregunta con éxito')
+           
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);
 	        
@@ -108,7 +109,8 @@ angular.module('app')
     $scope.editarAsk = function(cambia){
 	           console.log(cambia);
 	           $http.get('::preguntas/editar',  {params: {definicion: cambia.definicion, tipo: cambia.tipo, prueba_id: cambia.prueba_id, opc_a: cambia.opc_a, opc_b: cambia.opc_b, opc_c: cambia.opc_c, opc_d: cambia.opc_d, correcta: cambia.correcta, rowid: cambia.rowid }}).then (function(result){
-                console.log('Se actualizaron los datos con exito', result);
+         
+                 toastr.success('Se ha editado la pregunta con éxito')
                  $scope.traer_datos();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
@@ -124,7 +126,7 @@ angular.module('app')
     $scope.eliminar_ask = function(rowid){
 	    
 	    $http.delete('::preguntas/eliminar', {params: { id: rowid } }).then (function(result){
-			console.log('Se borraron los datos con exito', result);
+			toastr.success('Se ha borrado la pregunta con éxito')
             $scope.traer_datos();
 		}, function(error){
 			console.log('No se pudo borrarlos datos', error);

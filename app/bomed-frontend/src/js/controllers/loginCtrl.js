@@ -44,7 +44,16 @@ angular.module('app')
 
      
     MySocket.on('a_abrir_sesion', function(data){
-       console.log('hola burras', data);
+      
+
+        AuthServ.loguear(data).then(function(){
+              toastr.info('Iniciando sesión...');
+            $state.go('app.main');
+        }, function(){
+            toastr.error('Datos incorrectos');
+        })
+    
+
 
     });   
            

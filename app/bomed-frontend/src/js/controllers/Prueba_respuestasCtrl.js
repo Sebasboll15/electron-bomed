@@ -1,8 +1,6 @@
-angular.module('olimpiada_boom')
+angular.module('app')
 
-.controller('Prueba_respuestasCtrl', function(ConexionServ, $scope, AuthServ, USER, $state, $http ){
-
-	ConexionServ.createTables();
+.controller('Prueba_respuestasCtrl', function($scope, AuthServ, USER, $state, $http, toastr){
 	$scope.usuario= USER ;
     $scope.respuesta_llevada={};
     $scope.indice_preg = 0;
@@ -53,8 +51,8 @@ angular.module('olimpiada_boom')
 
         	if ($scope.indice_preg == $scope.preguntas.length) {
         	
-        	 alert('Haz terminado la prueba');
-        	 $state.go('main');
+        	 toastr.success('Prueba terminada');
+        	 $state.go('app.main');
         	};
         	
                 
