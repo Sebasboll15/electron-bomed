@@ -4,6 +4,7 @@ angular.module('app')
 .controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll, toastr){
 	console.log('dfvsd');
    $scope.mostrando 	= false;
+    $scope.mostrando_edit = false;
 	$scope.boton1 		= true;
 	$scope.usuarios		= {};
 	$scope.preg_edit 	= {};
@@ -61,10 +62,17 @@ angular.module('app')
     	$anchorScroll();
 	
 	};
+
+	
 	
 	$scope.salir_crear = function(){
 		$location.hash('');
 		$scope.mostrando= false
+	};
+
+	$scope.salir_editar = function(){
+		$location.hash('');
+		$scope.mostrando_edit= false
 	};
 	
 	
@@ -97,6 +105,13 @@ angular.module('app')
 	};
   
     $scope.editarP = function(cambia){
+        
+        $scope.mostrando_edit= true;
+		
+		$location.hash('editar-pregunta-div');
+    	$anchorScroll();
+	
+
       for (var i = 0; i < $scope.preguntas.length; i++) {
 			$scope.preguntas[i].editando = false;
 		}
