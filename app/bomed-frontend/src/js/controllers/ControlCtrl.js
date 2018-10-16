@@ -109,18 +109,22 @@ angular.module('app')
            
     };
 
+     $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+
+    }; 
+
     $scope.put_user = function(user){  
       console.log('usuario', user);
       
       data = {username: user.username , password: user.password, nombre_punto: $scope.cliente.nombre_punto, resourceId: $scope.cliente.resourceId};
       
       MySocket.emit('abrirle_la_sesion', data);
+
+      $scope.cancel();
        toastr.success('Usuario asignado');
     };
           
-    $scope.cancel = function () {
-        
-      $uibModalInstance.dismiss('cancel');
-
-    }; 
+   
 });

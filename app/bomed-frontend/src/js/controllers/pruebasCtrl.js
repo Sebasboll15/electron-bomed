@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('pruebasCtrl', function($scope, $filter, $http, toastr){
+.controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr){
     $scope.mostrando= false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
@@ -8,6 +8,15 @@ angular.module('app')
 	$scope.pruebas= [];
 	$scope.preguntas= {};
     
+    $location.hash('');
+	
+	
+	// Editor options.
+	$scope.options = {
+		language: 'es',
+		allowedContent: true,
+		entities: false
+	};
 
    $scope.traer_datos = function(){
    			$http.get('::pruebas').then (function(result){
@@ -73,14 +82,18 @@ angular.module('app')
 
 
 
-	$scope.mostrar= function(){
+	$scope.mostrar_crear= function(){
 		
 		$scope.mostrando= true;
-		$scope.bsoton1= false;
+		$scope.boton1= false;
+
+		$location.hash('crear-prueba-div');
+    	$anchorScroll();
+	
 	
 	};
 	
-	$scope.salir= function(){
+	$scope.salir_crear= function(){
 		$scope.mostrando= false;
 	};
 	 		

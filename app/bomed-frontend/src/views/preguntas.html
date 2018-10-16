@@ -88,7 +88,7 @@
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
                           <div class="col-md-9">
-                            <select id="select1" name="select" class="form-control" ng-model="preg_nueva.prueba_id" size="1">
+                            <select id="select1-preguntas"  class="form-control" ng-model="preg_nueva.prueba_id" size="1">
                               <option ng-repeat="n in pruebas" ng-value="{{n.rowid}}">{{n.alias}}</option>
                             </select>
                           </div>
@@ -98,12 +98,12 @@
                           <label class="col-md-3 col-form-label"><h5>Tipo de pregunta:</h5></label>
                           <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-multiple"  ng-model="preg_nueva.tipo" value="Multiple" name="inline-radios">
-                              <label class="form-check-label" for="inline-multiple">Múltiple</label>
+                              <input class="form-check-input" type="radio" id="inline-multiple-crear"  ng-model="preg_nueva.tipo" value="Múltiple" name="inline-radios">
+                              <label class="form-check-label" style="padding-right: 10px;" for="inline-multiple-crear">Múltiple</label>
                             </div>
                             <div class="form-check form-check-inline mr-1">
-                              <input class="form-check-input" type="radio" id="inline-verdadero-falso" ng-model="preg_nueva.tipo" value="Falso-Verdadero" name="inline-radios">
-                              <label class="form-check-label" for="inline-verdadero-falso">Falso/Verdadero</label>
+                              <input class="form-check-input" type="radio" id="inline-verdadero-falso-crear" ng-model="preg_nueva.tipo" value="Falso-Verdadero" name="inline-radios">
+                              <label class="form-check-label" style="padding-right: 10px;" for="inline-verdadero-falso-crear">Falso/Verdadero</label>
                             </div>
                           </div>
                         </div>
@@ -167,12 +167,12 @@
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
                                 <div class="col-md-9 col-form-label">
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio1"  ng-model="preg_nueva.correcta" value="Falso" name="radio-preg-correcta">
-                                    <label class="form-check-label" for="inline-radio1">Falso</label>
+                                    <input class="form-check-input" type="radio" id="inline-verdadero-falso1"  ng-model="preg_nueva.correcta" value="Falso" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-verdadero-falso1">Falso</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio2" ng-model="preg_nueva.correcta" value="Verdadero" name="radio-preg-correcta">
-                                    <label class="form-check-label" for="inline-radio2">Verdadero</label>
+                                    <input class="form-check-input" type="radio" id="inline-verdadero-falso2" ng-model="preg_nueva.correcta" value="Verdadero" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-verdadero-falso2">Verdadero</label>
                                   </div>
                                 </div>
                           </div>
@@ -210,7 +210,7 @@
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
                           <div class="col-md-9">
-                            <select id="select1" name="select" class="form-control" ng-model="pregunta.prueba_id" size="1">
+                            <select id="select2-preguntas"  class="form-control" ng-model="pregunta.prueba_id" size="1">
                               <option ng-repeat="n in pruebas" ng-value="{{n.rowid}}">{{n.alias}}</option>
                             </select>
                           </div>
@@ -221,14 +221,14 @@
                           <div class="col-md-9 col-form-label">
                             <div class="form-check form-check-inline mr-1">
                               
-                              <label class="form-check-label" for="inline-multiple-editar">
+                              <label class="form-check-label" style="padding-right: 10px;" for="inline-multiple-editar">
                                   <input class="form-check-input" type="radio" id="inline-multiple-editar"  ng-model="pregunta.tipo" value="Múltiple">
                                   Múltiple
                               </label>
                             </div>
                             <div class="form-check form-check-inline mr-1">
                               
-                              <label class="form-check-label" for="inline-verdadero-falso-editar">
+                              <label class="form-check-label" style="padding-right: 10px;" for="inline-verdadero-falso-editar">
                                   <input class="form-check-input" type="radio" id="inline-verdadero-falso-editar" ng-model="pregunta.tipo" value="Falso-Verdadero">
                                   Falso/Verdadero
                               </label>
@@ -270,20 +270,20 @@
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
                                 <div class="col-md-9 col-form-label">
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-a"  ng-model="pregunta.correcta" value="A" name="radio-preg-correcta">
-                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-a">A</label>
+                                    <input class="form-check-input" type="radio" id="inline-opc-a-editar"  ng-model="pregunta.correcta" value="A" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-a-editar">A</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-b" ng-model="pregunta.correcta" value="B" name="radio-preg-correcta">
-                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-b">B</label>
+                                    <input class="form-check-input" type="radio" id="inline-opc-b-editar" ng-model="pregunta.correcta" value="B" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-b-editar">B</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-c" ng-model="pregunta.correcta" value="C" name="radio-preg-correcta">
-                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-c">C</label>
+                                    <input class="form-check-input" type="radio" id="inline-opc-c-editar" ng-model="pregunta.correcta" value="C" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-c-editar">C</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-opc-d" ng-model="pregunta.correcta" value="D" name="radio-preg-correcta">
-                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-d">D</label>
+                                    <input class="form-check-input" type="radio" id="inline-opc-d-editar" ng-model="pregunta.correcta" value="D" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-opc-d-editar">D</label>
                                   </div>
                                 </div>
                           </div>
@@ -295,12 +295,12 @@
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
                                 <div class="col-md-9 col-form-label">
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio1"  ng-model="pregunta.correcta" value="Falso" name="radio-preg-correcta">
-                                    <label class="form-check-label" for="inline-radio1">Falso</label>
+                                    <input class="form-check-input" type="radio" id="inline-verdadero-falso1" ng-model="pregunta.correcta" value="Falso" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-radio1">Falso</label>
                                   </div>
                                   <div class="form-check form-check-inline mr-1">
-                                    <input class="form-check-input" type="radio" id="inline-radio2" ng-model="pregunta.correcta" value="Verdadero" name="radio-preg-correcta">
-                                    <label class="form-check-label" for="inline-radio2">Verdadero</label>
+                                    <input class="form-check-input" type="radio" id="inline-verdadero-falso2" ng-model="pregunta.correcta" value="Verdadero" name="radio-preg-correcta">
+                                    <label class="form-check-label" style="padding-right: 10px;" for="inline-radio2">Verdadero</label>
                                   </div>
                                 </div>
                           </div>
