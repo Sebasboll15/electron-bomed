@@ -94,26 +94,36 @@ angular.module('app')
 
     }
 
+    $scope.actualizarClientes = function(){
+      
+      MySocket.emit('traer_clientes');
+
+    };
 
     $scope.ok = function(){
         
       $uibModalInstance.close($scope.cliente);  
-   
+       $scope.actualizarClientes();
+
     };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+      $scope.actualizarClientes();
+
+    }; 
             
     $scope.cerrar_se = function(datos){  
 
       
       MySocket.emit('cerrar_su_sesion', datos);
+      $scope.cancel();
       toastr.success('Se ha cerrado la sesión con éxito')
-           
+     
     };
 
-     $scope.cancel = function () {
-        
-      $uibModalInstance.dismiss('cancel');
-
-    }; 
+     
 
     $scope.put_user = function(user){  
       console.log('usuario', user);
@@ -123,7 +133,8 @@ angular.module('app')
       MySocket.emit('abrirle_la_sesion', data);
 
       $scope.cancel();
-       toastr.success('Usuario asignado');
+      toastr.success('Usuario asignado');
+     
     };
           
    
