@@ -51,7 +51,7 @@ angular.module('app')
       
 
         AuthServ.loguear(data).then(function(){
-              toastr.info('Iniciando sesión...');
+            toastr.info('Iniciando sesión...');
             $state.go('app.main');
         }, function(){
             toastr.error('Datos incorrectos');

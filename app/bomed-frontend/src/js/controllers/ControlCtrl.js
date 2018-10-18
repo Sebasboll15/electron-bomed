@@ -76,7 +76,8 @@ angular.module('app')
 .controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket, toastr){
 
     $scope.cliente = cliente;
-
+     console.log('usuariotttt', $scope.cliente);
+      
     $scope.cliente_existe = false;
 
     if ($scope.cliente.user_data.rowid) {

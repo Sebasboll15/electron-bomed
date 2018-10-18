@@ -2,7 +2,8 @@ angular.module('app')
 
 .controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER, toastr){
 	
-	$scope.USER = USER;
+	$scope.USER 		= USER;
+	$scope.$state 		= $state;
 	
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
@@ -23,9 +24,27 @@ angular.module('app')
 	    
 	    setTimeout(function(){
 
+
+			if (!localStorage.getItem('registered_boolean')){
+				localStorage.registered_boolean = false
+			}
+
+			if (localStorage.getItem('registered_boolean')) {
+				registered = localStorage.getItem('registered_boolean')
+			}else{
+				registered = false
+			}
+
+			if (registered=='false') {
+				registered = false;
+			}
+
+			$scope.USER.registered 		= registered;
+			$scope.USER.logged 			= true;
+
 	       MySocket.emit('toma_mis_datos', {usuario: $scope.USER})
 
-	       }, 1000);
+	    }, 1000);
 	   
 		
 	});

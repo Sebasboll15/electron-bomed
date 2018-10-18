@@ -18,8 +18,8 @@ function crearDatosIniciales() {
                 }else{
                     
                     hash_password   = '123';
-                    consulta = "INSERT INTO `usuarios` VALUES (1,'JORGE', 'CELEDON', 'M', 'jorge', '" + hash_password + "', 1, 'Admin')," +
-                                                             "(2,'JUAN CAMILO', 'MANRRIQUE', 'M', 'juan','" + hash_password + "',  1, 'Usuario')," +
+                    consulta = "INSERT INTO `usuarios` VALUES (1,'ADMIN', '', 'M', 'ADMIN', '" + hash_password + "', 1, 'Admin')," +
+                                                             "(2,'Espectador', 'Espectador', 'M', 'screen','" + hash_password + "',  1, 'Espectador')," +
                                                              "(3,'EDILSON', 'MARQUEZ', 'M', 'edilson', '" + hash_password + "', 1, 'Usuario')," +
                                                              "(4,'FELIX', 'DÍAZ', 'M', 'felix', '" + hash_password + "', 1, 'Usuario')," +
                                                              "(5,'ERIK', 'ESLAVA', 'M', 'erik', '" + hash_password + "',  1, 'Usuario')," +

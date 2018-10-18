@@ -41,14 +41,26 @@ function deletePruebaHandler(req, res) {
 function getInsertarHandler(req, res) {
     
 
-	 consulta = "Insert into pruebas(nombre, alias, dirigido, mostrar_respuesta, puntos_promedio, tiempo_preg, tiempo_exam) values(?,?,?,?,?,?,?)";
+	consulta = "INSERT into pruebas(nombre, alias, dirigido, actual, mostrar_respuesta, puntos_promedio, tiempo_preg, tiempo_exam) values(?,?,?,?,?,?,?,?)";
 	params = req.query;
 
-	 datos= [params.nombre, params.alias, params.dirigido, params.mostrar_respuesta, params.puntos_promedio, params.tiempo_preg, params.tiempo_exam ];
+	datos= [params.nombre, params.alias, params.dirigido, params.actual, params.mostrar_respuesta, params.puntos_promedio, params.tiempo_preg, params.tiempo_exam ];
 	
 	db.query(consulta, datos).then (function(result){
-      
-        res.send('Insertado');
+		console.log(result);
+    	if (params.actual==1) {
+    		
+    		consulta = "UPDATE pruebas SET actual=0 WHERE id!=?";
+    		db.query(consulta, [result.insertId]).then (function(r){
+    			res.send('Insertado');
+    		}, function(error){
+		       res.status(400).send({ error: error })
+			})
+
+    	} else {
+    		res.send('Insertado');
+    	}
+        
 	}, function(error){
    
        res.status(400).send({ error: error })

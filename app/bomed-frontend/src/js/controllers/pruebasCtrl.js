@@ -4,6 +4,14 @@ angular.module('app')
 	$scope.dejarver= false;
 	$scope.boton3= true;
 	$scope.boton1= true;
+	$scope.crea 	= {
+		dirigido: 'Dirigido',
+		mostrar_respuesta: 'Si',
+		puntos_promedio: 'Puntos',
+		tiempo_preg: 30,
+		actual: 1,
+		tiempo_exam: 15
+	};
 	
 	$scope.pruebas= [];
 	$scope.preguntas= {};
@@ -122,15 +130,33 @@ angular.module('app')
 	};
 	
   	$scope.insertarPrueba = function(crea){
-	         
-  			$http.get('::pruebas/insertar', {params: {nombre: crea.nombre, alias: crea.alias, dirigido: crea.dirigido, mostrar_respuesta: crea.mostrar_respuesta, puntos_promedio: crea.puntos_promedio, tiempo_preg: crea.tiempo_preg, tiempo_exam: crea.tiempo_exam}}).then (function(result){
-	     toastr.success('Se ha insertado la prueba con éxito')
-           
-	     $scope.traer_datos();
 
+	    datos = {
+	    	nombre: crea.nombre, 
+		    alias: crea.alias, 
+		    dirigido: crea.dirigido, 
+		    actual: crea.actual, 
+		    mostrar_respuesta: crea.mostrar_respuesta, 
+		    puntos_promedio: crea.puntos_promedio, 
+		    tiempo_preg: crea.tiempo_preg, 
+		    tiempo_exam: crea.tiempo_exam
+		}
 
+  		$http.get('::pruebas/insertar', {params: datos}).then(function(result){
+	    	toastr.success('Se ha insertado la prueba con éxito')
+			
+	    	$scope.traer_datos();
 
-	        console.log('Se insertaron los datos con exito', result);
+			$scope.crea 	= {
+				dirigido_t: 'Dirigido',
+				mostrar_respuesta: 'Si',
+				puntos_promedio: 'Puntos',
+				tiempo_preg: 30,
+				actual: 1,
+				tiempo_exam: 15
+			};
+	        
+	        $scope.mostrando = false;
 	        
 	    }, function(error){
 	       console.log('No se pudo insertar los datos', error);
@@ -152,36 +178,35 @@ angular.module('app')
     };
     
     $scope.editarPrueba = function(cambia){
-	         
-		  
-		  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
-                console.log('Se actualizaron los datos con exito', result);
-              
-              toastr.success('Se ha editado la prueba con éxito')
-           
-              $scope.traer_datos();
 
+	  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
 
+			toastr.success('Se ha editado la prueba con éxito')
 
-	         }, function(error){
-	           console.log('No se pudo actualizar los datos', error);
+			$scope.traer_datos();
 
-	         })
+         }, function(error){
+           console.log('No se pudo actualizar los datos', error);
 
+         })
 
-     
-
-   };
+	};
     
-    $scope.eliminar_test = function(rowid){
+
+
+    $scope.eliminar_test = function(prueba){
+
+    	res = confirm('¡Seguro que deseas eliminar la prueba: '+ prueba.alias +'?');
+    	if (!res) {
+    		return;
+    	}
 	          
-	    $http.delete('::pruebas/eliminar', {params: { id: rowid } }).then (function(result){
+	    $http.delete('::pruebas/eliminar', {params: { id: prueba.rowid } }).then(function(result){
 			console.log('Se borraron los datos con exito', result);
          
-		 toastr.success('Se ha eliminado la prueba con éxito')
-           	
-         $scope.traer_datos();
- 
+			toastr.success('Se ha eliminado la prueba con éxito')
+	           	
+	        $scope.traer_datos();
 
 		}, function(error){
 			console.log('No se pudo borrarlos datos', error);

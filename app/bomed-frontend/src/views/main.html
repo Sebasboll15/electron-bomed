@@ -2,4 +2,23 @@
 
   <button class="btn btn-lg btn-block btn-pill btn-danger" ui-sref="app.prueba_respuestas" type="button">Empieza tu prueba</button>
 
+	<button class="btn btn-lg btn-block btn-pill btn-danger" ng-click="pantalla_completa=true" 
+  		type="button">
+	  Pantalla completa
+	</button>
+
+
+	<div ng-show="$state.is('panel.main.espectador')" style="background-color: #ccc;     width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    margin: 0;
+    overflow: auto;">
+		Tómalo
+	</div>
+
+
+
 </div>

@@ -12,11 +12,13 @@
                   <th>Id</th> 
                   <th>Nombre</th>
                   <th>Alias</th> 
-                  <th>Dirigido o Manual</th>
-                  <th>Mostrar respuesta</th>
+                  <th>
+                    <span uib-tooltip="Dirigido o manual">Diri / Manual</span>
+                  </th>
+                  <th>Mostrar correcta</th>
                   <th>Puntos o Promedio</th>
-                  <th>Tiempo de pregunta</th>
-                  <th>Tiempo de examen</th>
+                  <th>Tiempo pregunta</th>
+                  <th>Tiempo examen</th>
                   <th style="min-width: 100px;">Opciones</th>
                 </tr>
               </thead>
@@ -66,14 +68,7 @@
                       </td>
                         <td><span ng-show="!p.editando">{{p.tiempo_preg}}</span>
                         <span ng-show="p.editando">
-                           <label>
-                            <input type="radio" ng-model="p.por_tiempo_preg" value="Si">Si
-                          </label>
-                          
-                          <label>
-                            <input type="radio" ng-model="p.por_tiempo_preg" value="No">No
-                          </label>
-                           <div ng-show="p.por_tiempo_preg=='Si'">
+                           <div ng-show="p.dirigido=='Dirigido'">
                                <input type="text" placeholder="Tiempo de pregunta" ng-model="p.tiempo_preg">
                            </div>
                       </td>
@@ -88,7 +83,7 @@
 
                       <td style="padding: 0px;">
                         <span ng-show="!p.editando">
-                          <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p.rowid)"></button> 
+                          <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p)"></button> 
                           <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
                           <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
                         </span>
@@ -126,15 +121,16 @@
                                       <label class="col-md-3 col-form-label"><h5>Dirigido o manual:</h5></label>
                                       <div class="col-md-9 col-form-label">
                                         <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-dirigido-crear"  ng-model="crea.dirigido" value="Dirigido" name="inline-radios1">
+                                          <input class="form-check-input" type="radio" id="inline-dirigido-crear"  ng-model="crea.dirigido" name="nuevo_dirigido" value="Dirigido">
                                           <label class="form-check-label" style="padding-right: 10px;" for="inline-dirigido-crear">Dirigido</label>
                                         </div>
                                         <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-manual-crear" ng-model="crea.dirigido" value="Manual" name="inline-radios1">
+                                          <input class="form-check-input" type="radio" id="inline-manual-crear" ng-model="crea.dirigido" name="nuevo_dirigido" value="Manual">
                                           <label class="form-check-label" style="padding-right: 10px;" for="inline-manual-crear">Manual</label>
                                         </div>
                                       </div>
                                     </div>
+
 
                                     <div class="form-group row">
                                       <label class="col-md-3 col-form-label"><h5>¿Mostrar respuesta?:</h5></label>
@@ -164,21 +160,8 @@
                                       </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                      <label class="col-md-3 col-form-label"><h5>¿Tiempo de pregunta?:</h5></label>
-                                      <div class="col-md-9 col-form-label">
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-por_tiempo_preg-crear"  ng-model="crea.por_tiempo_preg" value="Si" name="inline-radios4">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-por_tiempo_preg-crear">Si</label>
-                                        </div>
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-no_por_tiempo_preg-crear" ng-model="crea.por_tiempo_preg" value="No" name="inline-radios4">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-no_por_tiempo_preg-crear">No</label>
-                                        </div>
-                                      </div>
-                                    </div>
 
-                                    <div  ng-show="crea.por_tiempo_preg == 'Si' ">
+                                    <div  ng-show="crea.dirigido=='Dirigido' ">
                                       <div class="form-group row">
                                         <div class="col-md-9">
                                          <input type="text" id="text-input-tiempo_preg-crear" ng-model="crea.tiempo_preg"  class="form-control" placeholder="Tiempo de pregunta">
@@ -187,7 +170,7 @@
               
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group row" ng-show="crea.dirigido=='Manual'">
                                         <label class="col-md-3 col-form-label" for="text-input"><h5>Tiempo de examen:</h5></label>
                                         <div class="col-md-9">
                                          <input type="text" id="text-input-tiempo_exam-crear" ng-model="crea.tiempo_exam"  class="form-control" placeholder="Tiempo de examen">
