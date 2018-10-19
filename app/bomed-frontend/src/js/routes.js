@@ -128,6 +128,24 @@ angular
     }
   })
 
+  .state('app.main.espectador.participantes', {
+    url: '/participantes',
+     controller: 'espectador-participantesCtrl',
+    templateUrl: 'views/participantes.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para el espectador' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/espectador-participantesCtrl.js']
+        });
+      }]
+    }
+  })
+
   .state('app.usuarios', {
     url: '/usuarios',
      controller: 'usuariosCtrl',

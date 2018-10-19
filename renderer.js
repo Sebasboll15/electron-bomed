@@ -182,6 +182,17 @@ self.io.on('connection', (socket)=> {
 
   });
 
+  socket.on('mandar_participantes', function(data){
+
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].resourceId == data.clientes_pantalla.resourceId) {
+            
+            io.to(all_clts[i].resourceId).emit('tome_participantes', data.clientes_participantes);
+
+          }
+      }
+  })
+
   socket.on('abrirle_la_sesion', function(data){
       
      for (var i = 0; i < all_clts.length; i++) {

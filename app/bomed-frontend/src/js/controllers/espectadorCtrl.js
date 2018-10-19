@@ -1,5 +1,13 @@
 angular.module('app')
-.controller('espectadorCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr){
+.controller('espectadorCtrl', function($scope, $anchorScroll,toastr, MySocket, $state){
+ 	console.log('hola_mundo');
+	
+	MySocket.on('tome_participantes', function(data){
+    	
+    	console.log('ffffff');
+    	$state.go('app.main.espectador.participantes');
+    		
+  	});
 
 
 
