@@ -4,6 +4,7 @@ angular.module('app')
 	
 	$scope.USER 		= USER;
 	$scope.$state 		= $state;
+	$scope.depend_usuario= false;
 	
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
@@ -15,13 +16,22 @@ angular.module('app')
 	};
 	$scope.traer_datos();
 
+	$scope.colocar_botones = function(){
+		if ($scope.USER.tipo == 'Espectador') {
+			$scope.depend_usuario = true;
+		}else	{
+			$scope.depend_usuario= false;
+		}	
+
+	};
+	$scope.colocar_botones();
+
 
 
 	AuthServ.verificar_user_logueado().then( function(r){
 
 		$scope.USER = r;
-		console.log($scope.USER, 'ffffff');
-	    
+	
 	    setTimeout(function(){
 
 

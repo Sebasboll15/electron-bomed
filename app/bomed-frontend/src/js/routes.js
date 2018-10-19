@@ -110,7 +110,24 @@ angular
     }
   })
   
-  
+  .state('app.main.espectador', {
+    url: '/espectador',
+     controller: 'espectadorCtrl',
+    templateUrl: 'views/espectador.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para el espectador' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/espectadorCtrl.js']
+        });
+      }]
+    }
+  })
+
   .state('app.usuarios', {
     url: '/usuarios',
      controller: 'usuariosCtrl',
