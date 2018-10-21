@@ -1,6 +1,7 @@
 angular.module('app')
 .controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr){
-    $scope.mostrando= false;
+    $scope.mostrando_crear= false;
+    $scope.mostrando_edit = false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
 	$scope.boton1= true;
@@ -92,8 +93,9 @@ angular.module('app')
 
 	$scope.mostrar_crear= function(){
 		
-		$scope.mostrando= true;
+		$scope.mostrando_crear= true;
 		$scope.boton1= false;
+		$scope.mostrando_edit= false;
 
 		$location.hash('crear-prueba-div');
     	$anchorScroll();
@@ -102,7 +104,7 @@ angular.module('app')
 	};
 	
 	$scope.salir_crear= function(){
-		$scope.mostrando= false;
+		$scope.mostrando_crear= false;
 	};
 	 		
 	$scope.verDetallesPrueba= function(id){
@@ -164,9 +166,22 @@ angular.module('app')
 	    })
 
 	};
-  
+  	
+  	$scope.salir_editar = function(){
+		$location.hash('');
+		$scope.mostrando_edit= false;
+	};
+
     $scope.editarP = function(cambia){
       
+      $scope.mostrando_crear = false;
+      $scope.mostrando_edit	 = true;
+      $scope.prueba          = cambia;
+
+      $location.hash('editar-prueba-div');
+    	$anchorScroll();
+	
+		
       for (var i = 0; i < $scope.pruebas.length; i++) {
 			$scope.pruebas[i].editando = false;
 		}

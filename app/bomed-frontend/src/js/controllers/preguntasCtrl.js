@@ -3,7 +3,7 @@ angular.module('app')
 
 .controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll, toastr){
 	console.log('dfvsd');
-   $scope.mostrando 	= false;
+    $scope.mostrando 	= false;
     $scope.mostrando_edit = false;
 	$scope.boton1 		= true;
 	$scope.usuarios		= {};
@@ -57,7 +57,7 @@ angular.module('app')
 
 		$scope.mostrando= true;
 		$scope.boton1= false;
-		$scope.mostrando_edit= false
+		$scope.mostrando_edit= false;
 
 		$location.hash('crear-pregunta-div');
     	$anchorScroll();
@@ -73,13 +73,11 @@ angular.module('app')
 
 	$scope.salir_editar = function(){
 		$location.hash('');
-		$scope.mostrando_edit= false
+		$scope.mostrando_edit= false;
 	};
 	
 	
   	$scope.insertarAsk = function(crea){
-        
-        $scope.mostrando = false;
   		
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			toastr.error('Debe escribir la definición');
@@ -88,6 +86,11 @@ angular.module('app')
 
   		if (crea.correcta == '' || crea.correcta == undefined) {
   			toastr.error('Debe escribir la respuesta correcta');
+  			return;
+  		}
+
+  		if (crea.tipo == '' || crea.tipo == undefined) {
+  			toastr.error('Debe indicar el tipo de pregunta');
   			return;
   		}
        
@@ -101,6 +104,7 @@ angular.module('app')
 	       console.log('No se pudo insertar los datos', error);
 
 	    })
+	    $scope.mostrando = false;
 
 	         
 	};

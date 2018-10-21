@@ -25,69 +25,44 @@
                <tbody> 
                  <tr  ng-repeat="p in pruebas">
                       <th scope="row">{{p.rowid}}</th>
+                      
                       <td>
-                        <span ng-show="!p.editando">{{p.nombre}}</span>
-                        <span ng-show="p.editando"><input type="text" ng-model="p.nombre"></span>
+                        <span >{{p.nombre}}</span>
+                      </td>
+                      
+                      <td>
+                        <span>{{p.alias}}</span>
+                      </td>
 
+                      <td>
+                        <span>{{p.dirigido}}</span>
                       </td>
-                      <td><span ng-show="!p.editando">{{p.alias}}</span>
-                        <span ng-show="p.editando"><input type="text" ng-model="p.alias"></span>
-                       </td>
-                      <td><span ng-show="!p.editando">{{p.dirigido}}</span>
-                        <span ng-show="p.editando">
-                          <label>
-                            <input type="radio" ng-model="p.dirigido" value="Dirigido">Dirigido
-                          </label>
-                          
-                          <label>
-                            <input type="radio" ng-model="p.dirigido" value="Manual">Manual
-                          </label>
-                          
-                        </span>
+
+                      <td>
+                        <span>{{p.mostrar_respuesta}}</span>
                       </td>
-                      <td><span ng-show="!p.editando">{{p.mostrar_respuesta}}</span>
-                        <span ng-show="p.editando">
-                           <label>
-                            <input type="radio" ng-model="p.mostrar_respuesta" value="Si">Si
-                          </label>
-                          
-                          <label>
-                            <input type="radio" ng-model="p.mostrar_respuesta" value="No">No
-                          </label>
-                          
+
+                      <td>
+                        <span>{{p.puntos_promedio}}</span> 
                       </td>
-                      <td><span ng-show="!p.editando">{{p.puntos_promedio}}</span>
-                         <span ng-show="p.editando">
-                           <label>
-                            <input type="radio" ng-model="p.puntos_promedio" value="Puntos">Puntos
-                          </label>
-                          
-                          <label>
-                            <input type="radio" ng-model="p.puntos_promedio" value="Promedio">Promedio
-                          </label> 
+
+                      <td>
+                        <span>{{p.tiempo_preg}}</span> 
                       </td>
-                        <td><span ng-show="!p.editando">{{p.tiempo_preg}}</span>
-                        <span ng-show="p.editando">
-                           <div ng-show="p.dirigido=='Dirigido'">
-                               <input type="text" placeholder="Tiempo de pregunta" ng-model="p.tiempo_preg">
-                           </div>
-                      </td>
-                         <td><span ng-show="!p.editando">{{p.tiempo_exam}}</span>
-                        <span ng-show="p.editando">
-                           <input type="text" ng-model="tiempo_preg">
-                       
+                         
+                      <td>
+                        <span>{{p.tiempo_exam}}</span>
                       </td>
 
 
 
 
                       <td style="padding: 0px;">
-                        <span ng-show="!p.editando">
+                        
                           <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p)"></button> 
                           <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
                           <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
-                        </span>
-                         <button ng-click="editarPrueba(p)" ng-show="p.editando" class="btn-sm btn btn-info fa fa-check"></button> 
+                        
                       </td>
                   
                  </tr>
@@ -96,7 +71,7 @@
 
             <button type="button" class="btn btn-info btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar_crear()">Crear</button>
                     
-                          <div  ng-show="mostrando" id="crear-prueba-div">
+                          <div  ng-show="mostrando_crear" id="crear-prueba-div">
                                                   
                             <div class="card">
                               <div class="card-header">
@@ -188,6 +163,99 @@
                               </div>
                         </div>
                       </div>
+
+                        <div  ng-show="mostrando_edit" id="editar-prueba-div"  >
+                          <div class="card">
+                              <div class="card-header">
+                                <h3><strong>Edita la prueba</strong> </h3>
+                              </div>
+                              <div class="card-body">
+                                   <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Nombre:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-nombre-editar" ng-model="prueba.nombre"  class="form-control" placeholder="Nombre">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Alias:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-alias-editar" ng-model="prueba.alias"  class="form-control" placeholder="Alias">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label"><h5>Dirigido o manual:</h5></label>
+                                      <div class="col-md-9 col-form-label">
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-dirigido-editar"  ng-model="prueba.dirigido" name="nuevo_dirigido" value="Dirigido">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-dirigido-editar">Dirigido</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-manual-editar" ng-model="prueba.dirigido" name="nuevo_dirigido" value="Manual">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-manual-editar">Manual</label>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label"><h5>¿Mostrar respuesta?:</h5></label>
+                                      <div class="col-md-9 col-form-label">
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-mostrar_respuesta-editar"  ng-model="prueba.mostrar_respuesta" value="Si" name="inline-radios2">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-mostrar_respuesta-editar">Si</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-no_mostrar_respuesta-editar" ng-model="prueba.mostrar_respuesta" value="No" name="inline-radios2">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-no_mostrar_respuesta-editar">No</label>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                     <div class="form-group row">
+                                      <label class="col-md-3 col-form-label"><h5>¿Puntos o Promedio?:</h5></label>
+                                      <div class="col-md-9 col-form-label">
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-puntos-editar"  ng-model="prueba.puntos_promedio" value="Puntos" name="inline-radios3">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-puntos-editar">Por puntos</label>
+                                        </div>
+                                        <div class="form-check form-check-inline mr-1">
+                                          <input class="form-check-input" type="radio" id="inline-promedio-editar" ng-model="prueba.puntos_promedio" value="Promedio" name="inline-radios3">
+                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-promedio-editar">Por promedio</label>
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                    <div  ng-show="p.dirigido=='Dirigido' ">
+                                      <div class="form-group row">
+                                        <div class="col-md-9">
+                                         <input type="text" id="text-input-tiempo_preg-editar" ng-model="prueba.tiempo_preg"  class="form-control" placeholder="Tiempo de pregunta">
+                                        </div>
+                                      </div>
+              
+                                    </div>
+
+                                    <div class="form-group row" ng-show="p.dirigido=='Manual'">
+                                        <label class="col-md-3 col-form-label" for="text-input"><h5>Tiempo de examen:</h5></label>
+                                        <div class="col-md-9">
+                                         <input type="text" id="text-input-tiempo_exam-editar" ng-model="prueba.tiempo_exam"  class="form-control" placeholder="Tiempo de examen">
+                                        </div>
+                                      </div>
+
+                                 
+                              </div>
+                              <div class="card-footer">
+                                <button type="button" class="btn btn-primary" ng-click="editarPrueba(prueba)"><i class="fa fa-dot-circle-o"></i>&nbsp; Guardar cambios</button>
+
+
+                                <button type="button" class="btn btn-danger" ng-click="salir_editar()"><i class="fa fa-ban"></i>&nbsp; Cerrar</button>
+                                
+                              </div>
+                        </div>
+                        </div>  
+                                        
                       
                       
                </div>
