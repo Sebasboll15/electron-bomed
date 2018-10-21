@@ -182,12 +182,32 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('Mandar_participantes', function(data){
-    console.log('Mandar_participantes');
+  socket.on('Mandar_participantes', function(){
+      console.log('Mandar_participantes', all_clts);
+     
+     for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Usuario') {
+             clientes = {};
+             clientes.participantes = all_clts[i].resourceId
+             for (var i = 0; i < all_clts.length; i++) {
+                if (all_clts[i].user_data.tipo == 'Espectador') {
+                  
+                  io.to(all_clts[i].resourceId).emit('tome_participantes', clientes );
+
+                }
+              }
+
+          }
+      }
+
+      
+  })
+
+  socket.on('Quitar_participantes', function(){
     for (var i = 0; i < all_clts.length; i++) {
           if (all_clts[i].user_data.tipo == 'Espectador') {
             
-            io.to(all_clts[i].resourceId).emit('tome_participantes', data.clientes_participantes);
+            io.to(all_clts[i].resourceId).emit('quite_participantes');
 
           }
       }

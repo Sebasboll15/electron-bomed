@@ -1,11 +1,24 @@
 <div class="animated fadeIn">
-	
-	 <div class="card-body p-2 clearfix">
-            <i class="fa fa-user p-3 font-2xl mr-3 float-left"
-            ng-class="{'bg-primary': cliente.logged, 'bg-info': !cliente.logged }"></i>
-            <div class="h5 text-primary mb-0 mt-0">{{cliente.user_data.nombres}} {{cliente.user_data.apellidos}}</div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">{{cliente.nombre_punto}}</div>
-     </div>
-
+	<div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+	                    <div ng-show="mostrar_participantes">
+		                      <div class="card-header">
+		                        Conectados
+		                      </div>
+		                      <div class="card-body row">
+		                      
+								 <div  class="card-body p-2 clearfix">
+							            <i class="fa fa-user p-3 font-2xl mr-3 float-left"
+							            ng-class="{'bg-primary': cliente.logged, 'bg-info': !cliente.logged }"></i>
+							            <div class="h5 text-primary mb-0 mt-0">{{clientes.user_data.nombres}} {{clientes.user_data.apellidos}}</div>
+							            <div class="text-muted text-uppercase font-weight-bold font-xs">{{cliente.nombre_punto}}</div>
+							     </div>
+		 					  
+		 					  </div>
+ 		 				</div>
+ 		    		</div>
+               </div>
+    </div>
 
 </div>

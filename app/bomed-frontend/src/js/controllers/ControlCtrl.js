@@ -48,25 +48,18 @@ angular.module('app')
   });
       
   $scope.show_participantes = function(){
-
-    if ($scope.mostrar_participantes == true) {
-        $scope.mostrar_participantes = false;
-    }else {
-     $scope.mostrar_participantes = true; 
-    }
-
-    for (var i = 0; i < $scope.clientes.length; i++) {
-      if ($scope.clientes[i].tipo == 'Espectador') {
-
-      $scope.clientes_screen = $scope.clientes[i]}
-      
-      };
-
-    $scope.datos = {clientes_pantalla: $scope.clientes_screen, clientes_participantes: $scope.clientes }
+   
+    $scope.mostrar_participantes = false; 
     
+    MySocket.emit('Mandar_participantes');
+  };
+ 
 
-    MySocket.emit('Mandar_participantes', $scope.datos);
-
+  $scope.quitar_participantes = function(){
+    
+    $scope.mostrar_participantes = true;
+    
+    MySocket.emit('Quitar_participantes');
   };
 
 

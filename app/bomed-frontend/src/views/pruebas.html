@@ -60,7 +60,13 @@
                       <td style="padding: 0px;">
                         
                           <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p)"></button> 
+                          
                           <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
+                          
+                          <button ng-show="p.actual!=1" type="button" ng-click="seleccionarPrueba(p)" uib-tooltip="Seleccionar" class="btn-sm btn  fa fa-hand-o-up"></button> 
+                            
+                          <button ng-show="p.actual==1" type="button" uib-tooltip="Seleccionada" class="btn-sm btn  fa fa-thumbs-up"></button> 
+
                           <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
                         
                       </td>

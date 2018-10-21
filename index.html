@@ -70,8 +70,11 @@
         
         
         crearTablas = function () {
+          console.log('A crear tablas');
           const {shell} = require('electron');
-          shell.openExternal('http://' + ip + ':8787/api/welcome/crear-tablas');
+          shell.openExternal('http://' + ip + ':8787/api/welcome/crear-tablas', {activate: true}, function(error){
+            console.log(error);
+          });
         }
         
         crearDatosIniciales = function () {
