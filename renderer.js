@@ -182,10 +182,10 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('mandar_participantes', function(data){
-
+  socket.on('Mandar_participantes', function(data){
+    console.log('Mandar_participantes');
     for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].resourceId == data.clientes_pantalla.resourceId) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
             
             io.to(all_clts[i].resourceId).emit('tome_participantes', data.clientes_participantes);
 

@@ -84,8 +84,8 @@ angular.module('app')
   			return;
   		}
 
-  		if (crea.correcta == '' || crea.correcta == undefined) {
-  			toastr.error('Debe escribir la respuesta correcta');
+  		if (crea.prueba_id == '' || crea.prueba_id == undefined) {
+  			toastr.error('Debe indicar la prueba a la que pertenece');
   			return;
   		}
 
@@ -93,6 +93,48 @@ angular.module('app')
   			toastr.error('Debe indicar el tipo de pregunta');
   			return;
   		}
+
+  		if (crea.tipo == 'Múltiple') {
+  			if (crea.opc_a == '' || crea.opc_a == undefined) {
+  				toastr.error('Debe escribir la opcion A');
+  				return;
+  			}
+  		}
+
+  		if (crea.tipo == 'Múltiple') {
+  			if (crea.opc_b == '' || crea.opc_b == undefined) {
+  				toastr.error('Debe escribir la opcion B');
+  				return;
+  			}
+  		}
+
+  		if (crea.tipo == 'Múltiple') {
+  			if (crea.opc_c == '' || crea.opc_c == undefined) {
+  				toastr.error('Debe escribir la opcion C');
+  				return;
+  			}
+  		}
+
+  		if (crea.tipo == 'Múltiple') {
+  			if (crea.opc_d == '' || crea.opc_d == undefined) {
+  				toastr.error('Debe escribir la opcion D');
+  				return;
+  			}
+  		}
+
+  		if (crea.tipo == 'Falso-Verdadero') {
+  			if (crea.correcta == '' || crea.correcta == undefined) {
+  				toastr.error('Debe si la respuesta es falsa o verdadera');
+  				return;
+  			}
+  		}
+
+  		if (crea.correcta == '' || crea.correcta == undefined) {
+  			toastr.error('Debe escribir la respuesta correcta');
+  			return;
+  		}
+  		
+
        
   		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: crea.correcta  }  }).then (function(result){
 	       toastr.success('Se ha insertado la pregunta con éxito')
