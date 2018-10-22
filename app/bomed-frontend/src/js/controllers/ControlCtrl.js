@@ -7,12 +7,35 @@ angular.module('app')
   $scope.clientes              = [];
   $scope.mostrar_participantes = true;
   $scope.clientes_screen       = [];
+  $scope.participantes         = [];
 
+  
 
   $scope.actualizarClientes = function(){
     MySocket.emit('traer_clientes');
-  }
+
+  };
+
+  MySocket.on('clientes_traidos',function(res){
+    console.log(res);
+    $scope.clientes = res ;
     
+
+  });
+
+
+  $scope.traer_participantes = function(){
+
+    for (var i = 0; i < $scope.clientes.length; i++) {
+      if ($scope.clientes[i].user_data.prueba_id =='') {
+
+      } 
+    }
+  
+
+  }
+  
+
    
   MySocket.on('alguien_logueado', function(datos){
     $scope.actualizarClientes();
@@ -40,12 +63,7 @@ angular.module('app')
   MySocket.emit('traer_clientes');
      
 
-  MySocket.on('clientes_traidos',function(res){
-    console.log(res);
-    $scope.clientes = res ;
   
-
-  });
       
   $scope.show_participantes = function(){
 
@@ -62,6 +80,8 @@ angular.module('app')
     MySocket.emit('Mandar_participantes', $scope.datos);
 
   };
+
+
 
 
   $scope.OpenModalUser = function (cliente) {

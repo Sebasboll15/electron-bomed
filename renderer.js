@@ -182,7 +182,7 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('Mandar_participantes', function(){
+  socket.on('Mandar_participantes', function(data){
       console.log('Mandar_participantes', all_clts);
      
    
