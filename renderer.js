@@ -185,28 +185,37 @@ self.io.on('connection', (socket)=> {
   socket.on('Mandar_participantes', function(){
       console.log('Mandar_participantes', all_clts);
      
-     for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].user_data.tipo == 'Usuario') {
-             clientes = {};
-             clientes.participantes = all_clts[i].resourceId
+   
              for (var i = 0; i < all_clts.length; i++) {
                 if (all_clts[i].user_data.tipo == 'Espectador') {
                   
-                  io.to(all_clts[i].resourceId).emit('tome_participantes', clientes );
+                  io.to(all_clts[i].resourceId).emit('tome_participantes?', all_clts[i].resourceId);
 
                 }
               }
 
-          }
-      }
-
       
+  })
+
+  socket.on('traiga_participantes', function(data){
+    
+    for (var i = 0; i < all_clts.length; i++) {
+       if (all_clts[i].user_data.prueba_id == '') {
+          
+                
+         io.to(data).emit('llevar_participantes',  );
+
+        }
+    }
+
+    
   })
 
   socket.on('Quitar_participantes', function(){
     for (var i = 0; i < all_clts.length; i++) {
           if (all_clts[i].user_data.tipo == 'Espectador') {
             
+
             io.to(all_clts[i].resourceId).emit('quite_participantes');
 
           }

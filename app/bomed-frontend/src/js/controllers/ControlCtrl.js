@@ -48,18 +48,19 @@ angular.module('app')
   });
       
   $scope.show_participantes = function(){
-   
-    $scope.mostrar_participantes = false; 
-    
-    MySocket.emit('Mandar_participantes');
-  };
- 
 
-  $scope.quitar_participantes = function(){
+    if ($scope.mostrar_participantes == true) {
+        $scope.mostrar_participantes = false;
+    }else {
+     $scope.mostrar_participantes = true; 
+    }
+
+
+    $scope.datos = {clientes_participantes: $scope.clientes }
     
-    $scope.mostrar_participantes = true;
-    
-    MySocket.emit('Quitar_participantes');
+
+    MySocket.emit('Mandar_participantes', $scope.datos);
+
   };
 
 

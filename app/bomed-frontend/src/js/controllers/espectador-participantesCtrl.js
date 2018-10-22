@@ -1,18 +1,20 @@
 angular.module('app')
-.controller('espectador-participantesCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket){
-	$scope.clientes = [];	
+.controller('espectador-participantesCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state){
+	$scope.clientes = [];
+  console.log('Hola_mundo' );	
 	
 	$scope.mostrar_participantes = false;
 
-	MySocket.on('tome_participantes', function(res){
+	MySocket.on('llevar_participantes', function(res){
     	$scope.clientes = res;
+      $scope.mostrar_participantes = true;
     	console.log('Hola_mundo', $scope.clientes );
-    	$scope.mostrar_participantes = true;
+    	
 
   	});
 
   	MySocket.on('quite_participantes', function(){
-    	$scope.mostrar_participantes = false;
+    	$state.go('app.main.espectador');
 
   	});
 

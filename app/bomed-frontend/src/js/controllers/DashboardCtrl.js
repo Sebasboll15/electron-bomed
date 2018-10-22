@@ -107,7 +107,9 @@ angular.module('app')
 		AuthServ.cerrar_sesion();
 		
     })
+	 $scope.Ir_espectador= function(){
+		$state.go('app.main.espectador');
+	};
 
-	
-	
+
 });
