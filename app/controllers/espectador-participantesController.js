@@ -15,7 +15,13 @@ router.route('/')
 
 	function getRouteHandler(req, res) {
 		
-		
+		consulta = "SELECT p.rowid FROM pruebas WHERE actual = 1 ";
+		db.query(consulta).then(function(result){
+	        id_prueba_actual = result ;
+	    	res.json( id_prueba_actual);
+	    }, function(error){
+			
+		})
 
 	};
 

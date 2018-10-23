@@ -1,14 +1,11 @@
 angular.module('app')
 
 
-.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr){
+.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
   $scope.mostrar_participantes = true;
-  $scope.clientes_screen       = [];
-  $scope.participantes         = [];
-
   
 
   $scope.actualizarClientes = function(){
@@ -22,19 +19,6 @@ angular.module('app')
     
 
   });
-
-
-  $scope.traer_participantes = function(){
-
-    for (var i = 0; i < $scope.clientes.length; i++) {
-      if ($scope.clientes[i].user_data.prueba_id =='') {
-
-      } 
-    }
-  
-
-  }
-  
 
    
   MySocket.on('alguien_logueado', function(datos){
@@ -62,24 +46,26 @@ angular.module('app')
 
   MySocket.emit('traer_clientes');
      
-
-  
-      
   $scope.show_participantes = function(){
-
-    if ($scope.mostrar_participantes == true) {
-        $scope.mostrar_participantes = false;
-    }else {
-     $scope.mostrar_participantes = true; 
-    }
-
-
-    $scope.datos = {clientes_participantes: $scope.clientes }
-    
-
-    MySocket.emit('Mandar_participantes', $scope.datos);
+   $scope.mostrar_participantes = false;
+   MySocket.emit('llevar_espectador');
 
   };
+  
+
+   $scope.quitar_participantes = function(){
+    
+    $scope.mostrar_participantes = true;
+    
+    MySocket.emit('Quitar_participantes');
+  };
+
+   MySocket.on('Ver_participantes', function(datos){
+   if ($scope.mostrar_participantes == false) {
+    MySocket.emit('llevar_espectador');
+   }   
+  });
+        
 
 
 

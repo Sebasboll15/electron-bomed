@@ -182,32 +182,45 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('Mandar_participantes', function(data){
-      console.log('Mandar_participantes', all_clts);
-     
-   
-             for (var i = 0; i < all_clts.length; i++) {
-                if (all_clts[i].user_data.tipo == 'Espectador') {
-                  
-                  io.to(all_clts[i].resourceId).emit('tome_participantes?', all_clts[i].resourceId);
+  socket.on('Espectador:Ya_estoy_aqui', function(){
+    for (var i = 0; i < all_clts.length; i++) {
+        if (all_clts[i].user_data.tipo == 'Admin') {
+           
+           io.to(all_clts[i].resourceId).emit('Ver_participantes');
+        }
+     }
 
-                }
-              }
-
-      
   })
+    
+    socket.on('llevar_espectador', function(){
 
-  socket.on('traiga_participantes', function(data){
+      for (var i = 0; i < all_clts.length; i++) {
+        if (all_clts[i].user_data.tipo == 'Espectador') {
+           
+           io.to(all_clts[i].resourceId).emit('llevelos_espectadores');
+        }
+      }
+
+
+    })
+   
+      
+  
+
+  socket.on('traer_participantes', function(data){
+
+    partis = []; 
     
     for (var i = 0; i < all_clts.length; i++) {
-       if (all_clts[i].user_data.prueba_id == '') {
+       if (all_clts[i].user_data.prueba_id) {
           
-                
-         io.to(data).emit('llevar_participantes',  );
+          partis.push(all_clts[i]);
 
         }
     }
 
+
+    socket.emit('llevar_participantes',  partis );
     
   })
 
