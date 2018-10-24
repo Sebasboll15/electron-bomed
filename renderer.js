@@ -220,9 +220,32 @@ self.io.on('connection', (socket)=> {
     }
 
 
-    socket.emit('llevar_participantes',  partis );
+  socket.emit('llevar_participantes',  partis );
     
-  })
+  });
+
+  socket.on('contesto_mal/bien', function(data){
+    if (data == 1) {
+      for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+            
+
+            io.to(all_clts[i].resourceId).emit('contesto_bien');
+
+          }
+      }
+    }else {
+      for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+            
+
+            io.to(all_clts[i].resourceId).emit('contesto_mal');
+
+          }
+      }
+    }
+
+  });
 
   socket.on('Quitar_participantes', function(){
     for (var i = 0; i < all_clts.length; i++) {

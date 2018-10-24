@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('Prueba_respuestasCtrl', function($scope, AuthServ, USER, $state, $http, toastr){
+.controller('Prueba_respuestasCtrl', function($scope, AuthServ, USER, $state, $http, toastr, MySocket){
 	$scope.usuario= USER ;
     $scope.respuesta_llevada={};
     $scope.indice_preg = 0;
@@ -27,8 +27,8 @@ angular.module('app')
     	correcta = 0;
     	if ($scope.preguntas[$scope.indice_preg].correcta == opcion ) {
     		correcta = 1;
-    	}
-        
+    	} 
+        MySocket.emit('contesto_mal/bien', correcta);     
 
         $http.get('::Prueba_en_curso/insertar', {params: {preg_id: $scope.preguntas[$scope.indice_preg].rowid, usuario_id: USER.rowid, opcion_elegida: opcion, correcta: correcta, duracion: 0 }  }).then (function(result){
          

@@ -16,10 +16,32 @@ angular.module('app')
     $scope.mostrar_participantes = true;
     $scope.participantes = data;
     console.log('data.participantes', $scope.participantes);  
-    $scope.traer_participantes();
+    
     
   });
 
+  MySocket.on('conectado:alguien', function(){
+   $scope.traer_participantes(); 
+
+  });
+
+  MySocket.on('client_disconnected', function(){
+   $scope.traer_participantes(); 
+    
+  });
+
+  MySocket.on('contesto_bien', function(){
+    
+    
+  });
+
+  MySocket.on('contesto_mal', function(){
+    
+    
+  });
+
+
+  
 	
 
 	

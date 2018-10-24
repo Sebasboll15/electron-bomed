@@ -2,6 +2,7 @@ angular.module('app')
 
 
 .controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
+  MySocket.emit('Quitar_participantes');
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
