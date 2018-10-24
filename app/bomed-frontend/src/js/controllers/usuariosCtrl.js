@@ -2,7 +2,7 @@ angular.module('app')
 
 
 .controller('usuariosCtrl', function($scope, $http, $filter, $uibModal, toastr){
-	$scope.mostrando= false;
+	$scope.mostrando_crear = false;
 	$scope.boton1= true;
 	$scope.usuarios= {};
     
@@ -19,13 +19,13 @@ angular.module('app')
     };
     $scope.traer_datos();
 
-	$scope.mostrar= function(){
-		$scope.mostrando= true;
-		$scope.bsoton1= false;
+	$scope.mostrar_crear= function(){
+		$scope.mostrando_crear= true;
+		$scope.boton1= false;
 	
 	};
-	$scope.salir= function(){
-		$scope.mostrando= false;
+	$scope.salir_crear= function(){
+		$scope.mostrando_crear = false;
 	};
 	
 	
@@ -36,7 +36,7 @@ angular.module('app')
   			return;
   		}
 	    
-	     $http.get('::usuarios/insertar', {params: {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, tipo: crea.tipo  }  }).then (function(result){
+	     $http.get('::usuarios/insertar', {params: {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, tipo: 'Usuario'}  }).then (function(result){
 	       toastr.success('Usuario creado con éxito');
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);

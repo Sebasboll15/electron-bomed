@@ -1,12 +1,16 @@
 angular.module('app')
 
+  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $rootScope, AuthServ, toastr, MySocket){
+   
+   $scope.user = {username: 'jorge', password: '123'};   
+    
+    MySocket.on('sesion_A_cerrar', function (){
+               
+        toastr.info('Cerrando sesión...');
+    AuthServ.cerrar_sesion();
+    
+    })
 
-  
-
-
-  .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $rootScope, AuthServ, toastr){
-       
-    $scope.user = {username: 'jorge', password: '123'}
     
     if ($rootScope.sesion_cerrada) {
         location.reload();

@@ -102,6 +102,7 @@ self.io.on('connection', (socket)=> {
 
       if (all_clts[i].resourceId == socket.id) {
         all_clts.splice(i, 1);
+        
       }
     }
     
@@ -192,20 +193,17 @@ self.io.on('connection', (socket)=> {
 
   })
     
-    socket.on('llevar_espectador', function(){
+  socket.on('llevar_espectador', function(){
 
-      for (var i = 0; i < all_clts.length; i++) {
-        if (all_clts[i].user_data.tipo == 'Espectador') {
-           
-           io.to(all_clts[i].resourceId).emit('llevelos_espectadores');
-        }
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].user_data.tipo == 'Espectador') {
+         
+         io.to(all_clts[i].resourceId).emit('llevelos_espectadores');
       }
+    }
 
 
-    })
-   
-      
-  
+  });
 
   socket.on('traer_participantes', function(data){
 
@@ -234,16 +232,16 @@ self.io.on('connection', (socket)=> {
 
           }
       }
-    }else {
-      for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].user_data.tipo == 'Espectador') {
-            
+    } else {
+        for (var i = 0; i < all_clts.length; i++) {
+            if (all_clts[i].user_data.tipo == 'Espectador') {
+              
 
-            io.to(all_clts[i].resourceId).emit('contesto_mal');
+              io.to(all_clts[i].resourceId).emit('contesto_mal');
 
-          }
+            }
+        }
       }
-    }
 
   });
 
@@ -256,7 +254,7 @@ self.io.on('connection', (socket)=> {
 
           }
       }
-  })
+  });
 
   socket.on('abrirle_la_sesion', function(data){
       
@@ -268,11 +266,7 @@ self.io.on('connection', (socket)=> {
           };
       };
 
-     
-
-
   });
-
 
   socket.on('liberar_hasta_pregunta', function(data){
       info_evento.free_till_question 	= data.numero;
@@ -307,8 +301,6 @@ self.io.on('connection', (socket)=> {
         console.log('Alguien se logueó ' , all_clts);
       }
     }
-
-
 
   });
 

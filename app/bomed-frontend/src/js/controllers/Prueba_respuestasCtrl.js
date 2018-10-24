@@ -15,12 +15,7 @@ angular.module('app')
             console.log('No se pudo traer los datos', error);
 
         })
-            
-
-
-    
-
-	
+                	
 
     $scope.seleccionarOpcion = function(opcion) {
 

@@ -12735,6 +12735,24 @@ hr.transparent {
   .clt-conect .card-body, .clt-conect .card-block {
     padding: 0px; }
 
+.clt-conect-right {
+  padding-left: 0px;
+  cursor: pointer;
+  transition: all .4s;
+  margin-left: 3px;
+  background-color: #AFEEEE; }
+  .clt-conect-right .card-body, .clt-conect-right .card-block {
+    padding: 0px; }
+
+.clt-conect-wrong {
+  padding-left: 0px;
+  cursor: pointer;
+  transition: all .4s;
+  margin-left: 3px;
+  background-color: #FF6347; }
+  .clt-conect-wrong .card-body, .clt-conect-wrong .card-block {
+    padding: 0px; }
+
 .clt-conect:hover {
   background-color: #eee; }
 

@@ -33,6 +33,9 @@ angular.module('app')
   MySocket.on('contesto_bien', function(){
     
     
+
+    
+    
   });
 
   MySocket.on('contesto_mal', function(){

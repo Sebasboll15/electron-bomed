@@ -37,6 +37,28 @@
 	}
 }
 
+.clt-conect-right{
+	padding-left: 0px;
+	cursor: pointer;
+	transition: all .4s;
+	margin-left: 3px;
+	background-color: #AFEEEE;
+	.card-body{
+		padding: 0px;
+	}
+}
+
+.clt-conect-wrong{
+	padding-left: 0px;
+	cursor: pointer;
+	transition: all .4s;
+	margin-left: 3px;
+	background-color: #FF6347;
+	.card-body{
+		padding: 0px;
+	}
+}
+
 .clt-conect:hover{
 	background-color: #eee; 
 }
