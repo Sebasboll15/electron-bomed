@@ -4,7 +4,7 @@ angular.module('app')
     $scope.mostrando_edit = false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
-	$scope.boton1= true;
+	$scope.mostrar_boton= true;
 	$scope.crea 	= {
 		dirigido: 'Dirigido',
 		mostrar_respuesta: 'Si',
@@ -29,30 +29,16 @@ angular.module('app')
 
    $scope.traer_datos = function(){
    			$http.get('::pruebas').then (function(result){
-				     
-				    
-    
+				     				       
+            $scope.pruebas = result.data  ;
 
-              $scope.pruebas = result.data  ;
-				                
-				                
-				     console.log('Se trajo los datos con exito', result);
-				    }, function(error){
-				      console.log('No se pudo traer los datos', error);
+		     console.log('Se trajo los datos con exito', result);
+		    }, function(error){
+		      console.log('No se pudo traer los datos', error);
 
-				    })
+		    })
    	};
    	$scope.traer_datos();
-
-
-	
-
-       
-	
-
-
-	
-
 
 
    $scope.seleccionarPrueba = function(prueba){
@@ -77,24 +63,12 @@ angular.module('app')
 
 	         })
 
-
-		
-
-
 	};
-
-
-    
-		
-
-       
-
-
 
 	$scope.mostrar_crear= function(){
 		
+		$scope.mostrar_boton= false;
 		$scope.mostrando_crear= true;
-		$scope.boton1= false;
 		$scope.mostrando_edit= false;
 
 		$location.hash('crear-prueba-div');
@@ -105,9 +79,11 @@ angular.module('app')
 	
 	$scope.salir_crear= function(){
 		$scope.mostrando_crear= false;
+		$scope.mostrar_boton= true;
 	};
 	 		
 	$scope.verDetallesPrueba= function(id){
+		$scope.mostrar_boton= false;
 		$scope.dejarver= true;
 		$scope.boton3= false;
 			    
@@ -133,6 +109,40 @@ angular.module('app')
 	
   	$scope.insertarPrueba = function(crea){
 
+
+  		if (crea.nombre == '' || crea.nombre == undefined) {
+  			toastr.error('Debe escribir el nombre');
+  			return;
+  		}
+
+  		if (crea.dirigido == '' || crea.dirigido == undefined) {
+  			toastr.error('Debe escoger el sexo');
+  			return;
+  		}
+
+  		if (crea.mostrar_respuesta == '' || crea.mostrar_respuesta == undefined) {
+  			toastr.error('Debe escribir el mostrar_respuesta');
+  			return;
+  		}
+
+  		if (crea.puntos_promedio == '' || crea.puntos_promedio == undefined) {
+  			toastr.error('Debe escribir la contraseña');
+  			return;
+  		}
+
+  		if (crea.dirigido == 'Dirigido') {
+  			if (crea.tiempo_preg == '' || crea.tiempo_preg == undefined) {
+  				toastr.error('Debe determinar el tiempo por pregunta');
+  				return;
+  			}	
+  		}
+
+  		if (crea.dirigido == 'Manual') {
+  			if (crea.tiempo_exam== '' || crea.tiempo_exam == undefined) {
+  				toastr.error('Debe determinar el tiempo del examen');
+  				return;
+  			}	
+  		}
 	    datos = {
 	    	nombre: crea.nombre, 
 		    alias: crea.alias, 
@@ -159,7 +169,8 @@ angular.module('app')
 			};
 	        
 	        $scope.mostrando = false;
-	        
+	        $scope.mostrar_boton= true;
+
 	    }, function(error){
 	       console.log('No se pudo insertar los datos', error);
 
@@ -170,10 +181,11 @@ angular.module('app')
   	$scope.salir_editar = function(){
 		$location.hash('');
 		$scope.mostrando_edit= false;
+		$scope.mostrar_boton= true;
 	};
 
     $scope.editarP = function(cambia){
-      
+      $scope.mostrar_boton= false;
       $scope.mostrando_crear = false;
       $scope.mostrando_edit	 = true;
       $scope.prueba          = cambia;
@@ -194,6 +206,44 @@ angular.module('app')
     
     $scope.editarPrueba = function(cambia){
 
+    	if (cambia.nombre == '' || cambia.nombre == undefined) {
+  			toastr.error('Debe escribir el nombre');
+  			return;
+  		}
+
+  		if (cambia.alias == '' || cambia.dirigido == undefined) {
+  			toastr.error('Debe escoger el sexo');
+  			return;
+  		}
+
+  		if (cambia.dirigido == '' || cambia.dirigido == undefined) {
+  			toastr.error('Debe escoger el sexo');
+  			return;
+  		}
+
+  		if (cambia.mostrar_respuesta == '' || cambia.mostrar_respuesta == undefined) {
+  			toastr.error('Debe escribir el mostrar_respuesta');
+  			return;
+  		}
+
+  		if (cambia.puntos_promedio == '' || cambia.puntos_promedio == undefined) {
+  			toastr.error('Debe escribir la contraseña');
+  			return;
+  		}
+
+  		if (cambia.dirigido == 'Dirigido') {
+  			if (cambia.tiempo_preg == '' || cambia.tiempo_preg == undefined) {
+  				toastr.error('Debe determinar el tiempo por pregunta');
+  				return;
+  			}	
+  		}
+
+  		if (cambia.dirigido == 'Manual') {
+  			if (cambia.tiempo_exam== '' || cambia.tiempo_exam == undefined) {
+  				toastr.error('Debe determinar el tiempo del examen');
+  				return;
+  			}	
+  		}
 	  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
 
 			toastr.success('Se ha editado la prueba con éxito')
@@ -204,6 +254,7 @@ angular.module('app')
            console.log('No se pudo actualizar los datos', error);
 
          })
+	  	$scope.mostrar_boton= true;
 
 	};
     

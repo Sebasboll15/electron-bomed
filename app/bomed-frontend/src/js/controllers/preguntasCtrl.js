@@ -5,7 +5,7 @@ angular.module('app')
 	console.log('dfvsd');
     $scope.mostrando 	= false;
     $scope.mostrando_edit = false;
-	$scope.boton1 		= true;
+	$scope.mostrar_boton= true;
 	$scope.usuarios		= {};
 	$scope.preg_edit 	= {};
 	$scope.preguntas 	= {};
@@ -56,7 +56,7 @@ angular.module('app')
 	$scope.mostrar_crear = function(){
 
 		$scope.mostrando= true;
-		$scope.boton1= false;
+		$scope.mostrar_boton= false;
 		$scope.mostrando_edit= false;
 
 		$location.hash('crear-pregunta-div');
@@ -68,11 +68,13 @@ angular.module('app')
 	
 	$scope.salir_crear = function(){
 		$location.hash('');
-		$scope.mostrando= false
+		$scope.mostrando= false;
+		$scope.mostrar_boton= true;
 	};
 
 	$scope.salir_editar = function(){
 		$location.hash('');
+		$scope.mostrar_boton= true;
 		$scope.mostrando_edit= false;
 	};
 	
@@ -147,12 +149,12 @@ angular.module('app')
 
 	    })
 	    $scope.mostrando = false;
-
+	    $scope.mostrar_boton= true;
 	         
 	};
   
     $scope.editarP = function(cambia){
-        
+        $scope.mostrar_boton= false;
         $scope.mostrando = false;
         $scope.mostrando_edit= true;
 		
@@ -179,6 +181,7 @@ angular.module('app')
 			$scope.traer_datos();
 			$scope.pregunta 		= {}
 			$scope.mostrando_edit	= false;
+			$scope.mostrar_boton= true;
 		}, function(error){
 			console.log('No se pudo actualizar los datos', error);
 		})

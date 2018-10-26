@@ -12,7 +12,7 @@ router.route('/insertar').get(getInsertarHandler);
 router.route('/editar').get(getEditarHandler);
 
 function getRouteHandler(req, res) {
-	consulta1 = "Select p.*, p.rowid, n.rowid as rowid_prueba, n.alias from preguntas p INNER JOIN pruebas n ON n.rowid= p.prueba_id";
+	consulta1 = "Select p.*, p.rowid, n.rowid as rowid_prueba, n.nombre from preguntas p INNER JOIN pruebas n ON n.rowid= p.prueba_id";
 	
 	db.query(consulta1).then(function(result){
         console.log(result);

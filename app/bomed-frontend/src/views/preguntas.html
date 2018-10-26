@@ -69,7 +69,7 @@
 
                
 
-                  <button type="button" class="btn btn-info btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar_crear()">Crear</button>
+                  <button type="button" class="btn btn-info btn-lg btn-block" ng-show="mostrar_boton" ng-click="mostrar_crear()">Crear</button>
                     
                 <div  ng-show="mostrando" id="crear-pregunta-div">
                                         
@@ -89,7 +89,7 @@
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
                           <div class="col-md-9">
                             <select id="select1-preguntas"  class="form-control" ng-model="preg_nueva.prueba_id" size="1">
-                              <option ng-repeat="n in pruebas" ng-value="{{n.rowid}}">{{n.alias}}</option>
+                              <option ng-repeat="n in pruebas" ng-value="{{n.rowid}}">{{n.nombre}}</option>
                             </select>
                           </div>
                         </div>

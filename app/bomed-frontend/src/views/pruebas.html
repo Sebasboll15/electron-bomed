@@ -31,7 +31,7 @@
                       </td>
                       
                       <td>
-                        <span>{{p.alias}}</span>
+                        <span ng-show="p.alias ==!undefined">{{p.alias}}</span>
                       </td>
 
                       <td>
@@ -58,24 +58,28 @@
 
 
                       <td style="padding: 0px;">
-                        
-                          <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p)"></button> 
                           
-                          <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
-                          
-                          <button ng-show="p.actual!=1" type="button" ng-click="seleccionarPrueba(p)" uib-tooltip="Seleccionar" class="btn-sm btn  fa fa-hand-o-up"></button> 
-                            
-                          <button ng-show="p.actual==1" type="button" uib-tooltip="Seleccionada" class="btn-sm btn  fa fa-thumbs-up"></button> 
+                          <div class="btn-group">
 
-                          <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
-                        
+                              <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar" ng-click="eliminar_test(p)"></button> 
+                              
+                              <button ng-click="editarP(p)" uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
+                              
+                              <button ng-show="p.actual!=1" type="button" ng-click="seleccionarPrueba(p)" uib-tooltip="Seleccionar" class="btn-sm btn  fa fa-hand-o-up"></button> 
+                                
+                              <button ng-show="p.actual==1" type="button" uib-tooltip="Seleccionada" class="btn-sm btn  fa fa-thumbs-up"></button> 
+
+                              <button type="button" ng-click="verDetallesPrueba(p.rowid)"  class="btn btn-link">Ver detalles</button>
+                          
+                          </div>
+
                       </td>
                   
                  </tr>
                </tbody> 
             </table>
 
-            <button type="button" class="btn btn-info btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar_crear()">Crear</button>
+            <button type="button" class="btn btn-info btn-lg btn-block" ng-show="mostrar_boton" ng-click="mostrar_crear()">Crear</button>
                     
                           <div  ng-show="mostrando_crear" id="crear-prueba-div">
                                                   
@@ -142,13 +146,12 @@
                                     </div>
 
 
-                                    <div  ng-show="crea.dirigido=='Dirigido' ">
-                                      <div class="form-group row">
+                                    <div class="form-group row" ng-show="crea.dirigido=='Dirigido' "> 
+                                         <label class="col-md-3 col-form-label" for="text-input"><h5>Tiempo de pregunta:</h5></label>
                                         <div class="col-md-9">
                                          <input type="text" id="text-input-tiempo_preg-crear" ng-model="crea.tiempo_preg"  class="form-control" placeholder="Tiempo de pregunta">
                                         </div>
-                                      </div>
-              
+                                      
                                     </div>
 
                                     <div class="form-group row" ng-show="crea.dirigido=='Manual'">
@@ -234,11 +237,11 @@
                                     </div>
 
 
-                                    <div  ng-show="p.dirigido=='Dirigido' ">
-                                      <div class="form-group row">
+                                    <div class="form-group row"  ng-show="p.dirigido =='Dirigido' ">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Tiempo de pregunta:</h5></label>
                                         <div class="col-md-9">
                                          <input type="text" id="text-input-tiempo_preg-editar" ng-model="prueba.tiempo_preg"  class="form-control" placeholder="Tiempo de pregunta">
-                                        </div>
+                                        
                                       </div>
               
                                     </div>

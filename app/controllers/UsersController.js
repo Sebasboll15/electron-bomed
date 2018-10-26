@@ -10,6 +10,8 @@ router.route('/eliminar').delete(deleteUsuarioHandler);
 router.route('/editar').get(getEditarHandler);
 router.route('/insertar').get(getInsertarHandler);
 router.route('/cambiar-pass').get(getCambiarPassHandler);
+router.route('/prueba_actual').get(getPrueba_actualHandler);
+
 
 
 function getRouteHandler(req, res) {
@@ -18,6 +20,18 @@ function getRouteHandler(req, res) {
 	db.query(consulta).then(function(result){
         usuarios = result ;
     	res.json(usuarios);
+    }, function(error){
+		
+	})
+
+}
+
+function getPrueba_actualHandler(req, res) {
+
+	consulta = "SELECT rowid from pruebas WHERE actual = 1";
+	db.query(consulta).then(function(result){
+        prueba_actual = result ;
+    	res.json(prueba_actual);
     }, function(error){
 		
 	})
@@ -69,9 +83,9 @@ function getEditarHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 
-	consulta = "INSERT into usuarios(nombres, apellidos, sexo, username, password, tipo) VALUES(?,?,?,?,?,?)";
+	consulta = "INSERT into usuarios(nombres, apellidos, sexo, username, password, prueba_id, tipo) VALUES(?,?,?,?,?,?,?)";
 	params = req.query;
-	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.password, params.tipo];     
+	datos = [params.nombres, params.apellidos, params.sexo, params.username, params.password, params.prueba_id, params.tipo];     
 	db.query(consulta, datos).then (function(result){
         res.send('Insertado');
 	}, function(error){

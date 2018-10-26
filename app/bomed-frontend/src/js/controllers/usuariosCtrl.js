@@ -1,11 +1,14 @@
 angular.module('app')
 
 
-.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal, toastr){
-	$scope.mostrando_crear = false;
-	$scope.boton1= true;
-	$scope.usuarios= {};
+.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal, toastr, $location, $anchorScroll){
+	$scope.mostrando_crear 	= false;
+	$scope.mostrar_boton   	= true;
+	$scope.mostrando_editar	= false;
+	$scope.usuarios        	= {};
     
+    $location.hash('');
+	
     $scope.traer_datos = function(){
 
 		$http.get('::usuarios').then (function(result){
@@ -21,30 +24,91 @@ angular.module('app')
 
 	$scope.mostrar_crear= function(){
 		$scope.mostrando_crear= true;
-		$scope.boton1= false;
+		$scope.mostrar_boton= false;
+		$location.hash('crear-usuario-div');
+    	$anchorScroll();
 	
 	};
+	
 	$scope.salir_crear= function(){
+		$location.hash('');
 		$scope.mostrando_crear = false;
+		$scope.mostrar_boton   	= true;
+	};
+
+	$scope.salir_editar= function(){
+		$location.hash('');
+		$scope.mostrando_editar = false;
+		$scope.mostrar_boton   	= true;
 	};
 	
 	
   	$scope.insertarUsuarios = function(crea){
-	         
-        if (crea.password != crea.passwordn) {
-  			alert('Las dos contraseñas no son iguales')
+	    
+	    
+  		if (crea.nombres == '' || crea.nombres == undefined) {
+  			toastr.error('Debe escribir el nombre');
   			return;
   		}
-	    
-	     $http.get('::usuarios/insertar', {params: {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, tipo: 'Usuario'}  }).then (function(result){
-	       toastr.success('Usuario creado con éxito');
-	       $scope.traer_datos();
-	        console.log('Se insertaron los datos con exito', result);
-	        
-	     }, function(error){
-	       console.log('No se pudo insertar los datos', error);
 
-	     })
+  		if (crea.apellidos == '' || crea.apellidos == undefined) {
+  			toastr.error('Debe escribir el apellido');
+  			return;
+  		}
+
+  		if (crea.sexo == '' || crea.sexo == undefined) {
+  			toastr.error('Debe escoger el sexo');
+  			return;
+  		}
+
+  		if (crea.username == '' || crea.username == undefined) {
+  			toastr.error('Debe escribir el username');
+  			return;
+  		}
+
+  		if (crea.password == '' || crea.password == undefined) {
+  			toastr.error('Debe escribir la contraseña');
+  			return;
+  		}
+
+  		if (crea.passwordn == '' || crea.passwordn == undefined) {
+  			toastr.error('Debe confirmar la contraseña');
+  			return;
+  		}
+
+        if (crea.password != crea.passwordn) {
+  			toastr.error('Las dos contraseñas no son iguales')
+  			return;
+  		}
+
+
+  		$http.get('::usuarios/prueba_actual').then (function(result){
+			
+			$scope.prueba_actual = result.data ;
+			
+			console.log('Se trajo los datos con exito', );
+			   if ($scope.prueba_actual.length == 0) {
+			   	 toastr.error('Debe seleccionar una prueba para el usuario, para eso dirijase a pruebas y seleccionela.');
+			   	 return;
+			   };
+
+			   $scope.datos_usuario = {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, prueba_id: $scope.prueba_actual[0].rowid, tipo: 'Usuario'};
+
+			   $http.get('::usuarios/insertar', {params: $scope.datos_usuario}).then (function(result){
+		       toastr.success('Usuario creado con éxito');
+		       $scope.traer_datos();
+		        console.log('Se insertaron los datos con exito', result);
+		        
+		     }, function(error){
+		       console.log('No se pudo insertar los datos', error);
+
+		     })
+
+			$scope.mostrar_boton  	= true;
+		
+		});
+	    
+	    
 
     };
 
@@ -74,10 +138,14 @@ angular.module('app')
     };
   
     $scope.editarU = function(cambia){
-      for (var i = 0; i < $scope.usuarios.length; i++) {
-			$scope.usuarios[i].editando = false;
-		}
-		cambia.editando = true; 
+      
+      $scope.mostrar_boton =  false;
+
+		$scope.usuario = cambia;
+		cambia.editando = true;
+		$scope.mostrando_editar	= true;
+		$location.hash('editar-usuario-div');
+    	$anchorScroll(); 
 	
 
 
@@ -85,9 +153,34 @@ angular.module('app')
     };
     $scope.editarUsuario = function(cambia){
 	        
-	         $http.get('::usuarios/editar',  {params: { rowid: cambia.rowid, nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: cambia.sexo, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo  } }).then (function(result){
+
+  		if (cambia.nombres == '' || cambia.nombres == undefined) {
+  			toastr.error('Debe escribir el nombre');
+  			return;
+  		}
+
+  		if (cambia.apellidos == '' || cambia.apellidos == undefined) {
+  			toastr.error('Debe escribir el apellido');
+  			return;
+  		}
+
+  		if (cambia.sexo == '' || cambia.sexo == undefined) {
+  			toastr.error('Debe escoger el sexo');
+  			return;
+  		}
+
+  		if (cambia.username == '' || cambia.username == undefined) {
+  			toastr.error('Debe escribir el username');
+  			return;
+  		}
+
+  		
+
+	         $http.get('::usuarios/editar',  {params: { nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: cambia.sexo, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo,  rowid: cambia.rowid  } }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
                  toastr.success('Usuario editado con éxito');
+                 $scope.mostrando_editar= false;
+                 $scope.mostrar_boton  	= true;
                  $scope.traer_datos();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
@@ -138,6 +231,11 @@ angular.module('app')
 
 	$scope.ok = function(usuario){
 		
+		if (usuario.password == '' || usuario.password == undefined) {
+  			toastr.error('Debe escribir la contraseña');
+  			retusuario
+  		}
+
 		$http.get('::usuarios/cambiar-pass', {params: {rowid: usuario.rowid, password: usuario.password}}).then (function(result){
 
 			toastr.success('Se ha cambiado la contraseña con éxito');

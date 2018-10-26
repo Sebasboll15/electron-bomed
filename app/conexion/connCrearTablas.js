@@ -6,7 +6,7 @@ sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (id integer," +
                 "sexo varchar(100)  NOT NULL," +
                 "username varchar(100)  NOT NULL collate nocase," +
                 "password varchar(100)  NOT NULL collate nocase," +
-                "prueba_id integer(100)  DEFAULT NULL," +
+                "prueba_id integer(100)  NOT NULL," +
                 "tipo integer DEFAULT '0')";
 
 sqlPreguntas = "CREATE TABLE IF NOT EXISTS preguntas (id integer," +
