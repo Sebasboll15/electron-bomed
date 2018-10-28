@@ -112,7 +112,6 @@ self.io.on('connection', (socket)=> {
   
   socket.on('traer_clientes', (data)=>{
     
-    console.log('Alguien escribió: Traer clientes', all_clts);
     socket.emit('clientes_traidos', all_clts );
   });
 
@@ -151,18 +150,20 @@ self.io.on('connection', (socket)=> {
     datos.logged        = true;
     datos.registered    = data.registered?true:false;
     datos.resourceId    = socket.id;
+    datos.puntos        = 0;
+    datos.tiempo        = 0;
+    datos.correctas     = 0;
+    datos.respondidas   = 0;
     datos.nombre_punto  = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
     datos.user_data     = data.usuario;
     socket.datos        = datos;
-
-    console.log('loguear', all_clts);
 
     for (var i = 0; i < all_clts.length; i++) {
       if (all_clts[i].resourceId == socket.id) {
         all_clts.splice(i, 1, socket.datos);
       }
     }
-    console.log('loguear2', all_clts);
+    //console.log('loguear2', all_clts);
 
     socket.broadcast.emit('logueado:alguien', {clt: socket.datos} );
 
@@ -223,25 +224,33 @@ self.io.on('connection', (socket)=> {
   });
 
   socket.on('contesto_mal/bien', function(data){
-    if (data == 1) {
-      for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].user_data.tipo == 'Espectador') {
-            
+    
+    socket.datos.answered 		= data.correcta;
+		socket.datos.respondidas++;
+		socket.datos.tiempo 		  = socket.datos.tiempo + data.tiempo;
+		if (data.correcta == 1) {
+			socket.datos.correctas++;
+			socket.datos.puntos 	= socket.datos.puntos + data.puntos;
+		}
 
-            io.to(all_clts[i].resourceId).emit('contesto_bien');
+    participante  = {};
+    codigo        = socket.id;
+    console.log('codigooooooo', codigo);
 
-          }
-      }
-    } else {
-        for (var i = 0; i < all_clts.length; i++) {
-            if (all_clts[i].user_data.tipo == 'Espectador') {
-              
+		for (var i = 0; i < all_clts.length; i++) {
+			if(all_clts[i].resourceId === codigo){
+        console.log(all_clts[i].resourceId, socket, (all_clts[i].resourceId == socket.id));
+				all_clts[i] 	= socket.datos;
+				participante 	= all_clts[i];
+			}
+    }
+    
+		for (var i = 0; i < all_clts.length; i++) {
 
-              io.to(all_clts[i].resourceId).emit('contesto_mal');
-
-            }
-        }
-      }
+				if(all_clts[i].user_data.tipo == 'Espectador' || all_clts[i].user_data.tipo == 'Admin'){
+					socket.broadcast.to(all_clts[i].resourceId).emit('respondido', { resourceId: socket.id, cliente: participante, clientes: all_clts });
+				}
+		}
 
   });
 

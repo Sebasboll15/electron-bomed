@@ -7,7 +7,7 @@ angular.module('app')
     MySocket.on('sesion_A_cerrar', function (){
                
         toastr.info('Cerrando sesión...');
-    AuthServ.cerrar_sesion();
+        AuthServ.cerrar_sesion();
     
     })
 
@@ -36,7 +36,7 @@ angular.module('app')
     $scope.iniciar = function(user){
 
         AuthServ.loguear(user).then(function(){
-        	    toastr.info('Iniciando sesión...');
+        	toastr.info('Iniciando sesión...');
             $state.go('app.main');
         }, function(){
             toastr.error('Datos incorrectos');

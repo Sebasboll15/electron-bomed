@@ -3,14 +3,12 @@ var router = express.Router();
 var db = require('../conexion/connWeb');
 
 router.route('/')
-    .get(getRouteHandler)
-    .post(postRouteHandler);
+    .get(getRouteHandler);
 
     router.route('/insertar').get(getInsertarHandler);
 
 
 function getRouteHandler(req, res) {
-	console.log(req);
 
     consulta1 = "Select p.*, p.rowid from pruebas p WHERE p.rowid = ?";
 	
@@ -29,36 +27,12 @@ function getRouteHandler(req, res) {
 
 	})	
 
-
-
-
-
-
-
-
-
-
-
-
-
-			//consulta = "Select p.*, p.rowid, n.rowid as rowid_prueba, n.alias from preguntas p INNER JOIN pruebas n ON n.rowid= p.prueba_id";
-				
-			//	db.query(consulta).then(function(result){
-			 //       console.log(result);
-			  //      preguntas = result ;
-			  //  	res.json(preguntas);
-			  //  }, function(error){
-				//	console.log('No se pudo traer los datos', error);
-				//})
-
 };
 
-function postRouteHandler(req, res) {
-    //handle POST route here
-}
+
+
 
 function getInsertarHandler(req, res) {
-  				console.log(req, 'hola perro');
 
     	consulta = "Insert into respuestas(preg_id, usuario_id, opcion_elegida, correcta, duracion) values(?,?,?,?,?)";
 	    params = req.query;

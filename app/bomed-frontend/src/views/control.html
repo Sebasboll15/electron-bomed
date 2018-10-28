@@ -22,12 +22,12 @@
                       
 
                           <div class="card col-sm-4 clt-conect" ng-repeat="cliente in clientes" 
-                            ng-click="OpenModalUser(cliente)">
+                            ng-click="OpenModalUser(cliente)" ng-class="{ 'clt-conect-right': cliente.answered==1, 'clt-conect-wrong': cliente.answered==0  }">
                             
                             <div class="card-body p-2 clearfix">
                               <i class="fa fa-user p-3 font-2xl mr-3 float-left"
                                 ng-class="{'bg-primary': cliente.logged, 'bg-info': !cliente.logged }"></i>
-                              <div class="h5 text-primary mb-0 mt-0">{{cliente.user_data.nombres}} {{cliente.user_data.apellidos}}</div>
+                              <div class="h5 text-primary mb-0 mt-0">{{cliente.user_data.nombres}} {{cliente.user_data.apellidos}} - {{ cliente.answered }}</div>
                               <div class="text-muted text-uppercase font-weight-bold font-xs">{{cliente.nombre_punto}}</div>
                             </div>
                           </div>

@@ -22,6 +22,11 @@ angular.module('app')
   });
 
    
+  MySocket.on('respondido', function(datos){
+    $scope.clientes = datos.clientes;
+  });
+  
+  
   MySocket.on('alguien_logueado', function(datos){
     $scope.actualizarClientes();
   });
