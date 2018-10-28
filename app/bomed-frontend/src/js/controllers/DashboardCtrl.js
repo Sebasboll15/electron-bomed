@@ -5,6 +5,7 @@ angular.module('app')
 	$scope.USER 		= USER;
 	$scope.$state 		= $state;
 	$scope.depend_usuario= false;
+	MySocket.emit('traer_participantes');
 	
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
