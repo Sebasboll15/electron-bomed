@@ -36,15 +36,36 @@
                       </div>
                       
                       
-                      <div class="card-footer">
+                      <div class="card-footer btn-group">
                         
                         <button type="button" ng-click="show_participantes()" ng-show="mostrar_participantes" class="btn btn-info btn-sm" uib-tooltip="Mostrar participantes a los espectadores"><i class="fa fa-users"></i>Participantes</button>
 
                         <button type="button" ng-click="quitar_participantes()" ng-show="!mostrar_participantes" class="btn btn-danger btn-sm" uib-tooltip="Quitar participantes a los espectadores"><i class="fa fa-users"></i>Participantes</button>
 
+                        <button type="button" ng-click="show_preguntas()" ng-show="mostrar_pregunta" class="btn btn-secondary btn-sm" uib-tooltip="Mostrar pregunta a los espectadores"><i class="fa fa-question"></i>Preguntas</button>
+
+                        <button type="button" ng-click="quitar_preguntas()" ng-show="!mostrar_pregunta" class="btn btn-danger btn-sm" uib-tooltip="Quitar pregunta a los espectadores"><i class="fa fa-question"></i>Preguntas</button>
+
                       </div>
 
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" uib-tooltip="Para seleccionar la pregunta a mostrar">
+                <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-header">
+                        Preguntas
+                      </div>
+                      <div class="card-body row"  ng-repeat="pregunta in preguntas">
+                      
+                          <div class="card col-sm-12 pre-conect" ng-click="mandar_pregunta">  
+                            {{pregunta.definicion}}
+                          </div>                 
+
+                      </div>
                     </div>
                 </div>
             </div>

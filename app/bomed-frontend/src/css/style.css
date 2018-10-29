@@ -12735,6 +12735,14 @@ hr.transparent {
   .clt-conect .card-body, .clt-conect .card-block {
     padding: 0px; }
 
+.clt-conect {
+  padding-left: 0px;
+  cursor: pointer;
+  transition: all .4s;
+  margin-left: 3px; }
+  .clt-conect .card-body, .clt-conect .card-block {
+    padding: 0px; }
+
 .clt-conect-right {
   background-color: #AFEEEE; }
 

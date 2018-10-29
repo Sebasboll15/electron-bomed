@@ -188,18 +188,30 @@ self.io.on('connection', (socket)=> {
     for (var i = 0; i < all_clts.length; i++) {
         if (all_clts[i].user_data.tipo == 'Admin') {
            
-           io.to(all_clts[i].resourceId).emit('Ver_participantes');
+           io.to(all_clts[i].resourceId).emit('Ver_Par/Pre');
         }
      }
 
   })
     
-  socket.on('llevar_espectador', function(){
+  socket.on('llevar_espectadorU', function(){
 
     for (var i = 0; i < all_clts.length; i++) {
       if (all_clts[i].user_data.tipo == 'Espectador') {
          
-         io.to(all_clts[i].resourceId).emit('llevelos_espectadores');
+         io.to(all_clts[i].resourceId).emit('llevelos_espectadoresU');
+      }
+    }
+
+
+  });
+
+  socket.on('llevar_espectadorP', function(){
+
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].user_data.tipo == 'Espectador') {
+         
+         io.to(all_clts[i].resourceId).emit('llevelos_espectadoresP');
       }
     }
 
@@ -260,6 +272,17 @@ self.io.on('connection', (socket)=> {
             
 
             io.to(all_clts[i].resourceId).emit('quite_participantes');
+
+          }
+      }
+  });
+
+  socket.on('Quitar_pregunta', function(){
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+            
+
+            io.to(all_clts[i].resourceId).emit('quite_pregunta');
 
           }
       }

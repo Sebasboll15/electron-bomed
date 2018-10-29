@@ -146,6 +146,24 @@ angular
     }
   })
 
+  .state('app.main.espectador.pregunta', {
+    url: '/pregunta',
+     controller: 'espectador-preguntaCtrl',
+    templateUrl: 'views/pregunta.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para el espectador' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/espectador-preguntaCtrl.js']
+        });
+      }]
+    }
+  })
+
   .state('app.usuarios', {
     url: '/usuarios',
      controller: 'usuariosCtrl',

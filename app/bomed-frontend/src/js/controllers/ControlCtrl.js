@@ -7,6 +7,26 @@ angular.module('app')
   $scope.boton1 	             = true;
   $scope.clientes              = [];
   $scope.mostrar_participantes = true;
+  $scope.mostrar_pregunta     = true;
+  
+  $scope.traer_datos = function(){
+    $http.get('::Control').then (function(result){
+          $scope.prueba = result.data;
+          $scope.prueba_rowid = $scope.prueba[0].rowid;
+          
+          $http.get('::Control/preguntas', {params: {rowid: $scope.prueba_rowid}}).then (function(result){
+          $scope.preguntas = result.data;
+          console.log('burra', result);
+          }, function(error){
+          console.log('No se pudo traer los datos', error);
+
+        })
+    })
+
+    
+  };
+
+  $scope.traer_datos();
   
 
   $scope.actualizarClientes = function(){
@@ -25,7 +45,6 @@ angular.module('app')
   MySocket.on('respondido', function(datos){
     $scope.clientes = datos.clientes;
   });
-  
   
   MySocket.on('alguien_logueado', function(datos){
     $scope.actualizarClientes();
@@ -54,7 +73,15 @@ angular.module('app')
      
   $scope.show_participantes = function(){
    $scope.mostrar_participantes = false;
-   MySocket.emit('llevar_espectador');
+   $scope.mostrar_pregunta      = true;
+   MySocket.emit('llevar_espectadorU');
+
+  };
+
+   $scope.show_preguntas = function(){
+    $scope.mostrar_participantes = true;
+    $scope.mostrar_pregunta      = false;
+    MySocket.emit('llevar_espectadorP');
 
   };
   
@@ -66,9 +93,24 @@ angular.module('app')
     MySocket.emit('Quitar_participantes');
   };
 
-   MySocket.on('Ver_participantes', function(datos){
-   if ($scope.mostrar_participantes == false) {
-    MySocket.emit('llevar_espectador');
+   MySocket.on('Ver_Par/Pre', function(datos){
+   if ($scope.mostrar_participantes == false
+       ) {
+    MySocket.emit('llevar_espectadorU');
+
+   }   
+  });
+
+  $scope.quitar_preguntas = function(){
+    
+    $scope.mostrar_pregunta = true;
+    
+    MySocket.emit('Quitar_pregunta');
+  };
+
+   MySocket.on('Ver_Par/Pre', function(datos){
+   if ($scope.mostrar_pregunta == false) {
+    MySocket.emit('llevar_espectadorP');
    }   
   });
         

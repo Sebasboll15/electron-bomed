@@ -3,8 +3,12 @@ angular.module('app')
 
 	MySocket.emit('Espectador:Ya_estoy_aqui');
 	
-	MySocket.on('llevelos_espectadores', function(data){
+	MySocket.on('llevelos_espectadoresU', function(data){
     	$state.go('app.main.espectador.participantes');
+  	});
+
+  	MySocket.on('llevelos_espectadoresP', function(data){
+    	$state.go('app.main.espectador.pregunta');
   	});
 
 
