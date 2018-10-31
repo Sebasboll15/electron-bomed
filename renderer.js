@@ -277,6 +277,17 @@ self.io.on('connection', (socket)=> {
       }
   });
 
+  socket.on('mostrar_pregunta', function(data){
+    console.log(data);
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+
+            io.to(all_clts[i].resourceId).emit('sc_mostrar_pregunta', {pregunta: data.pregunta});
+
+          }
+      }
+  });
+
   socket.on('Quitar_pregunta', function(){
     for (var i = 0; i < all_clts.length; i++) {
           if (all_clts[i].user_data.tipo == 'Espectador') {
