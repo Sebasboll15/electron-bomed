@@ -38,17 +38,14 @@
 }
 
 .pre-conect{
-	padding-left: 0px;
 	cursor: pointer;
 	transition: all .4s;
-	margin-left: 30px;
-	margin-bottom: 0px;
 	padding-top: 0px;
 	border-bottom: 1px solid #c2cfd6;
-
-	.card-body{
-		padding: 0px;
-	}
+}
+.card-preguntas .body{
+	height: 200px;
+    overflow: auto;
 }
 
 

@@ -7,8 +7,14 @@ angular.module('app')
     	$state.go('app.main.espectador.participantes');
   	});
 
-  	MySocket.on('llevelos_espectadoresP', function(data){
-    	$state.go('app.main.espectador.pregunta');
+  	MySocket.on('sc_mostrar_pregunta', function(data){
+		localStorage.sc_pregunta = JSON.stringify(data.pregunta);
+    	$state.go('app.main.espectador.pregunta', {}, {reload: true});
+  	});
+
+
+  	MySocket.on('sc_mostrar_vacio', function(data){
+    	$state.go('app.main.espectador');
   	});
 
 

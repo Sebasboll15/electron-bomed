@@ -14,4 +14,5 @@ router.use('/Dashboard', require('./DashboardController'));
 router.use('/Control', require('./ControlController'));
 router.use('/usuarios_de_control', require('./ModalControlController'));
 router.use('/id_prueba_actual', require('./espectador-participantesController'));
+router.use('/informes', require('./InformesController'));
 module.exports = router;

@@ -5,7 +5,7 @@
    
         <div class="card-header">
               <h3>
-              	Pregunta {{preguntas[indice_preg].rowid }}
+              	Pregunta {{pregunta.rowid }}
           	  </h3>
 
           </div>
@@ -16,30 +16,29 @@
             <li>
              
              
-               <h4>{{preguntas[indice_preg].definicion}}</h4>
+               <h4>{{pregunta.definicion}}</h4>
             
                 <div class="row">
                    <div class="col-sm-12"> 
                       <div class="row">
                         
                         <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('A')">  
-                          <span class=" card-body label label-default" 
-                            >A.     {{preguntas[indice_preg].opc_a}}  </span> 
-                          </div>  
+                          <span class=" card-body label label-default">A.     {{pregunta.opc_a}}  </span> 
+                        </div>  
 
                         <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('B')">
                           <span ng-model="llevar.opc_b" 
-                               class="card-body label label-default">B. {{preguntas[indice_preg].opc_b}}</span>
+                               class="card-body label label-default">B. {{pregunta.opc_b}}</span>
                           </div>
 
                         <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('C')">
                           <span ng-model="llevar.opc_c" 
-                             class="card-body label label-default">C. {{preguntas[indice_preg].opc_c}}</span>
+                             class="card-body label label-default">C. {{pregunta.opc_c}}</span>
                         </div>
 
                         <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('D')">
                           <span ng-model="llevar.opc_d" 
-                             class="card-body label label-default">D. {{preguntas[indice_preg].opc_d}}</span>
+                             class="card-body label label-default">D. {{pregunta.opc_d}}</span>
                         </div>
 
                       </div>

@@ -17,12 +17,12 @@ router.route('/')
 		
 		consulta1 = "Select p.actual, p.rowid from pruebas p WHERE p.actual = 1";
 	
-			db.query(consulta1).then (function(result){
-				
-				prueba = result ;
-				res.json(prueba);
-					
-				})
+		db.query(consulta1).then (function(result){
+			
+			prueba = result ;
+			res.json(prueba);
+		})
+		
 	};
 
 	function getPreguntasHandler(req, res) {
