@@ -6,7 +6,7 @@ angular.module('app')
 	$scope.indice_preg = 0;
    
 	
-	$http.get('::Prueba_en_curso',  {params: { rowid: USER.prueba_id} }).then (function(result){
+	$http.get('::Prueba_en_curso',  {params: { actual: 1} }).then (function(result){
 			$scope.prueba = result.data.prueba ;
 			$scope.preguntas = result.data.preguntas ;
 		}, function(error){

@@ -10,9 +10,9 @@ router.route('/')
 
 function getRouteHandler(req, res) {
 
-    consulta1 = "Select p.*, p.rowid from pruebas p WHERE p.rowid = ?";
+    consulta1 = "Select p.*, p.rowid from pruebas p WHERE p.actual = ?";
 	
-	db.query(consulta1, [req.query.rowid]).then (function(result){
+	db.query(consulta1, [req.query.actual]).then (function(result){
 		
 		prueba = result[0] ;
 		

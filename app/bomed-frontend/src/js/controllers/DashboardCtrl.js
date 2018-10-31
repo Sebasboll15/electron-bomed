@@ -10,6 +10,7 @@ angular.module('app')
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
 			$scope.pruebas= result.data ;
+			console.log('hola', $scope.USER.prueba_id);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
 
@@ -108,8 +109,21 @@ angular.module('app')
 		AuthServ.cerrar_sesion();
 		
     })
-	 $scope.Ir_espectador= function(){
+	
+	$scope.Ir_espectador= function(){
 		$state.go('app.main.espectador');
+	};
+
+	$scope.Ir_prueba = function(){
+		
+		if ($scope.pruebas[0].rowid == $scope.USER.prueba_id) {
+			$state.go('app.prueba_respuestas');
+
+		}else {
+			toastr.error('Su prueba no esta disponible');
+			return;
+		};
+		
 	};
 
 

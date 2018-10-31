@@ -12,10 +12,10 @@ angular.module('app')
     	$state.go('app.main.espectador.pregunta', {}, {reload: true});
   	});
 
-
-  	MySocket.on('sc_mostrar_vacio', function(data){
-    	$state.go('app.main.espectador');
-  	});
+    MySocket.on('sc_mostrar_puestos', function(data){
+      MySocket.emit('sc_traiga_los_puestos', {examenes: data.examenes});
+      $state.go('app.main.espectador.puntos');
+    });
 
 
 	

@@ -12,7 +12,7 @@ router.route('/')
 function getRouteHandler(req, res) {
 
 
-		consulta = "Select *, rowid from pruebas";
+		consulta = "SELECT p.*, p.rowid from pruebas p WHERE p.actual = 1";
 				db.query(consulta).then (function(result){
 					pruebas= result ;
 					res.json(pruebas);

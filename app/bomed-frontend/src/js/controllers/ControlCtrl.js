@@ -2,7 +2,7 @@ angular.module('app')
 
 
 .controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
-  MySocket.emit('Quitar_participantes');
+  MySocket.emit('limpiar_pantalla');
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
@@ -31,6 +31,17 @@ angular.module('app')
   
   $scope.mandar_pregunta = function(pregunta){
     MySocket.emit('mostrar_pregunta', {pregunta: pregunta} );
+  }
+
+  $scope.eliminar_respuesta = function(examen){
+    $http.put('::informes/calcular-examenes').then(function(r){
+    examenes = r.data;
+    $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
+   }, function(r2){
+     toastr.error('Error calculando puntajes');
+     console.log(r2)
+   })
+  
   }
   
 
@@ -74,24 +85,15 @@ angular.module('app')
   MySocket.emit('traer_clientes');
      
   $scope.show_participantes = function(){
-   $scope.mostrar_participantes = false;
-   $scope.mostrar_pregunta      = true;
    MySocket.emit('llevar_espectadorU');
 
   };
 
-  $scope.show_preguntas = function(){
-    $scope.mostrar_participantes = true;
-    $scope.mostrar_pregunta      = false;
-    MySocket.emit('llevar_espectadorP');
-
-  };
+ 
   
   $scope.mostrar_puestos = function(){
-    $scope.mostrar_participantes = true;
-    $scope.mostrar_pregunta      = false;
     MySocket.emit('mostrar_puestos', {examenes: $scope.examenes});
-
+    console.log('fds', $scope.examenes);
   };
   
   $scope.calcular_puntajes = function(){
@@ -106,43 +108,12 @@ angular.module('app')
   };
   
 
-  $scope.quitar_participantes = function(){
-    
-    $scope.mostrar_participantes = true;
-    
-    MySocket.emit('Quitar_participantes');
-  };
+ 
   
   $scope.limpiar_pantalla = function(){
-    
-    $scope.mostrar_participantes = true;
-    
-    MySocket.emit('Quitar_todo');
+     
+    MySocket.emit('limpiar_pantalla');
   };
-
-   MySocket.on('Ver_Par/Pre', function(datos){
-   if ($scope.mostrar_participantes == false
-       ) {
-    MySocket.emit('llevar_espectadorU');
-
-   }   
-  });
-
-  $scope.quitar_preguntas = function(){
-    
-    $scope.mostrar_pregunta = true;
-    
-    MySocket.emit('Quitar_pregunta');
-  };
-
-   MySocket.on('Ver_Par/Pre', function(datos){
-   if ($scope.mostrar_pregunta == false) {
-    MySocket.emit('llevar_espectadorP');
-   }   
-  });
-        
-
-
 
 
   $scope.OpenModalUser = function (cliente) {

@@ -5,6 +5,8 @@ require('dotenv').config();
 
             
 
+
+
 function crearDatosIniciales() {
     
     return new Promise(function(resolve, reject) {
@@ -86,9 +88,10 @@ function crearDatosIniciales() {
         
     });
     
-        
-}
+    
+    
 
+}
 
 module.exports = crearDatosIniciales;
 

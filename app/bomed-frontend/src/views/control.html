@@ -38,11 +38,9 @@
                       
                       <div class="card-footer btn-group">
                         
-                        <button type="button" ng-click="show_participantes()" ng-show="mostrar_participantes" class="btn btn-info btn-sm" uib-tooltip="Mostrar participantes a los espectadores"><i class="fa fa-users"></i>Participantes</button>
-
-                        <button type="button" ng-click="show_preguntas()" ng-show="mostrar_pregunta" class="btn btn-secondary btn-sm" uib-tooltip="Mostrar pregunta a los espectadores"><i class="fa fa-question"></i>Preguntas</button>
+                        <button type="button" ng-click="show_participantes()"  class="btn btn-info btn-sm" uib-tooltip="Mostrar participantes a los espectadores"><i class="fa fa-users"></i>Participantes</button>
                         
-                        <button type="button" ng-click="limpiar_pantalla()" ng-show="mostrar_pregunta" class="btn btn-danger btn-sm" uib-tooltip="Mostrar pregunta a los espectadores"><i class=""></i>Vacíar</button>
+                        <button type="button" ng-click="limpiar_pantalla()"  class="btn btn-danger btn-sm" uib-tooltip="Limpiar la pantalla de espectadores"><i class=""></i>Vacíar</button>
                         
 
                       </div>
@@ -73,7 +71,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card card-preguntas">
-                      <div class="card-header" uib-tooltip="Para seleccionar la pregunta a mostrar">
+                      <div class="card-header" uib-tooltip="Para mostrar los puntajes">
                         Puntajes
                         <button class="btn btn-default" ng-click="calcular_puntajes()">Calcular</button>
                         <button class="btn btn-default" ng-click="mostrar_puestos()">Mostrar puestos</button>
@@ -87,7 +85,7 @@
                                 Puntaje: {{ examen.puntaje }}
                             </div>      
                             <div class="btn-group pre-conect col-sm-2">
-                                <button class="btn btn-danger btn-sm" uib-tooltip="Eliminar respuestas"  ng-click="eliminar_respuestas(examen)" tooltip-append-to-body="true">
+                                <button class="btn btn-danger btn-sm" uib-tooltip="Eliminar respuestas"  ng-click="eliminar_respuesta(examen)" tooltip-append-to-body="true">
                                   <i class="fa fa-times"></i>
                                 </button>
                                 <button class="btn btn-primary btn-sm" uib-tooltip="Mostrar puesto"  ng-click="mandar_puesto(examen, $index+1)" tooltip-append-to-body="true">

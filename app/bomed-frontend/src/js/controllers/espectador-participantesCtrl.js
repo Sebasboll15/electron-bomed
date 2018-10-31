@@ -46,10 +46,16 @@ angular.module('app')
     console.log('hgfdsa', $scope.clientes);
   });
 
-  MySocket.on('quite_participantes', function(){
+  MySocket.on('limpie_pantalla', function(){
   	$state.go('app.main.espectador');
 
 	});
+
+  MySocket.on('mostrar_pregunta', function(){
+    $state.go('app.main.espectador');
+
+  });
+
 
 
 
