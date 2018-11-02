@@ -2,7 +2,7 @@ angular.module('app')
 
 
 .controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
-  MySocket.emit('limpiar_pantalla');
+
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
@@ -114,11 +114,15 @@ angular.module('app')
     MySocket.emit('mostrar_puestos', {examenes: $scope.examenes});
   };
 
-  $scope.mandar_puesto = function(puesto){
-    console.log('puesto', puesto.$index+1);
+  $scope.mandar_puesto = function(puesto, indice){
+
     $scope.mostrar_participantes = false;
     $scope.mostrar_pregunta      = false;
-    MySocket.emit('mostrar_puesto', {examen: puesto.examen, posicion: puesto.$index+1} );
+    
+    examen          = puesto
+    examen.posicion = indice
+    
+    MySocket.emit('mostrar_puesto', { examen: examen } );
   }
   
   $scope.calcular_puntajes = function(){

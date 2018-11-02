@@ -1,15 +1,16 @@
 <div class="animated fadeIn">
 	<div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" style="height: 100vh;">
 	                    <div>
 		                      
 		                      <div class="card-body row">
 
-							    <div class="card col-sm-4 clt-conect" 
-							    	ng-repeat="p in puesto">
+							    <div class="col-sm-12 txt-center" style="margin-top: 100px;">
 		                            
-		                           <div><h2>{{posicion}}° lugar</h2></div>
+		                           <h2>{{ puesto.posicion }}° lugar</h2>
+								   <h1>{{ puesto.nombres }} {{ puesto.apellidos }}</h1>
+								   
                           		</div>
 		 					  
 		 					  </div>
