@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER, toastr){
+.controller('DashboardCtrl', function($scope, AuthServ, $state, MySocket, $http, USER, toastr, $uibModal){
 	
 	$scope.USER 		= USER;
 	$scope.$state 		= $state;
@@ -115,16 +115,58 @@ angular.module('app')
 	};
 
 	$scope.Ir_prueba = function(){
-		
+		$scope.traer_datos();
 		if ($scope.pruebas[0].rowid == $scope.USER.prueba_id) {
-			$state.go('app.prueba_respuestas');
+				$state.go('app.prueba_respuestas');
 
-		}else {
-			toastr.error('Su prueba no esta disponible');
-			return;
-		};
+			}else {
+				toastr.error('Su prueba no esta disponible');
+				return;
+			};
+			
+		
 		
 	};
 
+	$scope.OpenModalCerrar_sesion = function (opcion) {
 
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'views/ModalCerrar_sesion.html',
+	      controller: 'ModalCerrar_sesionCtrl',
+	      animation: false,
+	      resolve: {
+	          opcion: function () {
+	            return opcion;
+	          }
+	      },
+	    });
+	        
+	    modalInstance.result.then(function (opcion) {
+	      
+	     $scope.cerrar_sesion();
+	    
+	    });
+	  
+  	};	
+
+})
+
+
+.controller('ModalCerrar_sesionCtrl', function($scope, $uibModalInstance, opcion, AuthServ, toastr){
+
+    $scope.opcion = opcion;
+  
+    $scope.ok = function(){
+        
+      $uibModalInstance.close($scope.opcion);  
+    };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+    }; 
+   
 });
+
+
+

@@ -103,8 +103,10 @@ angular.module('app')
 		       console.log('No se pudo insertar los datos', error);
 
 		     })
-
-			$scope.mostrar_boton  	= true;
+			 if ($scope.mostrando_crear == false) {
+			 	$scope.mostrar_boton  	= true;
+			 }
+			
 		
 		});
 	    
@@ -207,23 +209,30 @@ angular.module('app')
   
 
 
-
-
-
-
-
-			
-
-       
-
-  
-})
  
+	$scope.abrirModal_eliminar = function (eliminar) {
 
+	    	var modalInstance = $uibModal.open({
+				templateUrl: 'views/Modal_eliminar.html',
+				controller: 'Modal_eliminarUCtrl',
+				animation: false,
+				resolve: {
+				    eliminar: function () {
+				    	return eliminar;
+				    }
+				},
+	      	});
 
+	      	console.log(modalInstance);
+	            
+	  		modalInstance.result.then(function (eliminar) {
+		     console.log(eliminar);
+		     $scope.eliminar_user(eliminar);
+		    })
+	    };
+  
 
-
-
+})
 .controller('ModalUCtrl', function($scope, $uibModalInstance, usuario, $http, toastr){
 
    
@@ -254,4 +263,20 @@ angular.module('app')
 	$scope.cancel = function () {
 	   $uibModalInstance.dismiss('cancel');
 	}; 
+})
+
+.controller('Modal_eliminarUCtrl', function($scope, $uibModalInstance, eliminar, AuthServ, toastr){
+
+    $scope.eliminar = eliminar;
+  
+    $scope.ok = function(){
+        
+      $uibModalInstance.close($scope.eliminar);  
+    };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+    }; 
+   
 });

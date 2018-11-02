@@ -10,45 +10,81 @@
 
       <!-- TO DO List -->
       
-       
+     
         <div class="card-header">
-              <h3>
-              Pregunta {{preguntas[indice_preg].rowid }}
+          <h3>
+              Pregunta {{preguntas[indice_preg].rowid }} <h6 ng-show="preguntas[indice_preg].tipo == 'Múltiple'">tipo múltiple</h6> <h6 ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">tipo falso-verdadero</h6>
+             
+             
+              
           </h3>
 
           </div>
         <!-- /.box-header -->
         <div class="card-body">
        
-          <ul class="todo-list">
+          <ul class="todo-list" ng-show="preguntas[indice_preg].tipo == 'Múltiple'">
             <li>
-             
-             
-               <h4>{{preguntas[indice_preg].definicion}}</h4>
+               <h4 ng-bind-html="preguntas[indice_preg].definicion"></h4>
             
                 <div class="row">
                    <div class="col-sm-12"> 
                       <div class="row">
                         
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('A')">  
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('A')">  
                           <span class=" card-body label label-default" 
                             >A.     {{preguntas[indice_preg].opc_a}}  </span> 
                           </div>  
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('B')">
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('B')">
                           <span ng-model="llevar.opc_b" 
                                class="card-body label label-default">B. {{preguntas[indice_preg].opc_b}}</span>
                           </div>
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('C')">
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('C')">
                           <span ng-model="llevar.opc_c" 
                              class="card-body label label-default">C. {{preguntas[indice_preg].opc_c}}</span>
                         </div>
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('D')">
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('D')">D. 
                           <span ng-model="llevar.opc_d" 
-                             class="card-body label label-default">D. {{preguntas[indice_preg].opc_d}}</span>
+                             class="card-body label label-default" ng-bind-html="preguntas[indice_preg].opc_d"> </span>
                         </div>
+
+                      </div>
+                    </div>
+                </div>
+
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                  
+              </div>
+            </li>
+            
+          </ul>
+
+           <ul class="todo-list" ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">
+            <li>
+             
+             
+               <h4 ng-bind-html="preguntas[indice_preg].definicion"></h4>
+            
+                <div class="row">
+                   <div class="col-sm-12"> 
+                      <div class="row">
+                        
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('Verdadero')">  
+                          <span class=" card-body label label-default" 
+                            >Verdadero</span> 
+                          </div>  
+
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('Falso')">
+                          <span ng-model="llevar.opc_b" 
+                               class="card-body label label-default">Falso</span>
+                          </div>
+
 
                       </div>
                     </div>

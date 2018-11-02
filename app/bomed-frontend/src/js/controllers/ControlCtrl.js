@@ -6,8 +6,9 @@ angular.module('app')
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
-  $scope.mostrar_participantes = true;
-  $scope.mostrar_pregunta     = true;
+  $scope.mostrar_participantes = false;
+  $scope.mostrar_pregunta      = false;
+  
   
   $scope.traer_datos = function(){
     $http.get('::Control').then (function(result){
@@ -28,13 +29,17 @@ angular.module('app')
 
   $scope.traer_datos();
   
+   
   
   $scope.mandar_pregunta = function(pregunta){
+    $scope.mostrar_participantes = false;
+    $scope.mostrar_pregunta      = true;
+    
     MySocket.emit('mostrar_pregunta', {pregunta: pregunta} );
   }
 
-  $scope.eliminar_respuesta = function(examen){
-    $http.put('::informes/calcular-examenes').then(function(r){
+ /* $scope.eliminar_respuesta = function(examen){
+    $http.put('::informes/borrar-examenes', {params: { id: rowid } }).then(function(r){
     examenes = r.data;
     $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
    }, function(r2){
@@ -42,7 +47,7 @@ angular.module('app')
      console.log(r2)
    })
   
-  }
+  } */
   
 
   $scope.actualizarClientes = function(){
@@ -52,6 +57,18 @@ angular.module('app')
 
   MySocket.on('clientes_traidos',function(res){
     $scope.clientes = res ;
+  });
+
+  MySocket.on('Ver_Par/Pre',function(res){
+   if ($scope.mostrar_participantes == true) {
+    $scope.show_participantes();
+   }else {
+      if ($scope.mostrar_pregunta == true) {
+        $scope.mandar_pregunta(); 
+    }
+      
+
+   } 
   });
 
    
@@ -80,25 +97,34 @@ angular.module('app')
   MySocket.on('conectado:alguien', function(datos){
     $scope.actualizarClientes();
   });
-    
 
   MySocket.emit('traer_clientes');
      
   $scope.show_participantes = function(){
+   $scope.mostrar_participantes = true;
+   $scope.mostrar_pregunta      = false;
+  
    MySocket.emit('llevar_espectadorU');
 
   };
 
- 
-  
   $scope.mostrar_puestos = function(){
+    $scope.mostrar_participantes = false;
+    $scope.mostrar_pregunta      = false;
     MySocket.emit('mostrar_puestos', {examenes: $scope.examenes});
-    console.log('fds', $scope.examenes);
   };
+
+  $scope.mandar_puesto = function(puesto){
+    console.log('puesto', puesto.$index+1);
+    $scope.mostrar_participantes = false;
+    $scope.mostrar_pregunta      = false;
+    MySocket.emit('mostrar_puesto', {examen: puesto.examen, posicion: puesto.$index+1} );
+  }
   
   $scope.calcular_puntajes = function(){
    $http.put('::informes/calcular-examenes').then(function(r){
     examenes = r.data;
+    console.log('gggg', examenes);
     $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
    }, function(r2){
      toastr.error('Error calculando puntajes');
@@ -107,11 +133,11 @@ angular.module('app')
 
   };
   
-
- 
-  
   $scope.limpiar_pantalla = function(){
-     
+    $scope.mostrar_participantes = false;
+    $scope.mostrar_pregunta      = false;
+   
+   
     MySocket.emit('limpiar_pantalla');
   };
 

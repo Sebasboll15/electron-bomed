@@ -128,6 +128,24 @@ angular
     }
   })
 
+  .state('app.main.espectador.puesto', {
+    url: '/puesto',
+     controller: 'espectador-puestoCtrl',
+    templateUrl: 'views/puesto.html',
+    ncyBreadcrumb: {
+      label: 'Font Awesome'
+    },
+    //page subtitle goes here
+    params: { subtitle: 'Para el espectador' },
+    resolve: {
+      loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          files: ['js/controllers/espectador-puestoCtrl.js']
+        });
+      }]
+    }
+  })
+
   .state('app.main.espectador.puntos', {
     url: '/puntos',
      controller: 'espectador-puntosCtrl',

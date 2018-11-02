@@ -184,7 +184,7 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('Espectador:Ya_estoy_aqui', function(){
+  socket.on('Ya_estoy_aqui', function(){
     for (var i = 0; i < all_clts.length; i++) {
         if (all_clts[i].user_data.tipo == 'Admin') {
            
@@ -279,7 +279,20 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('sc_traiga_los_puestos', function(data){
+   socket.on('mostrar_puesto', function(data){
+    console.log(data);
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+
+            io.to(all_clts[i].resourceId).emit('sc_mostrar_puesto', {examenes: data.examenes});
+
+          }
+      }
+
+  });
+
+
+  socket.on('Estoy_en_punto', function(data){
     console.log(data);
     for (var i = 0; i < all_clts.length; i++) {
           if (all_clts[i].user_data.tipo == 'Espectador') {
@@ -288,7 +301,19 @@ self.io.on('connection', (socket)=> {
 
           }
       }
-  
+
+  });
+
+  socket.on('Estoy_en_puesto', function(data){
+    console.log(data);
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Espectador') {
+
+            io.to(all_clts[i].resourceId).emit('sc_toma_el_puesto', {examen: data.examen, posicion: data.posicion});
+
+          }
+      }
+
   });
 
 

@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr){
+.controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr,  $uibModal){
     $scope.mostrando_crear= false;
     $scope.mostrando_edit = false;
 	$scope.dejarver= false;
@@ -154,6 +154,9 @@ angular.module('app')
 		    tiempo_exam: crea.tiempo_exam
 		}
 
+		console.log('hola', crea);
+
+
   		$http.get('::pruebas/insertar', {params: datos}).then(function(result){
 	    	toastr.success('Se ha insertado la prueba con éxito')
 			
@@ -168,8 +171,9 @@ angular.module('app')
 				tiempo_exam: 15
 			};
 	        
-	        $scope.mostrando = false;
-	        $scope.mostrar_boton= true;
+	      if ($scope.mostrando_crear == false) {
+			 	$scope.mostrar_boton  = true;
+			 }
 
 	    }, function(error){
 	       console.log('No se pudo insertar los datos', error);
@@ -261,11 +265,6 @@ angular.module('app')
 
 
     $scope.eliminar_test = function(prueba){
-
-    	res = confirm('¡Seguro que deseas eliminar la prueba: '+ prueba.alias +'?');
-    	if (!res) {
-    		return;
-    	}
 	          
 	    $http.delete('::pruebas/eliminar', {params: { id: prueba.rowid } }).then(function(result){
 			console.log('Se borraron los datos con exito', result);
@@ -280,9 +279,42 @@ angular.module('app')
 		})
 
     };
+	
+	$scope.abrirModal_eliminar = function (eliminar) {
 
-    
+	    	var modalInstance = $uibModal.open({
+				templateUrl: 'views/Modal_eliminar.html',
+				controller: 'Modal_eliminarUCtrl',
+				animation: false,
+				resolve: {
+				    eliminar: function () {
+				    	return eliminar;
+				    }
+				},
+	      	});
+
+	      	console.log(modalInstance);
+	            
+	  		modalInstance.result.then(function (eliminar) {
+		     console.log(eliminar);
+		     $scope.eliminar_test(eliminar);
+		    })
+	    };  
 	
+})
+
+.controller('Modal_eliminarUCtrl', function($scope, $uibModalInstance, eliminar, AuthServ, toastr){
+
+    $scope.eliminar = eliminar;
+  
+    $scope.ok = function(){
+        
+      $uibModalInstance.close($scope.eliminar);  
+    };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+    }; 
    
-	
 });
