@@ -3,16 +3,12 @@ angular.module('app')
   $scope.puesto = {};
   $scope.posicion = {};
   
-  MySocket.on('sc_toma_el_puesto', function(data){
-    $scope.examen = data.examen;
-    $scope.posicion = data.posicion;
-    console.log('eee', data);
-  });
+  
+  if(localStorage.sc_puesto){
+  	$scope.puesto = JSON.parse(localStorage.sc_puesto);
+  }
 
-  MySocket.on('limpie_pantalla', function(){
-    $state.go('app.main.espectador');
-
-  });
+  
 
 
 

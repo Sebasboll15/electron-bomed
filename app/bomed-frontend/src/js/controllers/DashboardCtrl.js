@@ -16,7 +16,16 @@ angular.module('app')
 
 		})
 	};
+
+
 	$scope.traer_datos();
+	
+	
+	MySocket.on('limpie_pantalla', function(){
+		$state.go('app.main.espectador');
+  
+	});
+  
 
 	$scope.colocar_botones = function(){
 		if ($scope.USER.tipo == 'Espectador') {
