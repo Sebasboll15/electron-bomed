@@ -70,7 +70,7 @@ function crearDatosIniciales() {
                         resolve2('Pruebas ya estaban Insertadas');
                     }else{
                         
-                        consulta = "INSERT INTO `pruebas` VALUES (1, 'Matarratas', 'mrratas', 'Dirigido',  'Si', 'Puntos', 'No', '', '4:00')";
+                        consulta = "INSERT INTO `pruebas` VALUES (1, 'Matarratas', 'mrratas', 'Dirigido',  'Si', 'Puntos', 30, '', 20)";
                         db.query(consulta).then(function(res){
                             resolve2('Pruebas Insertadas');
                         })

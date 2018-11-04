@@ -23,6 +23,7 @@ function putCalcularExamenes(req, res) {
     db.query(consulta).then (function(result){
         usuarios = result ;
         for (let i = 0; i < usuarios.length; i++) {
+            usuarios[i].tiempo = 0;
             traer_puntajes(i);
         }
         
@@ -42,7 +43,13 @@ function putCalcularExamenes(req, res) {
             "GROUP BY preg_id";
         
         promesa = db.query(consulta, [usuarios[i].rowid]).then (function(puntaje){
+
             usuarios[i].puntaje = puntaje.length;
+            
+            for (let j = 0; j < puntaje.length; j++) {
+                usuarios[i].tiempo += parseInt(puntaje[j].duracion);
+                console.log(puntaje[j]);
+            }
         }, function(error){
             console.log(error);
         })

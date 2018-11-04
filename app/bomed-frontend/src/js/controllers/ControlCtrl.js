@@ -94,14 +94,26 @@ angular.module('app')
   MySocket.emit('traer_clientes');
      
   $scope.show_participantes = function(){
-   $scope.mostrar_participantes = true;
-   $scope.mostrar_pregunta      = false;
-  
-   MySocket.emit('llevar_espectadorU');
-   toastr.success('Participantes enviados');
-
+    $scope.mostrar_participantes = true;
+    $scope.mostrar_pregunta      = false;
+   
+    MySocket.emit('llevar_espectadorU');
+    toastr.success('Participantes enviados');
+ 
   };
 
+  $scope.empezar_examen = function(){
+    MySocket.emit('empezar_examen');
+    toastr.success('Prueba iniciada');
+ 
+  };
+  
+  $scope.next_question = function(){
+    MySocket.emit('next_question');
+    toastr.success('Siguiente pregunta enviada');
+ 
+  };
+  
   $scope.mostrar_puestos = function(){
     $scope.mostrar_participantes = false;
     $scope.mostrar_pregunta      = false;

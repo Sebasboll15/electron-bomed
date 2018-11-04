@@ -210,8 +210,19 @@ self.io.on('connection', (socket)=> {
     }
 
 
-  socket.emit('llevar_participantes',  partis );
+    socket.emit('llevar_participantes',  partis );
     
+  });
+
+  
+  socket.on('empezar_examen', function(data){
+    socket.broadcast.emit('empezar_examen');
+    info_evento.examen_iniciado = true;
+  });
+  
+  socket.on('next_question', function(data){
+    socket.broadcast.emit('next_question');
+    info_evento.preg_actual++;
   });
 
   socket.on('contesto_mal/bien', function(data){
