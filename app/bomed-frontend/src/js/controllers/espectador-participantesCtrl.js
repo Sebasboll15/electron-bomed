@@ -50,13 +50,5 @@ angular.module('app')
 
 	});
 
-  MySocket.on('mostrar_pregunta', function(){
-    $state.go('app.main.espectador');
-
-  });
-
-
-
-
 	
 });
