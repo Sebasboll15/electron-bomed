@@ -9,7 +9,7 @@ angular.module('app')
 	
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
-			$scope.pruebas= result.data ;
+			$scope.prueba = result.data[0];
 			console.log('hola', $scope.USER.prueba_id);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
@@ -23,6 +23,12 @@ angular.module('app')
 	
 	MySocket.on('limpie_pantalla', function(){
 		$state.go('app.main.espectador');
+  
+	});
+  
+	
+	MySocket.on('empezar_examen', function(){
+		$scope.Ir_prueba(true);
   
 	});
   
@@ -123,18 +129,20 @@ angular.module('app')
 		$state.go('app.main.espectador');
 	};
 
-	$scope.Ir_prueba = function(){
-		$scope.traer_datos();
-		if ($scope.pruebas[0].rowid == $scope.USER.prueba_id) {
-				$state.go('app.prueba_respuestas');
+	$scope.Ir_prueba = function(permiso){
+		
+		if ($scope.prueba.dirigido == 'Dirigido' && !permiso) {
+			toastr.warning('El administrador iniciará la prueba en breve.');
+			return;
+		}
+		
+		if ($scope.prueba.rowid == $scope.USER.prueba_id) {
+			$state.go('app.prueba_respuestas');
+		} else {
+			toastr.error('Su prueba no esta disponible');
+			return;
+		};
 
-			}else {
-				toastr.error('Su prueba no esta disponible');
-				return;
-			};
-			
-		
-		
 	};
 
 	$scope.OpenModalCerrar_sesion = function (opcion) {

@@ -21,7 +21,7 @@
                       <div class="card-body row">
                       
 
-                          <div class="card col-sm-4 clt-conect" ng-repeat="cliente in clientes" 
+                          <div class="card col-sm-4 clt-conect mgb-3" ng-repeat="cliente in clientes" 
                             ng-click="OpenModalUser(cliente)" ng-class="{ 'clt-conect-right': cliente.answered==1, 'clt-conect-wrong': cliente.answered==0  }">
                             
                             <div class="card-body p-2 clearfix">
@@ -42,8 +42,14 @@
                         
                         <button type="button" ng-click="limpiar_pantalla()"  class="btn btn-danger btn-sm" uib-tooltip="Limpiar la pantalla de espectadores"><i class=""></i>Vacíar</button>
                         
-
+                        <button type="button" ng-click="next_question()"  class="btn btn-primary btn-sm" uib-tooltip="Enviar siguiente pregunta"><i class=""></i>Siguiente pregunta</button>
+                        
                       </div>
+                      
+                      <br>
+                      
+                      <button type="button" ng-click="empezar_examen()"  class="btn btn-primary btn-sm" uib-tooltip="Iniciar prueba"><i class="fa fa-fighter-jet"></i>Iniciar examen</button>
+
 
 
                     </div>
@@ -81,8 +87,11 @@
                             <div class="pre-conect col-sm-6">
                                 {{ $index+1 }}. {{ examen.nombres }} {{ examen.apellidos }}
                             </div>    
-                            <div class="pre-conect col-sm-4">
+                            <div class="pre-conect col-sm-3">
                                 Puntaje: {{ examen.puntaje }}
+                            </div>  
+                            <div class="pre-conect col-sm-1">
+                                {{ examen.tiempo }}s
                             </div>      
                             <div class="btn-group pre-conect col-sm-2">
                                 <button class="btn btn-danger btn-sm" uib-tooltip="Eliminar respuestas"  ng-click="eliminar_respuesta(examen)" tooltip-append-to-body="true">

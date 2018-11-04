@@ -14,14 +14,21 @@
         <div class="card-header">
           <h3>
               Pregunta {{preguntas[indice_preg].rowid }} <h6 ng-show="preguntas[indice_preg].tipo == 'Múltiple'">tipo múltiple</h6> <h6 ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">tipo falso-verdadero</h6>
-             
+              <div>
+                00:{{timeleft}}
+              </div>
+              <progress value="{{tiempo}}" max="{{prueba.tiempo_preg}}" id="progressBar"></progress>
              
               
           </h3>
 
           </div>
         <!-- /.box-header -->
-        <div class="card-body">
+        <div class="card-body" ng-if="esperando_preg">
+          Espere que el administrador le envíe la siguiente pregunta.
+        </div>
+        
+        <div class="card-body" ng-if="!esperando_preg">
        
           <ul class="todo-list" ng-show="preguntas[indice_preg].tipo == 'Múltiple'">
             <li>

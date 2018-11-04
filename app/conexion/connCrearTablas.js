@@ -30,7 +30,7 @@ sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
                 "usuario_id integer(100)  DEFAULT NULL," +
                 "opcion_elegida varchar(100)  NOT NULL," +
                 "correcta varchar(100)  NOT NULL collate nocase," +
-                "duracion varchar(100)  NOT NULL collate nocase)";       
+                "duracion integer(3)  NOT NULL)";       
   
   sqlPruebas = "CREATE TABLE IF NOT EXISTS pruebas (id integer," +
                 "nombre varchar(100)  NOT NULL collate nocase," +
@@ -38,9 +38,9 @@ sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
                 "dirigido varchar(100)  NOT NULL," +
                 "mostrar_respuesta varchar(100)  NOT NULL collate nocase," +
                 "puntos_promedio varchar(100)  NOT NULL collate nocase," +
-                "tiempo_preg varchar(100)  NOT NULL collate nocase," +
+                "tiempo_preg integer(3)  NOT NULL," +
                 "actual integer(1)  DEFAULT NULL," +
-                "tiempo_exam varchar(100)  NOT NULL collate nocase)";  
+                "tiempo_exam integer(3)  NOT NULL)";  
            
 
 
@@ -129,7 +129,7 @@ function createTable() {
                             resolve2('Pruebas ya estaban Insertadas');
                         }else{
                             
-                            consulta = "INSERT INTO `pruebas` VALUES (1, 'Matarratas', 'mrratas', 'Dirigido',  'Si', 'Puntos', 'No', '', '4:00')";
+                            consulta = "INSERT INTO `pruebas` VALUES (1, 'Matarratas', 'mrratas', 'Dirigido',  'Si', 'Puntos', 30, 1, 20)";
                             db.query(consulta).then(function(res){
                                 resolve2('Pruebas Insertadas');
                             })
