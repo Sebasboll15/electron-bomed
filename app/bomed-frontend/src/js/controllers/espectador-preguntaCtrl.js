@@ -15,8 +15,10 @@ angular.module('app')
       if ($scope.opcion == $scope.pregunta.correcta) {
         $scope.opcion_a = 1;
         toastr.success('Respuesta correcta');
+
       }else {
         $scope.opcion_a = 0;
+        toastr.error('Respuesta incorrecta');
         
       }  
     };
@@ -27,6 +29,7 @@ angular.module('app')
         toastr.success('Respuesta correcta');
       }else {
         $scope.opcion_b = 0;
+        toastr.error('Respuesta incorrecta');
        
       }  
     };
@@ -37,6 +40,7 @@ angular.module('app')
         toastr.success('Respuesta correcta');
       }else {
         $scope.opcion_c = 0;
+        toastr.error('Respuesta incorrecta');
        
       }  
     };
@@ -47,6 +51,7 @@ angular.module('app')
         toastr.success('Respuesta correcta');
       }else {
         $scope.opcion_d = 0;
+        toastr.error('Respuesta incorrecta');
       
       }  
     };

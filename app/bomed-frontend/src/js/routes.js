@@ -136,7 +136,7 @@ angular
       label: 'Puesto'
     },
     //page subtitle goes here
-    params: { subtitle: 'Para el espectador' },
+    params: { subtitle: 'Para el espectador ver el puesto' },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
@@ -154,7 +154,7 @@ angular
       label: 'Puntos'
     },
     //page subtitle goes here
-    params: { subtitle: 'Para el espectador' },
+    params: { subtitle: 'Para el espectador ver los puntos' },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
@@ -172,7 +172,7 @@ angular
       label: 'Participantes'
     },
     //page subtitle goes here
-    params: { subtitle: 'Para el espectador' },
+    params: { subtitle: 'Para el espectador ver los participantes' },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
@@ -190,7 +190,7 @@ angular
       label: 'Pregunta'
     },
     //page subtitle goes here
-    params: { subtitle: 'Para el espectador' },
+    params: { subtitle: 'Para el espectador ver la pregunta' },
     resolve: {
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
