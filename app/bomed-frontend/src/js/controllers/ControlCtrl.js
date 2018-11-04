@@ -2,7 +2,7 @@ angular.module('app')
 
 
 .controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
-
+  MySocket.emit('limpiar_pantalla');
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
@@ -36,6 +36,7 @@ angular.module('app')
     $scope.mostrar_pregunta      = true;
     
     MySocket.emit('mostrar_pregunta', {pregunta: pregunta} );
+    toastr.success('Pregunta enviada');
   }
 
  /* $scope.eliminar_respuesta = function(examen){
@@ -59,16 +60,8 @@ angular.module('app')
     $scope.clientes = res ;
   });
 
-  MySocket.on('Ver_Par/Pre',function(res){
-   if ($scope.mostrar_participantes == true) {
-    $scope.show_participantes();
-   }else {
-      if ($scope.mostrar_pregunta == true) {
-        $scope.mandar_pregunta(); 
-    }
-      
-
-   } 
+  MySocket.on('Ver_Par',function(res){
+    $scope.show_participantes(); 
   });
 
    
@@ -105,6 +98,7 @@ angular.module('app')
    $scope.mostrar_pregunta      = false;
   
    MySocket.emit('llevar_espectadorU');
+   toastr.success('Participantes enviados');
 
   };
 
@@ -112,6 +106,7 @@ angular.module('app')
     $scope.mostrar_participantes = false;
     $scope.mostrar_pregunta      = false;
     MySocket.emit('mostrar_puestos', {examenes: $scope.examenes});
+    toastr.success('Puestos enviados');
   };
 
   $scope.mandar_puesto = function(puesto, indice){
@@ -123,6 +118,7 @@ angular.module('app')
     examen.posicion = indice
     
     MySocket.emit('mostrar_puesto', { examen: examen } );
+    toastr.success('Puesto enviado');
   }
   
   $scope.calcular_puntajes = function(){
@@ -143,6 +139,7 @@ angular.module('app')
    
    
     MySocket.emit('limpiar_pantalla');
+    toastr.success('La pantalla ha sido limpiada');
   };
 
 
@@ -161,6 +158,26 @@ angular.module('app')
         
     modalInstance.result.then(function (clientes) {
       console.log(clientes);
+    
+    });
+  
+  };
+
+  $scope.OpenModalPreg = function (pregunta) {
+
+    var modalInstance = $uibModal.open({
+      templateUrl: 'views/Modal_Mostrar_pregunta.html',
+      controller: 'Modal_Mostrar_preguntaCtrl',
+      animation: false,
+      resolve: {
+          pregunta: function () {
+            return pregunta;
+          }
+      },
+    });
+        
+    modalInstance.result.then(function (pregunta) {
+      $scope.mandar_pregunta(pregunta);  
     
     });
   
@@ -236,5 +253,21 @@ angular.module('app')
      
     };
           
+   
+})
+
+.controller('Modal_Mostrar_preguntaCtrl', function($scope, $uibModalInstance, pregunta, AuthServ, toastr){
+
+    $scope.pregunta = pregunta;
+  
+    $scope.ok = function(){
+        
+      $uibModalInstance.close($scope.pregunta);  
+    };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+    }; 
    
 });

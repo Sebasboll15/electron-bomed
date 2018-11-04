@@ -20,8 +20,8 @@ angular.module('app')
 
 
   MySocket.on('sc_mostrar_puestos', function(data){
-    MySocket.emit('Estoy_en_punto', {examenes: data.examenes});
-    $state.go('app.main.espectador.puntos');
+    localStorage.sc_puestos = JSON.stringify(data.examenes);
+    $state.go('app.main.espectador.puntos', {}, {reload: true});
   });
 
 

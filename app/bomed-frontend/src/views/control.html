@@ -58,8 +58,8 @@
                       </div>
                       <div class="body">
                         
-                        <div ng-repeat="pregunta in preguntas" class="pre-conect col-sm-12" ng-click="mandar_pregunta(pregunta)">
-                            {{ pregunta.definicion }}
+                        <div ng-repeat="pregunta in preguntas" class="pre-conect col-sm-12" ng-click="OpenModalPreg(pregunta)" ng-bind-html="pregunta.definicion">
+
                         </div>         
 
                       </div>

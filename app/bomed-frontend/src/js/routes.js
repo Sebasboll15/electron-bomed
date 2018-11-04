@@ -65,7 +65,7 @@ angular
     templateUrl: 'views/main.html',
     //page title goes here
     ncyBreadcrumb: {
-      label: 'Home',
+      label: 'Panel',
     },
     //page subtitle goes here
     params: { subtitle: 'Welcome to ROOT powerfull Bootstrap & AngularJS UI Kit' },
@@ -115,7 +115,7 @@ angular
      controller: 'espectadorCtrl',
     templateUrl: 'views/espectador.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Espectador'
     },
     //page subtitle goes here
     params: { subtitle: 'Para el espectador' },
@@ -133,7 +133,7 @@ angular
      controller: 'espectador-puestoCtrl',
     templateUrl: 'views/puesto.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Puesto'
     },
     //page subtitle goes here
     params: { subtitle: 'Para el espectador' },
@@ -151,7 +151,7 @@ angular
      controller: 'espectador-puntosCtrl',
     templateUrl: 'views/puntos.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Puntos'
     },
     //page subtitle goes here
     params: { subtitle: 'Para el espectador' },
@@ -169,7 +169,7 @@ angular
      controller: 'espectador-participantesCtrl',
     templateUrl: 'views/participantes.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Participantes'
     },
     //page subtitle goes here
     params: { subtitle: 'Para el espectador' },
@@ -187,7 +187,7 @@ angular
      controller: 'espectador-preguntaCtrl',
     templateUrl: 'views/pregunta.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Pregunta'
     },
     //page subtitle goes here
     params: { subtitle: 'Para el espectador' },
@@ -205,7 +205,7 @@ angular
      controller: 'usuariosCtrl',
     templateUrl: 'views/usuarios.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Usuarios'
     },
     //page subtitle goes here
     params: { subtitle: 'Para ver y editar los usuarios' },
@@ -223,7 +223,7 @@ angular
      controller: 'pruebasCtrl',
     templateUrl: 'views/pruebas.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Pruebas'
     },
     //page subtitle goes here
     params: { subtitle: 'Para ver y editar las pruebas' },
@@ -241,7 +241,7 @@ angular
     controller: 'preguntasCtrl',
     templateUrl: 'views/preguntas.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Preguntas'
     },
     //page subtitle goes here
     params: { subtitle: 'Para ver y editar las preguntas' },
@@ -259,7 +259,7 @@ angular
      controller: 'respuestasCtrl',
     templateUrl: 'views/respuestas.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Respuestas'
     },
     //page subtitle goes here
     params: { subtitle: 'Para ver  las respuestas' },
@@ -277,7 +277,7 @@ angular
      controller: 'ControlCtrl',
     templateUrl: 'views/control.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Control'
     },
     //page subtitle goes here
     params: { subtitle: 'Para coordinar las pruebas' },
@@ -295,7 +295,7 @@ angular
      controller: 'Prueba_respuestasCtrl',
     templateUrl: 'views/prueba_respuestas.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Prueba en curso'
     },
     //page subtitle goes here
     params: { subtitle: 'Realizar la prueba' },
@@ -313,7 +313,7 @@ angular
      controller: 'loginCtrl',
     templateUrl: 'views/login.html',
     ncyBreadcrumb: {
-      label: 'Font Awesome'
+      label: 'Login'
     },
     //page subtitle goes here
     params: { subtitle: 'Para ingresar a inicio' },

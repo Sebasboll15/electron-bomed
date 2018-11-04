@@ -1,7 +1,9 @@
 angular.module('app')
 .controller('espectador-participantesCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state){
+  MySocket.emit('estoy_en_part');
+
   $scope.clientes        = [];
-  $scope.prueba_actual         = {};
+  $scope.prueba_actual   = {};
 
   $scope.mostrar_participantes = false;
   $scope.traer_participantes = function(){
@@ -32,9 +34,7 @@ angular.module('app')
   });
 
   MySocket.on('respondido', function(datos){
-   participantes = [];
-
-  
+    participantes = [];
 
     for (var i = 0; i < datos.clientes.length; i++) {
       if(datos.clientes[i].user_data.tipo == 'Usuario'){
@@ -43,7 +43,6 @@ angular.module('app')
     }
 
     $scope.clientes = participantes;
-    console.log('hgfdsa', $scope.clientes);
   });
 
   MySocket.on('limpie_pantalla', function(){

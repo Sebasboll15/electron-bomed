@@ -22,22 +22,22 @@
                    <div class="col-sm-12"> 
                       <div class="row">
                         
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('A')">  
-                          <span class=" card-body label label-default">A.     {{pregunta.opc_a}}  </span> 
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('A')"  ng-class="{ 'clt-conect-right': opcion_a == 1, 'clt-conect-wrong': opcion_a == 0}">  
+                          <span class=" card-body label label-default">A. {{pregunta.opc_a}}  </span> 
                         </div>  
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('B')">
-                          <span ng-model="llevar.opc_b" 
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('B')"  ng-class="{ 'clt-conect-right': opcion_b == 1, 'clt-conect-wrong': opcion_b == 0}">
+                          <span 
                                class="card-body label label-default">B. {{pregunta.opc_b}}</span>
                           </div>
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('C')">
-                          <span ng-model="llevar.opc_c" 
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('C')"  ng-class="{ 'clt-conect-right': opcion_c == 1, 'clt-conect-wrong': opcion_c == 0}">
+                          <span  
                              class="card-body label label-default">C. {{pregunta.opc_c}}</span>
                         </div>
 
-                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('D')">
-                          <span ng-model="llevar.opc_d" 
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('D')"  ng-class="{ 'clt-conect-right': opcion_d == 1, 'clt-conect-wrong': opcion_d == 0}">
+                          <span 
                              class="card-body label label-default">D. {{pregunta.opc_d}}</span>
                         </div>
 

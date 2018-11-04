@@ -126,7 +126,7 @@ angular.module('app')
 
   		if (crea.tipo == 'Falso-Verdadero') {
   			if (crea.correcta == '' || crea.correcta == undefined) {
-  				toastr.error('Debe si la respuesta es falsa o verdadera');
+  				toastr.error('Debe indicar si la respuesta es falsa o verdadera');
   				return;
   			}
   		}

@@ -8,7 +8,12 @@ angular.module('app')
   	$scope.puesto = JSON.parse(localStorage.sc_puesto);
   }
 
-  
+  MySocket.on('limpie_pantalla', function(){
+    $state.go('app.main.espectador');
+
+  });
+
+
 
 
 
