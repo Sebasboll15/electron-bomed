@@ -110,10 +110,17 @@
 
                         <div  ng-show="preg_nueva.tipo == 'Múltiple' ">
 
-                                <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
+                              <div class="form-group row">
+                                  <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
+                                  <div class="col-md-9">
+                                    <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_a" value="A" placeholder="..." style="height: 80px"></textarea>
+                                  </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion A</label>
                                 <div class="col-md-9">
-                                  <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_a" value="A" placeholder="..." style="height: 80px"></textarea>
+                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_a_img" name="file-input">
                                 </div>
                               </div>
 
@@ -125,6 +132,14 @@
                               </div>
 
                               <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion B</label>
+                                <div class="col-md-9">
+                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_b_img" name="file-input">
+                                </div>
+                              </div>
+
+
+                              <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción C:</h5></label>
                                 <div class="col-md-9">
                                   <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_c" value="C" placeholder="..." style="height: 80px"></textarea>
@@ -132,9 +147,24 @@
                               </div>
 
                               <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion C</label>
+                                <div class="col-md-9">
+                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_c_img" name="file-input">
+                                </div>
+                              </div>
+
+
+                              <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción D:</h5></label>
                                 <div class="col-md-9">
                                   <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="preg_nueva.opc_d" value="D" placeholder="..." style="height: 80px"></textarea>
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion D</label>
+                                <div class="col-md-9">
+                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_d_img" name="file-input">
                                 </div>
                               </div>
 

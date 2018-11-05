@@ -20,6 +20,8 @@ angular.module('app')
     	$state.go('app.main');
   	}
 	$location.hash('');
+
+
 	
 	
 	// Editor options.
@@ -84,6 +86,7 @@ angular.module('app')
 	
 	
   	$scope.insertarAsk = function(crea){
+      console.log('ggggggg', crea);
   		
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			toastr.error('Debe escribir la definición');

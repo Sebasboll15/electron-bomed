@@ -3,12 +3,13 @@ angular.module('app')
 
 .controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http, $state){
   MySocket.emit('limpiar_pantalla');
-  $scope.mostrando             = false;
-  $scope.boton1 	             = true;
-  $scope.clientes              = [];
-  $scope.mostrar_participantes = false;
-  $scope.mostrar_pregunta      = false;
+  $scope.mostrando                    = false;
+  $scope.boton1 	                    = true;
+  $scope.clientes                     = [];
+  $scope.mostrar_participantes        = false;
+  $scope.mostrar_pregunta             = false;
   $scope.mostrar_puestosUsuarios      = false;
+  $scope.indice_preg                  = 0;
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -32,6 +33,7 @@ angular.module('app')
 
     
   };
+
 
   $scope.traer_datos();
   
@@ -128,6 +130,7 @@ angular.module('app')
   
   $scope.next_question = function(){
     MySocket.emit('next_question');
+
     toastr.success('Siguiente pregunta enviada');
     for (let i = 0; i < $scope.clientes.length; i++) {
       $scope.clientes[i].answered = undefined;
