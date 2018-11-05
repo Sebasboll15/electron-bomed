@@ -25,8 +25,14 @@ angular.module('app')
   });
 
   MySocket.on('conectado:alguien', function(){
-   $scope.traer_participantes(); 
-
+    $scope.traer_participantes(); 
+ 
+   });
+   
+  MySocket.on('next_question', function(){
+    for (let i = 0; i < $scope.clientes.length; i++) {
+      $scope.clientes[i].answered = undefined;
+    }
   });
 
   MySocket.on('client_disconnected', function(){

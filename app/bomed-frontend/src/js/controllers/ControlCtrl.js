@@ -1,13 +1,18 @@
 angular.module('app')
 
 
-.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http){
+.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http, $state){
   MySocket.emit('limpiar_pantalla');
   $scope.mostrando             = false;
   $scope.boton1 	             = true;
   $scope.clientes              = [];
   $scope.mostrar_participantes = false;
   $scope.mostrar_pregunta      = false;
+  
+  
+  if ($scope.USER.tipo != 'Admin') {
+    $state.go('app.main');
+  }
   
   
   $scope.traer_datos = function(){
@@ -38,16 +43,25 @@ angular.module('app')
     toastr.success('Pregunta enviada');
   }
 
- /* $scope.eliminar_respuesta = function(examen){
-    $http.put('::informes/borrar-examenes', {params: { id: rowid } }).then(function(r){
-    examenes = r.data;
-    $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
-   }, function(r2){
-     toastr.error('Error calculando puntajes');
-     console.log(r2)
-   })
+  $scope.eliminar_respuestas = function(examen){
+    
+    var modalInstance = $uibModal.open({
+      templateUrl: 'views/eliminarRespuestasModal.html',
+      controller: 'EliminarRespuestasModalCtrl',
+      animation: false,
+      resolve: {
+          cliente: function () {
+            return examen;
+          }
+      },
+    });
+        
+    modalInstance.result.then(function (clientes) {
+      //console.log(clientes);
+    });
   
-  } */
+  
+  }
   
 
   $scope.actualizarClientes = function(){
@@ -269,16 +283,38 @@ angular.module('app')
 
 .controller('Modal_Mostrar_preguntaCtrl', function($scope, $uibModalInstance, pregunta, AuthServ, toastr){
 
-    $scope.pregunta = pregunta;
+  $scope.pregunta = pregunta;
+
+  $scope.ok = function(){
+      
+    $uibModalInstance.close($scope.pregunta);  
+  };
+
+  $scope.cancel = function () {
+      
+    $uibModalInstance.dismiss('cancel');
+  }; 
+ 
+})
+
+
+.controller('EliminarRespuestasModalCtrl', function($scope, $uibModalInstance, cliente, toastr, $http){
+
+    $scope.cliente = cliente;
   
     $scope.ok = function(){
-        
-      $uibModalInstance.close($scope.pregunta);  
+      
+      $http.put('::informes/borrar-examenes', {rowid: cliente.rowid } ).then(function(r){
+        $uibModalInstance.close($scope.cliente);  
+      }, function(r2){
+        toastr.error('Error calculando puntajes');
+        console.log(r2)
+      })
+      
     };
 
     $scope.cancel = function () {
-        
       $uibModalInstance.dismiss('cancel');
     }; 
    
-});
+})

@@ -5,6 +5,7 @@ var db = require('../conexion/connWeb');
 
 
 router.route('/calcular-examenes').put(putCalcularExamenes)
+router.route('/borrar-examenes').put(putBorrarExamenes)
 
 
 
@@ -57,9 +58,23 @@ function putCalcularExamenes(req, res) {
         promesas_respu.push(promesa);
     }
     
-    
 }
 
+
+
+
+function putBorrarExamenes(req, res) {
+
+
+    consulta = "DELETE FROM respuestas WHERE usuario_id=?";
+
+    db.query(consulta, [req.body.rowid]).then (function(result){
+        res.send('Eliminado');
+    }, function(error){
+        console.log(error);
+    })
+    
+}
 
 
 
