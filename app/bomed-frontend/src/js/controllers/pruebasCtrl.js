@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr,  $uibModal){
+.controller('pruebasCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, USER, $state,  $uibModal){
     $scope.mostrando_crear= false;
     $scope.mostrando_edit = false;
 	$scope.dejarver= false;
@@ -13,6 +13,12 @@ angular.module('app')
 		actual: 1,
 		tiempo_exam: 15
 	};
+
+	$scope.USER        	= USER;
+
+	if ($scope.USER.tipo != 'Admin') {
+    	$state.go('app.main');
+  	}
 	
 	$scope.pruebas= [];
 	$scope.preguntas= {};

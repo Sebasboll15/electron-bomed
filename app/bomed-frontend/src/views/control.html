@@ -80,7 +80,7 @@
                       <div class="card-header" uib-tooltip="Para mostrar los puntajes">
                         Puntajes
                         <button class="btn btn-default" ng-click="calcular_puntajes()">Calcular</button>
-                        <button class="btn btn-default" ng-click="mostrar_puestos()">Mostrar puestos</button>
+                        <button class="btn btn-default" ng-click="mostrar_puestos()" ng-show="mostrar_puestosUsuarios">Mostrar puestos</button>
                       </div>
                       <div class="body">
                         <div class="row" ng-repeat="examen in examenes">

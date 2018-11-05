@@ -260,11 +260,11 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('estoy_en_part', function(){
+  socket.on('Estoy_en_espectador', function(){
     for (var i = 0; i < all_clts.length; i++) {
           if (all_clts[i].user_data.tipo == 'Admin') {
 
-            io.to(all_clts[i].resourceId).emit('Ver_Par');
+            io.to(all_clts[i].resourceId).emit('mande_participantes');
 
           }
       }

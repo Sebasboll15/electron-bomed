@@ -8,6 +8,7 @@ angular.module('app')
   $scope.clientes              = [];
   $scope.mostrar_participantes = false;
   $scope.mostrar_pregunta      = false;
+  $scope.mostrar_puestosUsuarios      = false;
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -104,6 +105,10 @@ angular.module('app')
     $scope.actualizarClientes();
   });
 
+  MySocket.on('mande_participantes', function(datos){
+   $scope.show_participantes();
+  });
+
   MySocket.emit('traer_clientes');
      
   $scope.show_participantes = function(){
@@ -124,12 +129,15 @@ angular.module('app')
   $scope.next_question = function(){
     MySocket.emit('next_question');
     toastr.success('Siguiente pregunta enviada');
- 
+    for (let i = 0; i < $scope.clientes.length; i++) {
+      $scope.clientes[i].answered = undefined;
+    }
   };
   
   $scope.mostrar_puestos = function(){
     $scope.mostrar_participantes = false;
     $scope.mostrar_pregunta      = false;
+
     MySocket.emit('mostrar_puestos', {examenes: $scope.examenes});
     toastr.success('Puestos enviados');
   };
@@ -147,10 +155,16 @@ angular.module('app')
   }
   
   $scope.calcular_puntajes = function(){
+   
    $http.put('::informes/calcular-examenes').then(function(r){
     examenes = r.data;
     console.log('gggg', examenes);
     $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
+    if ($scope.examenes.length > 0) {
+       $scope.mostrar_puestosUsuarios      = true;
+    }else {
+      toastr.error('No hay puntajes');
+    }
    }, function(r2){
      toastr.error('Error calculando puntajes');
      console.log(r2)

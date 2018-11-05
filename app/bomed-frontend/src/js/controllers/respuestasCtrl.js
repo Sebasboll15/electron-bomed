@@ -1,12 +1,17 @@
 angular.module('app')
 
 
-.controller('respuestasCtrl', function($scope, $filter, $http, toastr){
-   $scope.mostrando = false;
-	$scope.boton1 	= true;
-	$scope.usuarios	= {};
+.controller('respuestasCtrl', function($scope, $filter, $http, toastr, USER, $state){
+   $scope.mostrando 	= false;
+	$scope.boton1 		= true;
+	$scope.usuarios		= {};
 	$scope.resp_nueva 	= {};
 	$scope.resp_edit 	= {};
+	$scope.USER        	= USER;
+
+	if ($scope.USER.tipo != 'Admin') {
+    	$state.go('app.main');
+  	}
 
 	$scope.traer_dato= function(){
 		

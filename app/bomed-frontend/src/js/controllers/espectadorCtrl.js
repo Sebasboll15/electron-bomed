@@ -1,7 +1,12 @@
 angular.module('app')
-.controller('espectadorCtrl', function($scope, $anchorScroll,toastr, MySocket, $state){
-  
+.controller('espectadorCtrl', function($scope, $anchorScroll,toastr, MySocket, $state, USER){
+  $scope.USER         = USER;
 
+  if ($scope.USER.tipo != 'Espectador') {
+      $state.go('app.main');
+  }
+
+  MySocket.emit('Estoy_en_espectador');
 	
 	MySocket.on('llevelos_espectadoresU', function(data){
     $state.go('app.main.espectador.participantes');

@@ -1,7 +1,5 @@
 angular.module('app')
-.controller('espectador-participantesCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state){
-  MySocket.emit('estoy_en_part');
-
+.controller('espectador-participantesCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state, USER){
   $scope.clientes        = [];
   $scope.prueba_actual   = {};
 
@@ -11,6 +9,12 @@ angular.module('app')
     MySocket.emit('traer_participantes'); 
 
   };
+
+  $scope.USER         = USER;
+
+  if ($scope.USER.tipo != 'Espectador') {
+      $state.go('app.main');
+  }
 
 
   $scope.traer_participantes();	

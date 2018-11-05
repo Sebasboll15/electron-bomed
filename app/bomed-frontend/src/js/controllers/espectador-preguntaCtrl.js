@@ -1,9 +1,15 @@
 angular.module('app')
-.controller('espectador-preguntaCtrl', function($scope, USER, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state){
+.controller('espectador-preguntaCtrl', function($scope, USER, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state, USER){
   $scope.pregunta = {};
   
   if(localStorage.sc_pregunta){
   	$scope.pregunta = JSON.parse(localStorage.sc_pregunta);
+  }
+
+  $scope.USER         = USER;
+
+  if ($scope.USER.tipo != 'Espectador') {
+      $state.go('app.main');
   }
 
   console.log($scope.pregunta);

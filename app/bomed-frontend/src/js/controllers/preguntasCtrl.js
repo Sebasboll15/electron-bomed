@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll, toastr, $uibModal){
+.controller('preguntasCtrl', function($scope, $filter, $http, $location, $anchorScroll, toastr, USER, $state, $uibModal){
 	console.log('dfvsd');
     $scope.mostrando 	= false;
     $scope.mostrando_edit = false;
@@ -14,7 +14,11 @@ angular.module('app')
 		definicion: '',
 		tipo: 		'Multiple',
 	};
-	
+	$scope.USER        	= USER;
+
+	if ($scope.USER.tipo != 'Admin') {
+    	$state.go('app.main');
+  	}
 	$location.hash('');
 	
 	

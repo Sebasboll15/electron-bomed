@@ -1,15 +1,19 @@
 angular.module('app')
 
 
-.controller('usuariosCtrl', function($scope, $http, $filter, $uibModal, toastr, $location, $anchorScroll){
+.controller('usuariosCtrl', function($scope, $http, $filter, USER, $uibModal, toastr, $location, $anchorScroll, $state){
 	$scope.mostrando_crear 	= false;
 	$scope.mostrar_boton   	= true;
 	$scope.mostrando_editar	= false;
 	$scope.usuarios        	= {};
+	$scope.USER        		= USER;
     $scope.color_seleccion1 = false;
     $scope.color_seleccion2 = false;
     $location.hash('');
 	
+	if ($scope.USER.tipo != 'Admin') {
+    	$state.go('app.main');
+  	}
 	$scope.caja_genero1 = function(opcion){
 		$scope.color_seleccion1 = true;
 		$scope.color_seleccion2 = false;

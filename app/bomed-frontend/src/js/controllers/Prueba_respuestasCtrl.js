@@ -5,7 +5,11 @@ angular.module('app')
 	$scope.respuesta_llevada={};
 	$scope.indice_preg = 0;
    
-	
+	$scope.USER        	= USER;
+
+	if ($scope.USER.tipo != 'Usuario') {
+    	$state.go('app.main');
+  	}
 	$http.get('::Prueba_en_curso',  {params: { actual: 1 } }).then (function(result){
 			$scope.prueba = result.data.prueba ;
 			$scope.preguntas = result.data.preguntas ;
@@ -35,9 +39,15 @@ angular.module('app')
 	
 	
 	MySocket.on('next_question',function(res){
-		$scope.esperando_preg 	= false;
-		$scope.indice_preg 		= $scope.indice_preg + 1;
-		$scope.reiniciar_tiempo();
+		if ($scope.indice_preg == $scope.preguntas.length) {
+			
+			toastr.success('Prueba terminada');
+			$state.go('app.main');
+		}else	{
+			$scope.esperando_preg 	= false;
+			$scope.indice_preg 		= $scope.indice_preg + 1;
+			$scope.reiniciar_tiempo();
+		};
 	});	
 
 	$scope.seleccionarOpcion = function(opcion) {
