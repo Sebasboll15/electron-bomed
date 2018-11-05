@@ -226,9 +226,23 @@ self.io.on('connection', (socket)=> {
   });
   
   socket.on('next_question', function(data){
+    
     socket.broadcast.emit('next_question');
     info_evento.preg_actual++;
+    dato_actual = info_evento.preg_actual;
+    socket.emit('preg_actual', {preg_actual: dato_actual});
+   
   });
+
+  socket.on('no_se_puede_pasar', function(){
+    for (var i = 0; i < all_clts.length; i++) {
+          if (all_clts[i].user_data.tipo == 'Admin') {
+
+            io.to(all_clts[i].resourceId).emit('no_se_puede_pasar');
+
+          }
+      }  
+  })
 
   socket.on('contesto_mal/bien', function(data){
     

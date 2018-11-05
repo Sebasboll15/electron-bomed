@@ -67,6 +67,51 @@
                      </tbody> 
                   </table>
 
+                  <table class="table table-striped table-sm" ng-show="mostrar_url_img">
+                    <thead>
+                      <tr>
+                        <th>Id</th> 
+                        <th>Img_Definición</th>                        
+                        <th>Img_opción A</th> 
+                        <th>Img_opción B</th>
+                        <th>Img_opción C</th> 
+                        <th>Img_opción D</th>  
+                    </tr>
+                    </thead>
+                    
+                        <tbody> 
+                           <tr  ng-repeat="p in preguntas">
+                                
+                                <th scope="row">{{p.rowid}}</th>
+                                
+                                <td>
+                                  <span>{{p.defini_img}}</span>
+                                </td>                                
+                                <td>
+                                  <span>{{p.opc_a_img}}</span>
+                                 </td>
+                                <td>
+                                  <span>{{p.opc_b_img}}</span>
+                                </td>
+                                <td>
+                                  <span>{{p.opc_c_img}}</span>
+                                </td>
+                                 <td>
+                                  <span>{{p.opc_d_img}}</span>
+                                </td>
+                           </tr>
+                         </tbody> 
+                  </table>
+
+                  <div class="card-footer btn-group col-sm-12">
+                        
+                    <button type="button" ng-click="imagenes_preg()" ng-show="!mostrar_url_img"  class="btn btn-primary btn-sm col-sm-4" uib-tooltip="Mostrar los URL de la imágenes"><i class=""></i>Url-Imágenes de preguntas</button>
+
+                    <button type="button" ng-show="mostrar_url_img" class="btn btn-danger btn-sm col-sm-4" uib-tooltip="Quitar tablas de imágenes" ng-click="imagenes_preg()"><i class=""></i>Url-Imágenes de preguntas</button>
+                    
+                  </div>
+
+
                
 
                   <button type="button" class="btn btn-info btn-lg btn-block" ng-show="mostrar_boton" ng-click="mostrar_crear()">Crear</button>

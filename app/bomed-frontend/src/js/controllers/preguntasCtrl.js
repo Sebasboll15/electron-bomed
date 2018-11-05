@@ -10,6 +10,7 @@ angular.module('app')
 	$scope.preg_edit 	= {};
 	$scope.preguntas 	= {};
 	$scope.pruebas 		= {};
+  $scope.mostrar_url_img = false;
 	$scope.preg_nueva 	= { 
 		definicion: '',
 		tipo: 		'Multiple',
@@ -70,7 +71,14 @@ angular.module('app')
 	
 	};
 
-	
+  $scope.imagenes_preg = function(){
+    if ($scope.mostrar_url_img == false) {
+      $scope.mostrar_url_img = true;
+    }else {
+      $scope.mostrar_url_img = false;
+    }
+
+	};
 	
 	$scope.salir_crear = function(){
 		$location.hash('');

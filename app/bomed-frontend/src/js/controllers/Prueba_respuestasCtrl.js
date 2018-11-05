@@ -4,6 +4,7 @@ angular.module('app')
 	$scope.usuario= USER ;
 	$scope.respuesta_llevada={};
 	$scope.indice_preg = 0;
+	$scope.esperando = false;
    
 	$scope.USER        	= USER;
 
@@ -28,7 +29,10 @@ angular.module('app')
 		$scope.downloadTimer = $interval(function(){
 
 			$scope.tiempo = $scope.prueba.tiempo_preg - --$scope.timeleft;
-			
+			if ($scope.timeleft > 0) {
+				$scope.esperando = false;	
+			}
+
 			if($scope.timeleft <= 0){
 				$scope.seleccionarOpcion('');
 				$interval.cancel($scope.downloadTimer);
@@ -39,12 +43,17 @@ angular.module('app')
 	
 	
 	MySocket.on('next_question',function(res){
+		if ($scope.esperando == false) {
+			MySocket.emit('no_se_puede_pasar');
+			return;
+		}
 		if ($scope.indice_preg == $scope.preguntas.length) {
 			
 			toastr.success('Prueba terminada');
 			$state.go('app.main');
 		}else	{
 			$scope.esperando_preg 	= false;
+			$scope.esperando 		= false;
 			$scope.indice_preg 		= $scope.indice_preg + 1;
 			$scope.reiniciar_tiempo();
 		};
@@ -77,6 +86,7 @@ angular.module('app')
 			
 			if ($scope.prueba.dirigido == 'Dirigido') {
 				$scope.esperando_preg = true;
+				$scope.esperando 	  = true;
 				$interval.cancel($scope.downloadTimer);
 			}else{
 				

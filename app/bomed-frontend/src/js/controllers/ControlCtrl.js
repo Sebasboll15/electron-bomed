@@ -10,6 +10,7 @@ angular.module('app')
   $scope.mostrar_pregunta             = false;
   $scope.mostrar_puestosUsuarios      = false;
   $scope.indice_preg                  = 0;
+
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -111,6 +112,14 @@ angular.module('app')
    $scope.show_participantes();
   });
 
+   MySocket.on('preg_actual', function(datos){
+   $scope.preg_actual = datos.preg_actual;
+  });
+
+   MySocket.on('no_se_puede_pasar', function(){
+    
+   })
+
   MySocket.emit('traer_clientes');
      
   $scope.show_participantes = function(){
@@ -124,11 +133,13 @@ angular.module('app')
 
   $scope.empezar_examen = function(){
     MySocket.emit('empezar_examen');
+     $scope.preg_actual = 1;
     toastr.success('Prueba iniciada');
  
   };
   
   $scope.next_question = function(){
+
     MySocket.emit('next_question');
 
     toastr.success('Siguiente pregunta enviada');
@@ -224,6 +235,8 @@ angular.module('app')
     });
   
   };
+
+
     
 
 
