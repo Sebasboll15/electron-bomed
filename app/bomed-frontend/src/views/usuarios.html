@@ -97,13 +97,12 @@
                                     <div class="form-group row">
                                       <label class="col-md-3 col-form-label"><h5>Sexo:</h5></label>
                                       <div class="col-md-9 col-form-label">
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-masculino-crear"  ng-model="crea.sexo" name="nuevo_dirigido" value="M">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-masculino-crear">Masculino</label>
+                                        <div class="form-check form-check-inline mr-1 " ng-model="crea.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" id="sexo_crear1">
+                                          <img src="img/male1.png" class="img-genero" for="inline-masculino-crear">
                                         </div>
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-femenino-crear" ng-model="crea.sexo" name="nuevo_dirigido" value="F">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-femenino-crear">Femenino</label>
+                                        <div class="form-check form-check-inline mr-1" ng-model="crea.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }" id="sexo_crear2"  ng-click="caja_genero2('F')">
+                                           <img src="img/female1.png" class="img-genero" for="inline-femenino-crear">
+                                         
                                         </div>
                                       </div>
                                     </div>
@@ -163,14 +162,14 @@
                                     <div class="form-group row">
                                       <label class="col-md-3 col-form-label"><h5>Sexo:</h5></label>
                                       <div class="col-md-9 col-form-label">
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-masculino-editar"  ng-model="usuario.sexo" name="nuevo_dirigido" value="M">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-masculino-editar">Masculino</label>
+                                         <div class="form-check form-check-inline mr-1 " ng-model="usuario.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" id="sexo_editar1">
+                                          <img src="img/male1.png" class="img-genero" for="inline-masculino-editar">
                                         </div>
-                                        <div class="form-check form-check-inline mr-1">
-                                          <input class="form-check-input" type="radio" id="inline-femenino-editar" ng-model="usuario.sexo" name="nuevo_dirigido" value="F">
-                                          <label class="form-check-label" style="padding-right: 10px;" for="inline-femenino-editar">Femenino</label>
+                                        <div class="form-check form-check-inline mr-1" ng-model="usuario.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }" id="sexo_editar2"  ng-click="caja_genero2('F')">
+                                           <img src="img/female1.png" class="img-genero" for="inline-femenino-editar">
+                                         
                                         </div>
+                                        
                                       </div>
                                     </div>
 

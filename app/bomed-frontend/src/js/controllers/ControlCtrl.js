@@ -29,8 +29,7 @@ angular.module('app')
 
   $scope.traer_datos();
   
-   
-  
+ 
   $scope.mandar_pregunta = function(pregunta){
     $scope.mostrar_participantes = false;
     $scope.mostrar_pregunta      = true;

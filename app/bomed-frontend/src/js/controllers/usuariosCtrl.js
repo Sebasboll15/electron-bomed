@@ -6,9 +6,24 @@ angular.module('app')
 	$scope.mostrar_boton   	= true;
 	$scope.mostrando_editar	= false;
 	$scope.usuarios        	= {};
-    
+    $scope.color_seleccion1 = false;
+    $scope.color_seleccion2 = false;
     $location.hash('');
 	
+	$scope.caja_genero1 = function(opcion){
+		$scope.color_seleccion1 = true;
+		$scope.color_seleccion2 = false;
+		$scope.opcion = opcion;
+	}
+
+	$scope.caja_genero2 = function(opcion){
+		$scope.color_seleccion1 = false;
+		$scope.color_seleccion2 = true;
+		$scope.opcion = opcion;
+	}
+
+	
+
     $scope.traer_datos = function(){
 
 		$http.get('::usuarios').then (function(result){
@@ -56,7 +71,7 @@ angular.module('app')
   			return;
   		}
 
-  		if (crea.sexo == '' || crea.sexo == undefined) {
+  		if ($scope.opcion == '' || $scope.opcion == undefined) {
   			toastr.error('Debe escoger el sexo');
   			return;
   		}
@@ -92,7 +107,7 @@ angular.module('app')
 			   	 return;
 			   };
 
-			   $scope.datos_usuario = {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, prueba_id: $scope.prueba_actual[0].rowid, tipo: 'Usuario'};
+			   $scope.datos_usuario = {nombres: crea.nombres, apellidos: crea.apellidos, sexo: $scope.opcion, username: crea.username, password: crea.password, prueba_id: $scope.prueba_actual[0].rowid, tipo: 'Usuario'};
 
 			   $http.get('::usuarios/insertar', {params: $scope.datos_usuario}).then (function(result){
 		       toastr.success('Usuario creado con éxito');
@@ -139,20 +154,30 @@ angular.module('app')
         
     };
   
-    $scope.editarU = function(cambia){
-      
-      $scope.mostrar_boton =  false;
+	$scope.editarU = function(cambia){
 
+		$scope.mostrar_boton =  false;
+		$scope.mostrando_crear 	= false;
 		$scope.usuario = cambia;
+		$scope.opcion = $scope.usuario.sexo;
 		cambia.editando = true;
 		$scope.mostrando_editar	= true;
 		$location.hash('editar-usuario-div');
-    	$anchorScroll(); 
-	
+		$anchorScroll();
+
+		if ($scope.opcion == 'M') {
+			$scope.color_seleccion1 = true;
+			$scope.color_seleccion2 = false;
+		}else  {
+		 	 if ($scope.opcion == 'F') {
+		 	 	$scope.color_seleccion1 = false;
+				$scope.color_seleccion2 = true;	
+		 	 }
+		};
 
 
-    
-    };
+
+	};
     $scope.editarUsuario = function(cambia){
 	        
 
@@ -178,7 +203,7 @@ angular.module('app')
 
   		
 
-	         $http.get('::usuarios/editar',  {params: { nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: cambia.sexo, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo,  rowid: cambia.rowid  } }).then (function(result){
+	         $http.get('::usuarios/editar',  {params: { nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: $scope.opcion, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo,  rowid: cambia.rowid  } }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
                  toastr.success('Usuario editado con éxito');
                  $scope.mostrando_editar= false;

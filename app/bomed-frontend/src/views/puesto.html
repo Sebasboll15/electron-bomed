@@ -10,7 +10,8 @@
 		                            
 		                           <h2>{{ puesto.posicion }}° lugar</h2>
 								   <h1>{{ puesto.nombres }} {{ puesto.apellidos }}</h1>
-								   
+								   <img ng-show="puesto.posicion == '1'" src="img/medalla_oro.png">
+								   <img ng-show="puesto.posicion == '2'" src="img/medalla_plata.png">
                           		</div>
 		 					  
 		 					</div>

@@ -31,6 +31,8 @@ angular.module('app')
    			$http.get('::pruebas').then (function(result){
 				     				       
             $scope.pruebas = result.data  ;
+            $scope.alias = $scope.pruebas.alias;
+          
 
 		     console.log('Se trajo los datos con exito', result);
 		    }, function(error){
@@ -143,6 +145,11 @@ angular.module('app')
   				return;
   			}	
   		}
+	    
+	    if (crea.alias == undefined) {
+	    	crea.alias = '';
+	    }
+
 	    datos = {
 	    	nombre: crea.nombre, 
 		    alias: crea.alias, 
@@ -154,7 +161,7 @@ angular.module('app')
 		    tiempo_exam: crea.tiempo_exam
 		}
 
-		console.log('hola', crea);
+		
 
 
   		$http.get('::pruebas/insertar', {params: datos}).then(function(result){

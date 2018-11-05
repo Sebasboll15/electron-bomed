@@ -18,6 +18,7 @@ angular.module('app')
   MySocket.on('llevar_participantes', function(data){
     $scope.mostrar_participantes = true;
     $scope.clientes = data;
+    $scope.clientes = $filter('orderBy')($scope.clientes, '-correctas');
     console.log('data.participantes', $scope.clientes);  
     
     
