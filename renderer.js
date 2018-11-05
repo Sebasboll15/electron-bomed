@@ -126,7 +126,12 @@ self.io.on('connection', (socket)=> {
         }
     }
     
-    socket.broadcast.emit('empezar_examen');
+    for (var i = 0; i < all_clts.length; i++) {
+      if (all_clts[i].user_data.tipo == 'Usuario') {
+         io.to(all_clts[i].resourceId).emit('empezar_examen');
+      }
+    }
+
   });
 
   socket.on('empezar_examen_cliente', function(data){
@@ -237,7 +242,6 @@ self.io.on('connection', (socket)=> {
 
     participante  = {};
     codigo        = socket.id;
-    console.log('codigooooooo', codigo);
 
 		for (var i = 0; i < all_clts.length; i++) {
 			if(all_clts[i].resourceId === codigo){
