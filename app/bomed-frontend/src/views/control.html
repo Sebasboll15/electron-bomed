@@ -29,6 +29,7 @@
                                 ng-class="{'bg-primary': cliente.logged, 'bg-info': !cliente.logged }"></i>
                               <div class="h5 text-primary mb-0 mt-0">{{cliente.user_data.nombres}} {{cliente.user_data.apellidos}}</div>
                               <div class="text-muted text-uppercase font-weight-bold font-xs">{{cliente.nombre_punto}}</div>
+                              <div class="text-muted text-uppercase font-weight-bold font-xs" ng-show="cliente.user_data.tipo == 'Usuario'">Pregunta actual: {{cliente.preg_actual+1}}</div>
                             </div>
                           </div>
                                         
@@ -44,7 +45,7 @@
                         
                         <button type="button" ng-click="next_question()"  class="btn btn-primary btn-sm" uib-tooltip="Enviar siguiente pregunta"><i class=""></i>Siguiente pregunta</button>
                         
-                        <label class="col-md-3 col-form-label" style="background-color: #ccc;">Pregunta actual:{{preg_actual}}</label>
+                        <label class="col-md-3 col-form-label" style="background-color: #ccc;">Pregunta actual:  {{preg_actual+1}}</label>
                       </div>
                       
                       <br>

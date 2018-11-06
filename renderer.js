@@ -64,7 +64,8 @@ self.io.on('connection', (socket)=> {
   datos.categsel			= 0;
   datos.respondidas		= 0;
   datos.correctas			= 0;
-  datos.tiempo			= 0;
+  datos.tiempo			  = 0;
+  datos.preg_actual   = 0;
   datos.nombre_punto		= 'Punto_' + count_clients;
   datos.user_data 		= {};
   socket.datos 			= datos;
@@ -118,7 +119,9 @@ self.io.on('connection', (socket)=> {
 
   socket.on('empezar_examen', function(data){
     info_evento.examen_iniciado 	= true;
-    info_evento.preg_actual 		= 1;
+    info_evento.preg_actual++;
+    datos.preg_actual++;
+
 
     if(data){
         if(data.puestos_ordenados){
@@ -159,6 +162,7 @@ self.io.on('connection', (socket)=> {
     datos.tiempo        = 0;
     datos.correctas     = 0;
     datos.respondidas   = 0;
+    datos.preg_actual   = 0;
     datos.nombre_punto  = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
     datos.user_data     = data.usuario;
     socket.datos        = datos;
@@ -229,21 +233,13 @@ self.io.on('connection', (socket)=> {
     
     socket.broadcast.emit('next_question');
     info_evento.preg_actual++;
+    datos.preg_actual++;
     dato_actual = info_evento.preg_actual;
     socket.emit('preg_actual', {preg_actual: dato_actual});
    
   });
 
-  socket.on('no_se_puede_pasar', function(){
-    for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].user_data.tipo == 'Admin') {
-
-            io.to(all_clts[i].resourceId).emit('no_se_puede_pasar');
-
-          }
-      }  
-  })
-
+  
   socket.on('contesto_mal/bien', function(data){
     
     socket.datos.answered 		= data.correcta;

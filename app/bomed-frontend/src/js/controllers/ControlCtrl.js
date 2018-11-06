@@ -1,7 +1,7 @@
 angular.module('app')
 
 
-.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http, $state){
+.controller('ControlCtrl', function($scope, $filter, MySocket, $uibModal, toastr, $http, $state, USER){
   MySocket.emit('limpiar_pantalla');
   $scope.mostrando                    = false;
   $scope.boton1 	                    = true;
@@ -10,7 +10,7 @@ angular.module('app')
   $scope.mostrar_pregunta             = false;
   $scope.mostrar_puestosUsuarios      = false;
   $scope.indice_preg                  = 0;
-
+  $scope.USER                         = USER;
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -61,7 +61,7 @@ angular.module('app')
     });
         
     modalInstance.result.then(function (clientes) {
-      //console.log(clientes);
+      $scope.calcular_puntajes();
     });
   
   
@@ -75,13 +75,9 @@ angular.module('app')
 
   MySocket.on('clientes_traidos',function(res){
     $scope.clientes = res ;
+    console.log('holaaa', $scope.clientes);
   });
 
-  MySocket.on('Ver_Par',function(res){
-    $scope.show_participantes(); 
-  });
-
-   
   MySocket.on('respondido', function(datos){
     $scope.clientes = datos.clientes;
   });
@@ -112,16 +108,23 @@ angular.module('app')
    $scope.show_participantes();
   });
 
-   MySocket.on('preg_actual', function(datos){
+  MySocket.on('preg_actual', function(datos){
    $scope.preg_actual = datos.preg_actual;
   });
 
-   MySocket.on('no_se_puede_pasar', function(){
-    
-   })
-
   MySocket.emit('traer_clientes');
-     
+  
+  $scope.next_question = function(){
+    MySocket.emit('next_question');
+
+    toastr.success('Siguiente pregunta enviada');
+    for (let i = 0; i < $scope.clientes.length; i++) {
+      $scope.clientes[i].answered = undefined;
+    }
+  };
+
+  
+
   $scope.show_participantes = function(){
     $scope.mostrar_participantes = true;
     $scope.mostrar_pregunta      = false;
@@ -133,20 +136,11 @@ angular.module('app')
 
   $scope.empezar_examen = function(){
     MySocket.emit('empezar_examen');
-     $scope.preg_actual = 1;
     toastr.success('Prueba iniciada');
  
   };
   
-  $scope.next_question = function(){
-
-    MySocket.emit('next_question');
-
-    toastr.success('Siguiente pregunta enviada');
-    for (let i = 0; i < $scope.clientes.length; i++) {
-      $scope.clientes[i].answered = undefined;
-    }
-  };
+  
   
   $scope.mostrar_puestos = function(){
     $scope.mostrar_participantes = false;
@@ -274,7 +268,7 @@ angular.module('app')
     $scope.ok = function(){
         
       $uibModalInstance.close($scope.cliente);  
-       $scope.actualizarClientes();
+      
 
     };
 
@@ -340,8 +334,10 @@ angular.module('app')
         toastr.error('Error calculando puntajes');
         console.log(r2)
       })
-      
+       
     };
+
+
 
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');

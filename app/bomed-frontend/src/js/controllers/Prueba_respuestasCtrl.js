@@ -44,7 +44,6 @@ angular.module('app')
 	
 	MySocket.on('next_question',function(res){
 		if ($scope.esperando == false) {
-			MySocket.emit('no_se_puede_pasar');
 			return;
 		}
 		if ($scope.indice_preg == $scope.preguntas.length) {
