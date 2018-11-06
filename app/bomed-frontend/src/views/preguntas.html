@@ -129,6 +129,12 @@
                             <div ckeditor="options" rows="9" ng-model="preg_nueva.definicion" id="textarea-input" name="textarea-input"></div>
                           </div>
                         </div>
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de definición</h5></label>
+                          <div class="col-md-9">
+                            <input type="text" id="text-input-defini_img-crear" ng-model="preg_nueva.defini_img" uib-tooltip="Debe colocar el nombre junto con el formato; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                          </div>
+                        </div>
                         
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
@@ -163,10 +169,10 @@
                               </div>
 
                               <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion A</label>
-                                <div class="col-md-9">
-                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_a_img" name="file-input">
-                                </div>
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción A</h5></label>
+                                  <div class="col-md-9">
+                                    <input type="text" id="text-input-opc_a_img-crear" ng-model="preg_nueva.opc_a_img" uib-tooltip="Debe colocar el nombre junto con el formato; ejemplo: ejemplo.png"  class="form-control" placeholder="URL...">
+                                  </div>
                               </div>
 
                               <div class="form-group row">
@@ -177,10 +183,10 @@
                               </div>
 
                               <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion B</label>
-                                <div class="col-md-9">
-                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_b_img" name="file-input">
-                                </div>
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción B</h5></label>
+                                  <div class="col-md-9">
+                                    <input type="text" id="text-input-opc_b_img-crear" ng-model="preg_nueva.opc_b_img" uib-tooltip="Debe colocar el nombre junto con el formato; ejemplo: ejemplo.png"  class="form-control" placeholder="URL...">
+                                  </div>
                               </div>
 
 
@@ -192,11 +198,12 @@
                               </div>
 
                               <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion C</label>
-                                <div class="col-md-9">
-                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_c_img" name="file-input">
-                                </div>
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción C</h5></label>
+                                  <div class="col-md-9">
+                                    <input type="text" id="text-input-opc_c_img-crear" ng-model="preg_nueva.opc_c_img" uib-tooltip="Debe colocar el nombre junto con el formato; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                                  </div>
                               </div>
+
 
 
                               <div class="form-group row">
@@ -207,11 +214,12 @@
                               </div>
 
                               <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="file-input">Subir imagen de opcion D</label>
-                                <div class="col-md-9">
-                                  <input type="file" id="file-input" ng-model="preg_nueva.opc_d_img" name="file-input">
-                                </div>
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción B</h5></label>
+                                  <div class="col-md-9">
+                                    <input type="text" id="text-input-opc_d_img-crear" ng-model="preg_nueva.opc_d_img" uib-tooltip="Debe colocar el nombre junto con el formato; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                                  </div>
                               </div>
+
 
                               <div class="form-group row">
                                 <label class="col-md-3 col-form-label"><h5>Elija respuesta:</h5></label>
@@ -281,6 +289,13 @@
                             <div ckeditor="options" rows="9" ng-model="pregunta.definicion" id="textarea-input" name="textarea-input"></div>
                           </div>
                         </div>
+
+                        <div class="form-group row">
+                          <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de definición</h5></label>
+                          <div class="col-md-9">
+                            <input type="text" id="text-input-defini_img-editar" ng-model="pregunta.defini_img" uib-tooltip="Debe solo cambiar el nombre de la imagen, no cambie el resto; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                          </div>
+                        </div>
                         
                         <div class="form-group row">
                           <label class="col-md-3 col-form-label" for="select1"><h5>Pertenece a la prueba:</h5></label>
@@ -313,10 +328,17 @@
 
                         <div  ng-show="pregunta.tipo == 'Múltiple' " style="background-color: #eee; padding: 8px;">
 
-                                <div class="form-group row">
+                              <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción A:</h5></label>
                                 <div class="col-md-9">
                                   <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_a" value="A" placeholder="..." style="height: 80px"></textarea>
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción A</h5></label>
+                                <div class="col-md-9">
+                                  <input type="text" id="text-input-opc_a_img-editar" ng-model="pregunta.opc_a_img" uib-tooltip="Debe solo cambiar el nombre de la imagen, no cambie el resto; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
                                 </div>
                               </div>
 
@@ -328,6 +350,13 @@
                               </div>
 
                               <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción B</h5></label>
+                                <div class="col-md-9">
+                                  <input type="text" id="text-input-opc_b_img-editar" ng-model="pregunta.opc_b_img" uib-tooltip="Debe solo cambiar el nombre de la imagen, no cambie el resto; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción C:</h5></label>
                                 <div class="col-md-9">
                                   <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_c" value="C" placeholder="..." style="height: 80px"></textarea>
@@ -335,9 +364,23 @@
                               </div>
 
                               <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción C</h5></label>
+                                <div class="col-md-9">
+                                  <input type="text" id="text-input-opc_c_img-editar" ng-model="pregunta.opc_c_img" uib-tooltip="Debe solo cambiar el nombre de la imagen, no cambie el resto; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="textarea-input"><h5>Opción D:</h5></label>
                                 <div class="col-md-9">
                                   <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" ng-model="pregunta.opc_d" value="D" placeholder="..." style="height: 80px"></textarea>
+                                </div>
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="text-input"><h5>URL-imagen de opción D</h5></label>
+                                <div class="col-md-9">
+                                  <input type="text" id="text-input-opc_d_img-editar" ng-model="pregunta.opc_d_img" uib-tooltip="Debe solo cambiar el nombre de la imagen, no cambie el resto; ejemplo: ejemplo.png" class="form-control" placeholder="URL...">
                                 </div>
                               </div>
 

@@ -94,7 +94,15 @@ angular.module('app')
 	
 	
   	$scope.insertarAsk = function(crea){
-      console.log('ggggggg', crea);
+      
+      $scope.crea = crea;
+      $scope.defini_img       ='img/img-preguntas/'+ $scope.crea.defini_img;
+      $scope.opc_a_img        ='img/img-preguntas/'+ $scope.crea.opc_a_img;
+      $scope.opc_b_img        ='img/img-preguntas/'+ $scope.crea.opc_b_img;
+      $scope.opc_c_img        ='img/img-preguntas/'+ $scope.crea.opc_c_img;
+      $scope.opc_d_img        ='img/img-preguntas/'+ $scope.crea.opc_d_img;
+
+      console.log('ggggggg', $scope.defini_img );
   		
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			toastr.error('Debe escribir la definición');
@@ -177,7 +185,7 @@ angular.module('app')
 
   		
        
-  		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: $scope.correcta_crear  }  }).then (function(result){
+  		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: $scope.correcta_crear, defini_img:  $scope.defini_img, opc_a_img: $scope.opc_a_img, opc_b_img: $scope.opc_b_img, opc_c_img: $scope.opc_c_img, opc_d_img: $scope.opc_d_img  } }).then (function(result){
 	       toastr.success('Se ha insertado la pregunta con éxito')
            
 	       $scope.traer_datos();
@@ -197,7 +205,8 @@ angular.module('app')
         $scope.mostrar_boton= false;
         $scope.mostrando = false;
         $scope.mostrando_edit= true;
-		$scope.pregunta = cambia;
+      	$scope.pregunta = cambia;
+
 		$location.hash('editar-pregunta-div');
     	$anchorScroll();
 	
@@ -218,11 +227,11 @@ angular.module('app')
     
     };
     $scope.editarAsk = function(cambia){
-
-    	console.log('hola', cambia.correctaM);
-        if (cambia.definicion == '' || cambia.definicion == undefined) {
-  			toastr.error('Debe escribir la definición');
-  			return;
+      $scope.cambia = cambia;
+      
+      if (cambia.definicion == '' || cambia.definicion == undefined) {
+			toastr.error('Debe escribir la definición');
+			return;
   		}
 
   		if (cambia.prueba_id == '' || cambia.prueba_id == undefined) {
@@ -299,7 +308,7 @@ angular.module('app')
   			}
   		}
   
-		$http.get('::preguntas/editar',  {params: {definicion: cambia.definicion, tipo: cambia.tipo, prueba_id: cambia.prueba_id, opc_a: cambia.opc_a, opc_b: cambia.opc_b, opc_c: cambia.opc_c, opc_d: cambia.opc_d, correcta: $scope.correcta_editar, rowid: cambia.rowid }}).then (function(result){
+		$http.get('::preguntas/editar',  {params: {definicion: cambia.definicion, tipo: cambia.tipo, prueba_id: cambia.prueba_id, opc_a: cambia.opc_a, opc_b: cambia.opc_b, opc_c: cambia.opc_c, opc_d: cambia.opc_d, correcta: $scope.correcta_editar, defini_img: $scope.cambia.defini_img, opc_a_img: $scope.cambia.opc_a_img, opc_b_img: $scope.cambia.opc_b_img, opc_c_img: $scope.cambia.opc_c_img, opc_d_img: $scope.cambia.opc_d_img, rowid: cambia.rowid }}).then (function(result){
 	
 			toastr.success('Se ha editado la pregunta con éxito')
 			$scope.traer_datos();

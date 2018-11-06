@@ -44,10 +44,10 @@ function deletePreguntaHandler(req, res) {
 
 function getInsertarHandler(req, res) {
 	
-	 consulta = "INSERT INTO preguntas(definicion, tipo, prueba_id, opc_a, opc_b, opc_c, opc_d, correcta) VALUES(?,?,?,?,?,?,?,?)";
+	 consulta = "INSERT INTO preguntas(definicion, tipo, prueba_id, opc_a, opc_b, opc_c, opc_d, correcta, defini_img, opc_a_img, opc_b_img, opc_c_img, opc_d_img) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	params = req.query;
 
-	datos = [params.definicion, params.tipo, params.prueba_id, params.opc_a, params.opc_b, params.opc_c, params.opc_d, params.correcta];     
+	datos = [params.definicion, params.tipo, params.prueba_id, params.opc_a, params.opc_b, params.opc_c, params.opc_d, params.correcta, params.defini_img, params.opc_a_img, params.opc_b_img, params.opc_c_img, params.opc_d_img];     
 	
 	db.query(consulta, datos).then (function(result){
       
@@ -60,10 +60,10 @@ function getInsertarHandler(req, res) {
 
 function getEditarHandler(req, res) {
 
-	 consulta = "UPDATE  preguntas SET definicion=?, tipo=?, prueba_id=?, opc_a=?, opc_b=?, opc_c=?, opc_d=?, correcta=? WHERE rowid=?";
+	 consulta = "UPDATE  preguntas SET definicion=?, tipo=?, prueba_id=?, opc_a=?, opc_b=?, opc_c=?, opc_d=?, correcta=?, defini_img=?, opc_a_img=?, opc_b_img=?, opc_c_img=?, opc_d_img=? WHERE rowid=?";
 	params = req.query;
 
-	 datos= [params.definicion, params.tipo, params.prueba_id, params.opc_a, params.opc_b, params.opc_c, params.opc_d, params.correcta, params.rowid ];
+	 datos= [params.definicion, params.tipo, params.prueba_id, params.opc_a, params.opc_b, params.opc_c, params.opc_d, params.correcta, params.defini_img, params.opc_a_img, params.opc_b_img, params.opc_c_img, params.opc_d_img, params.rowid ];
 	db.query(consulta, datos).then (function(result){
        
         res.send('Editado');

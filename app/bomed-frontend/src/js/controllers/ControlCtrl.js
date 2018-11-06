@@ -105,7 +105,11 @@ angular.module('app')
   });
 
   MySocket.on('mande_participantes', function(datos){
-   $scope.show_participantes();
+   if ( $scope.mostrar_participantes = true) {
+    return;
+   }else  {
+    $scope.show_participantes();   
+   }
   });
 
   MySocket.on('preg_actual', function(datos){
