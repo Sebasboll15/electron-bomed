@@ -96,14 +96,37 @@ angular.module('app')
   	$scope.insertarAsk = function(crea){
       
       $scope.crea = crea;
-      $scope.defini_img       ='img/img-preguntas/'+ $scope.crea.defini_img;
-      $scope.opc_a_img        ='img/img-preguntas/'+ $scope.crea.opc_a_img;
-      $scope.opc_b_img        ='img/img-preguntas/'+ $scope.crea.opc_b_img;
-      $scope.opc_c_img        ='img/img-preguntas/'+ $scope.crea.opc_c_img;
-      $scope.opc_d_img        ='img/img-preguntas/'+ $scope.crea.opc_d_img;
 
-      console.log('ggggggg', $scope.defini_img );
-  		
+      if ($scope.crea.defini_img == '' || $scope.crea.defini_img == undefined) {
+        $scope.defini_img = '';
+      }else {
+        $scope.defini_img       ='img/img-preguntas/'+ $scope.crea.defini_img;  
+      }    
+        
+      if ($scope.crea.opc_a_img == '' || $scope.crea.opc_a_img == undefined) {
+        $scope.opc_a_img = '';
+      }else {
+        $scope.opc_a_img        ='img/img-preguntas/'+ $scope.crea.opc_a_img;   
+      }
+      
+      if ($scope.crea.opc_b_img == '' || $scope.crea.opc_b_img == undefined) {
+        $scope.opc_b_img = '';
+      }else {
+        $scope.opc_b_img        ='img/img-preguntas/'+ $scope.crea.opc_b_img;
+      }
+
+      if ($scope.crea.opc_c_img == '' || $scope.crea.opc_c_img == undefined) {
+        $scope.opc_c_img = '';
+      }else {
+        $scope.opc_c_img        ='img/img-preguntas/'+ $scope.crea.opc_c_img;
+      }
+
+      if ($scope.crea.opc_d_img == '' || $scope.crea.opc_d_img == undefined) {
+        $scope.opc_c_img = '';
+      }else {
+        $scope.opc_d_img        ='img/img-preguntas/'+ $scope.crea.opc_d_img;
+      }
+
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			toastr.error('Debe escribir la definición');
   			return;

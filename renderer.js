@@ -239,8 +239,12 @@ self.io.on('connection', (socket)=> {
   });
 
   socket.on('next_question_only', function(data){
-    
-    socket.broadcast.emit('next_question_only');
+    for (var i = all_clts.length - 1; i >= 0; i--) {
+      if (all_clts[i].resourceId == data.cliente.resourceId){
+        socket.to(all_clts[i].resourceId).emit('next_question_only', data.cliente); 
+      }
+    }
+   
     
   });
 

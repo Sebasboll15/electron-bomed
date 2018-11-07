@@ -76,7 +76,6 @@ angular.module('app')
 
   MySocket.on('clientes_traidos',function(res){
     $scope.clientes = res ;
-    console.log('holaaa', $scope.clientes);
   });
 
   MySocket.on('respondido', function(datos){
@@ -206,7 +205,7 @@ angular.module('app')
 
 
   $scope.OpenModalUser = function (cliente) {
-
+    console.log('cliente', cliente);
     var modalInstance = $uibModal.open({
       templateUrl: 'views/ModalControlUser.html',
       controller: 'ModalControlUserCtrl',
@@ -277,8 +276,14 @@ angular.module('app')
 
     };
 
-    $scope.next_question = function(){
-    MySocket.emit('next_question_only');
+    MySocket.on('clientes_traidos',function(res){
+      $scope.clientes = res ;
+    console.log('holaaa', $scope.clientes);
+    });
+
+    $scope.next_question_only = function(){
+
+    MySocket.emit('next_question_only', {cliente: $scope.cliente});
 
     toastr.success('Siguiente pregunta enviada para solo el usuario seleccionado');
    

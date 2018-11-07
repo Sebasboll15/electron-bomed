@@ -75,7 +75,7 @@ angular.module('app')
 		if ($scope.esperando == false) {
 			return;
 		}
-		console.log($scope.indice_preg);
+
 		if ($scope.indice_preg == $scope.preguntas.length) {
 			
 			toastr.success('Prueba terminada');

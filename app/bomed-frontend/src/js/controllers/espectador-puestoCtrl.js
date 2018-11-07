@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('espectador-puestoCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state, USER{
+.controller('espectador-puestoCtrl', function($scope, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state, USER){
   $scope.puesto = {};
   $scope.posicion = {};
   $scope.USER         = USER;
