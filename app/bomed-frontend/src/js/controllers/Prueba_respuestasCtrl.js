@@ -16,7 +16,6 @@ angular.module('app')
 	$http.get('::Prueba_en_curso',  {params: { actual: 1 } }).then (function(result){
 			$scope.prueba = result.data.prueba ;
 			$scope.preguntas = result.data.preguntas ;
-			
 			$scope.reiniciar_tiempo();
 			
 		}, function(error){
@@ -75,13 +74,7 @@ angular.module('app')
 		if ($scope.esperando == false) {
 			return;
 		}
-
-		if ($scope.indice_preg == $scope.preguntas.length) {
-			
-			toastr.success('Prueba terminada');
-			$state.go('app.main');
-			location.reload();
-		}else	{
+		else	{
 			$scope.esperando_preg 	= false;
 			$scope.esperando 		= false;
 			$scope.indice_preg 		= $scope.indice_preg + 1;
@@ -104,7 +97,16 @@ angular.module('app')
 			}else {
 				toastr.info('Respuesta correcta');
 			}
-		} 
+		}
+
+		if ($scope.indice_preg == $scope.preguntas.length) {
+			$scope.esperando_preg 	= true;
+			$scope.esperando 		= true;
+			toastr.success('Prueba terminada');
+			$state.go('app.main');
+			location.reload();
+				}
+
 
 
 		MySocket.emit('contesto_mal/bien', {correcta: correcta});     
@@ -124,20 +126,12 @@ angular.module('app')
 				}
 				$interval.cancel($scope.downloadTimer);
 				
-			}else{
+			}else		{
 				
-				$scope.indice_preg = $scope.indice_preg + 1;
-				$scope.reiniciar_tiempo();
+						$scope.indice_preg = $scope.indice_preg + 1;
+						$scope.reiniciar_tiempo();
 
-			}
-
-			if ($scope.indice_preg == $scope.preguntas.length) {
-			
-				toastr.success('Prueba terminada');
-				$state.go('app.main');
-				location.reload();
-			};
-				
+					};
 			
 		 }, function(error){
 		   console.log('No se pudo insertar los datos', error);

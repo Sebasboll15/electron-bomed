@@ -1,8 +1,7 @@
 angular.module('app')
 
   .controller('loginCtrl', function($scope, MySocket, $state, $http, $filter, $rootScope, AuthServ, toastr, MySocket){
-   
-   $scope.user = {username: 'jorge', password: '123'};   
+    
     
     MySocket.on('sesion_A_cerrar', function (){
                
