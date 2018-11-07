@@ -6,8 +6,8 @@
 
    <div ng-show="cliente_existe">
     <h4>Usuario: {{cliente.nombres}} {{cliente.apellidos}}</h4>
-   	<button class="btn btn-danger" type="button" ng-click="cerrar_se(cliente)">Cerrar sesión</button>
-
+   	<button class="btn btn-danger" type="button" ng-click="OpenModalCerrar_sesion(cliente)">Cerrar sesión</button>
+     <button type="button" ng-click="next_question()"  class="btn btn-primary" uib-tooltip="Enviar siguiente pregunta a solo él"><i class=""></i>Siguiente pregunta</button>
    </div>
 
 

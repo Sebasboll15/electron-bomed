@@ -11,6 +11,7 @@ angular.module('app')
   $scope.mostrar_puestosUsuarios      = false;
   $scope.indice_preg                  = 0;
   $scope.USER                         = USER;
+   $scope.preg_actual                 = 0;
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -113,6 +114,7 @@ angular.module('app')
   });
 
   MySocket.on('preg_actual', function(datos){
+   
    $scope.preg_actual = datos.preg_actual;
   });
 
@@ -124,8 +126,17 @@ angular.module('app')
     toastr.success('Siguiente pregunta enviada');
     for (let i = 0; i < $scope.clientes.length; i++) {
       $scope.clientes[i].answered = undefined;
+      console.log('hhh', $scope.clientes[i].respondidas);
+      if ($scope.clientes[i].user_data.tipo == 'Usuario') {
+        if ($scope.clientes[i].respondidas != $scope.preg_actual) {
+          $scope.mensaje_error = 'EL usuario '+$scope.clientes[i].user_data.nombres+' '+$scope.clientes[i].user_data.apellidos+' se ha atrasado de un pregunta.'
+        toastr.warning($scope.mensaje_error);
+      }  
+      }
+      
     }
   };
+
 
   
 
@@ -234,14 +245,11 @@ angular.module('app')
   
   };
 
-
-    
-
-
+ 
 
 })
 
-.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $http, cliente, AuthServ, MySocket, toastr){
+.controller('ModalControlUserCtrl', function($scope, $uibModalInstance, $uibModal, $http, cliente, AuthServ, MySocket, toastr){
 
     $scope.cliente = cliente;
      console.log('usuariotttt', $scope.cliente);
@@ -269,6 +277,15 @@ angular.module('app')
 
     };
 
+    $scope.next_question = function(){
+    MySocket.emit('next_question_only');
+
+    toastr.success('Siguiente pregunta enviada para solo el usuario seleccionado');
+   
+      $scope.cliente.answered = undefined;
+    
+  };
+
     $scope.ok = function(){
         
       $uibModalInstance.close($scope.cliente);  
@@ -291,6 +308,27 @@ angular.module('app')
       toastr.success('Se ha cerrado la sesión con éxito')
      
     };
+
+    $scope.OpenModalCerrar_sesion = function (cliente) {
+
+      var modalInstance = $uibModal.open({
+        templateUrl: 'views/ModalCerrar_sesion.html',
+        controller: 'ModalCerrar_sesionCtrl',
+        animation: false,
+        resolve: {
+            cliente: function () {
+              return cliente;
+            }
+        },
+      });
+          
+      modalInstance.result.then(function (cliente) {
+        
+       $scope.cerrar_se(cliente);
+      
+      });
+    
+    };  
 
      
 
@@ -348,3 +386,19 @@ angular.module('app')
     }; 
    
 })
+
+.controller('ModalCerrar_sesionCtrl', function($scope, $uibModalInstance, cliente, AuthServ, toastr){
+
+    $scope.cliente = cliente;
+  
+    $scope.ok = function(){
+        
+      $uibModalInstance.close($scope.cliente);  
+    };
+
+    $scope.cancel = function () {
+        
+      $uibModalInstance.dismiss('cancel');
+    }; 
+   
+});

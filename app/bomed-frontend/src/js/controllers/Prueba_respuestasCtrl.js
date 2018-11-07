@@ -5,12 +5,14 @@ angular.module('app')
 	$scope.respuesta_llevada={};
 	$scope.indice_preg = 0;
 	$scope.esperando = false;
+	$scope.free_till_question = -1;
    
 	$scope.USER        	= USER;
 
 	if ($scope.USER.tipo != 'Usuario') {
     	$state.go('app.main');
   	}
+
 	$http.get('::Prueba_en_curso',  {params: { actual: 1 } }).then (function(result){
 			$scope.prueba = result.data.prueba ;
 			$scope.preguntas = result.data.preguntas ;
@@ -41,8 +43,11 @@ angular.module('app')
 		
 	}
 	
+	MySocket.on('liberar_hasta_preg',function(res){
+		$scope.free_till_question = res.num_question;
+	});
 	
-	MySocket.on('next_question',function(res){
+	MySocket.on('next_question_only',function(res){
 		if ($scope.esperando == false) {
 			return;
 		}
@@ -56,7 +61,34 @@ angular.module('app')
 			$scope.indice_preg 		= $scope.indice_preg + 1;
 			$scope.reiniciar_tiempo();
 		};
+	});
+
+	MySocket.on('next_question',function(res){
+		$scope.siguiente_preg();
+	});
+
+	MySocket.on('next_question_only',function(res){
+		$scope.siguiente_preg();
 	});	
+
+	$scope.siguiente_preg = function(){
+		if ($scope.esperando == false) {
+			return;
+		}
+		console.log($scope.indice_preg);
+		if ($scope.indice_preg == $scope.preguntas.length) {
+			
+			toastr.success('Prueba terminada');
+			$state.go('app.main');
+			location.reload();
+		}else	{
+			$scope.esperando_preg 	= false;
+			$scope.esperando 		= false;
+			$scope.indice_preg 		= $scope.indice_preg + 1;
+			$scope.reiniciar_tiempo();
+		};
+	}
+
 
 	$scope.seleccionarOpcion = function(opcion) {
 
@@ -84,9 +116,14 @@ angular.module('app')
 			
 			
 			if ($scope.prueba.dirigido == 'Dirigido') {
-				$scope.esperando_preg = true;
-				$scope.esperando 	  = true;
+				if ($scope.free_till_question <= $scope.indice_preg) {
+					$scope.esperando_preg = true;
+					$scope.esperando 	  = true;
+				}else{
+					$scope.siguiente_preg();
+				}
 				$interval.cancel($scope.downloadTimer);
+				
 			}else{
 				
 				$scope.indice_preg = $scope.indice_preg + 1;
@@ -98,6 +135,7 @@ angular.module('app')
 			
 				toastr.success('Prueba terminada');
 				$state.go('app.main');
+				location.reload();
 			};
 				
 			

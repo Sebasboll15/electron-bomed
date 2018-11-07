@@ -65,7 +65,6 @@ self.io.on('connection', (socket)=> {
   datos.respondidas		= 0;
   datos.correctas			= 0;
   datos.tiempo			  = 0;
-  datos.preg_actual   = 0;
   datos.nombre_punto		= 'Punto_' + count_clients;
   datos.user_data 		= {};
   socket.datos 			= datos;
@@ -119,9 +118,7 @@ self.io.on('connection', (socket)=> {
 
   socket.on('empezar_examen', function(data){
     info_evento.examen_iniciado 	= true;
-    info_evento.preg_actual++;
-    datos.preg_actual++;
-
+  
 
     if(data){
         if(data.puestos_ordenados){
@@ -162,7 +159,6 @@ self.io.on('connection', (socket)=> {
     datos.tiempo        = 0;
     datos.correctas     = 0;
     datos.respondidas   = 0;
-    datos.preg_actual   = 0;
     datos.nombre_punto  = data.nombre_punto?data.nombre_punto:socket.datos.nombre_punto;
     datos.user_data     = data.usuario;
     socket.datos        = datos;
@@ -225,18 +221,27 @@ self.io.on('connection', (socket)=> {
 
   
   socket.on('empezar_examen', function(data){
+    info_evento.preg_actual = 0;
     socket.broadcast.emit('empezar_examen');
     info_evento.examen_iniciado = true;
+    info_evento.preg_actual++;
+    dato_actual = info_evento.preg_actual;
+    socket.emit('preg_actual', {preg_actual: dato_actual});
   });
   
   socket.on('next_question', function(data){
     
     socket.broadcast.emit('next_question');
     info_evento.preg_actual++;
-    datos.preg_actual++;
     dato_actual = info_evento.preg_actual;
     socket.emit('preg_actual', {preg_actual: dato_actual});
    
+  });
+
+  socket.on('next_question_only', function(data){
+    
+    socket.broadcast.emit('next_question_only');
+    
   });
 
   
