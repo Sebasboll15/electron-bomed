@@ -75,6 +75,8 @@ angular.module('app')
 
   
   $scope.liberar_preg_till = function(numero){
+    $scope.free_till_question = numero;
+    $scope.preg_actual        = numero;
     MySocket.emit('liberar_hasta_pregunta', {numero: numero});
 
   };
