@@ -48,6 +48,19 @@
                         <label class="col-md-3 col-form-label" style="background-color: #ccc;">Pregunta actual:  {{preg_actual}}</label>
                       </div>
                       
+                      
+                      <div class="card-footer">
+                        
+                        {{ free_till_question }}
+                        
+                        <input type="number" ng-model="free_till_question_new">
+                        
+                        <button type="button" ng-click="liberar_preg_till(free_till_question_new)" class="btn btn-primary btn-sm" 
+                          uib-tooltip="Enviar siguiente pregunta">
+                          <i class=""></i>Liberar hasta
+                        </button>
+                      </div>
+                      
                       <br>
                       
                       <button type="button" ng-click="empezar_examen()"  class="btn btn-primary btn-sm" uib-tooltip="Iniciar prueba"><i class="fa fa-fighter-jet"></i>Iniciar examen</button>

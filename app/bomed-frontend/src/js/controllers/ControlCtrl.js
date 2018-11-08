@@ -11,7 +11,9 @@ angular.module('app')
   $scope.mostrar_puestosUsuarios      = false;
   $scope.indice_preg                  = 0;
   $scope.USER                         = USER;
-   $scope.preg_actual                 = 0;
+  $scope.preg_actual                  = 0;
+  $scope.free_till_question           = 0; 
+  $scope.free_till_question_new       = 0; 
   
   
   if ($scope.USER.tipo != 'Admin') {
@@ -21,16 +23,14 @@ angular.module('app')
   
   $scope.traer_datos = function(){
     $http.get('::Control').then (function(result){
-          $scope.prueba = result.data;
-          $scope.prueba_rowid = $scope.prueba[0].rowid;
-          
-          $http.get('::Control/preguntas', {params: {rowid: $scope.prueba_rowid}}).then (function(result){
+      $scope.prueba = result.data;
+      $scope.prueba_rowid = $scope.prueba[0].rowid;
+      
+      $http.get('::Control/preguntas', {params: {rowid: $scope.prueba_rowid}}).then (function(result){
           $scope.preguntas = result.data;
-          console.log('burra', result);
-          }, function(error){
+      }, function(error){
           console.log('No se pudo traer los datos', error);
-
-        })
+      })
     })
 
     
@@ -71,6 +71,11 @@ angular.module('app')
 
   $scope.actualizarClientes = function(){
     MySocket.emit('traer_clientes');
+  };
+
+  
+  $scope.liberar_preg_till = function(numero){
+    MySocket.emit('liberar_hasta_pregunta', {numero: numero});
 
   };
 
@@ -180,7 +185,7 @@ angular.module('app')
    
    $http.put('::informes/calcular-examenes').then(function(r){
     examenes = r.data;
-    console.log('gggg', examenes);
+
     $scope.examenes = $filter('orderBy')(examenes, '-puntaje');
     if ($scope.examenes.length > 0) {
        $scope.mostrar_puestosUsuarios      = true;

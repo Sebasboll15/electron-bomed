@@ -13,7 +13,9 @@
      
         <div class="card-header">
           <h3>
-              Pregunta {{preguntas[indice_preg].rowid }} <h6 ng-show="preguntas[indice_preg].tipo == 'Múltiple'">Tipo múltiple</h6> <h6 ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">tipo falso-verdadero</h6>
+              Pregunta {{ indice_preg + 1 }} 
+              <span ng-show="free_till_question>0"> - Liberado hasta {{free_till_question}}</span>
+              <h6 ng-show="preguntas[indice_preg].tipo == 'Múltiple'">Tipo múltiple</h6> <h6 ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">tipo falso-verdadero</h6>
               <div>
                 00:{{timeleft}}
               </div>

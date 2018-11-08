@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('Prueba_respuestasCtrl', function($scope, $interval, USER, $state, $http, toastr, MySocket, $uibModal){
+.controller('Prueba_respuestasCtrl', function($scope, $interval, USER, $state, $http, toastr, MySocket, $uibModal, $timeout){
 	$scope.usuario= USER ;
 	$scope.respuesta_llevada={};
 	$scope.indice_preg = 0;
@@ -14,26 +14,32 @@ angular.module('app')
   	}
 
 	$http.get('::Prueba_en_curso',  {params: { actual: 1 } }).then (function(result){
-			$scope.prueba = result.data.prueba ;
-			$scope.preguntas = result.data.preguntas ;
-			$scope.reiniciar_tiempo();
-			
-		}, function(error){
-			console.log('No se pudo traer los datos', error);
+		$scope.prueba = result.data.prueba ;
+		$scope.preguntas = result.data.preguntas ;
+		$scope.reiniciar_tiempo();
+		
+	}, function(error){
+		console.log('No se pudo traer los datos', error);
 
-		})
+	})
 			
+	
 	$scope.reiniciar_tiempo = function (){
 		
 		$scope.timeleft = $scope.prueba.tiempo_preg;
 		$scope.tiempo = 0;
 		$scope.downloadTimer = $interval(function(){
+			
+			if ($scope.esperando) {
+				$interval.cancel($scope.downloadTimer);
+				return
+			}
 
 			$scope.tiempo = $scope.prueba.tiempo_preg - --$scope.timeleft;
 			if ($scope.timeleft > 0) {
 				$scope.esperando = false;	
 			}
-
+			console.log($scope.esperando, $scope.esperando_preg);
 			if($scope.timeleft <= 0){
 				$scope.seleccionarOpcion('');
 				$interval.cancel($scope.downloadTimer);
@@ -42,8 +48,8 @@ angular.module('app')
 		
 	}
 	
-	MySocket.on('liberar_hasta_preg',function(res){
-		$scope.free_till_question = res.num_question;
+	MySocket.on('set_free_till_question',function(res){
+		$scope.free_till_question = res.free_till_question;
 	});
 	
 	MySocket.on('next_question_only',function(res){
@@ -70,11 +76,11 @@ angular.module('app')
 		$scope.siguiente_preg();
 	});	
 
-	$scope.siguiente_preg = function(){
-		if ($scope.esperando == false) {
+	$scope.siguiente_preg = function(liberado){
+		
+		if ($scope.esperando == false && !liberado) {
 			return;
-		}
-		else	{
+		} else	{
 			$scope.esperando_preg 	= false;
 			$scope.esperando 		= false;
 			$scope.indice_preg 		= $scope.indice_preg + 1;
@@ -105,7 +111,7 @@ angular.module('app')
 			toastr.success('Prueba terminada');
 			$state.go('app.main');
 			location.reload();
-				}
+		}
 
 
 
@@ -116,29 +122,33 @@ angular.module('app')
 			
 			console.log('Se insertaron los datos con exito', result);
 			
-			
 			if ($scope.prueba.dirigido == 'Dirigido') {
-				if ($scope.free_till_question <= $scope.indice_preg) {
-					$scope.esperando_preg = true;
+				
+				
+				if ( $scope.free_till_question <= ($scope.indice_preg + 1) ) {
+					console.log($scope.free_till_question, $scope.indice_preg + 1);
 					$scope.esperando 	  = true;
+					$scope.esperando_preg = true;
 				}else{
-					$scope.siguiente_preg();
+					console.log($scope.free_till_question, $scope.indice_preg + 1, 'siguiente');
+					$scope.siguiente_preg(true);
 				}
 				$interval.cancel($scope.downloadTimer);
+				$timeout(function(){
+					$interval.cancel($scope.downloadTimer);
+				}, 100)
 				
-			}else		{
+			} else {
 				
-						$scope.indice_preg = $scope.indice_preg + 1;
-						$scope.reiniciar_tiempo();
+				$scope.indice_preg = $scope.indice_preg + 1;
+				$scope.reiniciar_tiempo();
 
-					};
+			};
 			
 		 }, function(error){
 		   console.log('No se pudo insertar los datos', error);
 
 		 })
-
-
 				
 
 

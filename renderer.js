@@ -279,15 +279,6 @@ self.io.on('connection', (socket)=> {
 
   });
 
-  socket.on('Estoy_en_espectador', function(){
-    for (var i = 0; i < all_clts.length; i++) {
-          if (all_clts[i].user_data.tipo == 'Admin') {
-
-            io.to(all_clts[i].resourceId).emit('mande_participantes');
-
-          }
-      }
-  });
 
   socket.on('mostrar_pregunta', function(data){
     console.log('mostrar_pregunta', data);
@@ -351,7 +342,7 @@ self.io.on('connection', (socket)=> {
 
   socket.on('liberar_hasta_pregunta', function(data){
       info_evento.free_till_question 	= data.numero;
-      info_evento.preg_actual 		= data.numero;
+      info_evento.preg_actual 		    = data.numero;
       socket.broadcast.emit('set_free_till_question', { free_till_question: data.numero }); 
   });
 
