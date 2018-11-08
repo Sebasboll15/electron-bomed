@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h1 class="modal-title" >Detalles</h1>
+</div>
+   
+<div class="modal-body" >
+
+   <div ng-show="cliente_existe">
+    <h4>Usuario: {{cliente.nombres}} {{cliente.apellidos}}</h4>
+   	<button class="btn btn-danger" type="button" ng-click="OpenModalCerrar_sesion(cliente)">Cerrar sesión</button>
+     <button type="button" ng-click="next_question_only()"  class="btn btn-primary" uib-tooltip="Enviar siguiente pregunta a solo él"><i class=""></i>Siguiente pregunta</button>
+   </div>
+
+
+   <div ng-show="!cliente_existe" class="row">
+    <h4>Elija usuario:</h4>
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+            
+            <input type="text" ng-model="text_buscar" 
+              placeholder="Buscar..." class="form-control">
+            <br>
+            
+            <button type="button" ng-repeat="usuario in usuarios | filter:text_buscar" 
+              class="btn btn-info btn-sm btn-block" ng-click="put_user(usuario)">
+              
+              {{ usuario.nombres }} {{usuario.apellidos}}
+            </button>
+
+            
+        </div>
+      </div>
+    </div>
+   		
+   </div>
+
+</div>
+
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok(usuario)">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancelar</button>
+</div>

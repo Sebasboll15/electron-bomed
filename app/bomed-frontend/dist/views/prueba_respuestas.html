@@ -1,0 +1,151 @@
+
+<!-- Main content -->
+   
+  <div class="animated fadeIn">
+
+  <!-- Main row -->
+  <div class="row card">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable card-body">
+
+      <!-- TO DO List -->
+      
+     
+        <div class="card-header">
+          <h3>
+              Pregunta {{ indice_preg + 1 }} 
+              <span ng-show="free_till_question>0"> - Liberado hasta {{free_till_question}}</span>
+              <h6 ng-show="preguntas[indice_preg].tipo == 'Múltiple'">Tipo múltiple</h6> <h6 ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">tipo falso-verdadero</h6>
+              <div>
+                00:{{timeleft}}
+              </div>
+              <progress value="{{tiempo}}" max="{{prueba.tiempo_preg}}" id="progressBar"></progress>
+             
+              
+          </h3>
+
+          </div>
+        <!-- /.box-header -->
+        <div class="card-body" ng-if="esperando_preg">
+          Espere que el administrador le envíe la siguiente pregunta.
+        </div>
+        
+        <div class="card-body" ng-if="!esperando_preg">
+       
+          <ul class="todo-list" ng-show="preguntas[indice_preg].tipo == 'Múltiple'">
+            <li>
+               <h4 ng-bind-html="preguntas[indice_preg].definicion"></h4>
+                <span>
+                  <img src="{{preguntas[indice_preg].defini_img}}" style="width: 150px;">
+                </span>
+                <div class="row">
+                   <div class="col-sm-12"> 
+                      <div class="row">
+                        
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('A')"> 
+                          <div class="row"> 
+                            <span  class=" col-sm-2 card-body label label-default">A.</span>
+                            <span
+                             class=" col-sm-10 card-body label label-default" ng-bind-html="preguntas[indice_preg].opc_a"> </span>
+                             <span class="col-sm-12 ">
+                              <img src="{{preguntas[indice_preg].opc_a_img}}" style="width: 150px;">
+                             </span>
+                          </div>    
+                        </div>
+
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('B')"> 
+                          <div class="row"> 
+                            <span  class=" col-sm-2 card-body label label-default">B.</span>
+                            <span
+                             class=" col-sm-10 card-body label label-default" ng-bind-html="preguntas[indice_preg].opc_b"> </span>
+                            <span class="col-sm-12 ">
+                              <img src="{{preguntas[indice_preg].opc_b_img}}" style="width: 150px;">
+                             </span>
+                          </div>    
+                        </div>
+
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('C')"> 
+                          <div class="row"> 
+                            <span  class=" col-sm-2 card-body label label-default">C.</span>
+                            <span
+                             class=" col-sm-10 card-body label label-default" ng-bind-html="preguntas[indice_preg].opc_c"> </span>
+                             <span class="col-sm-12 ">
+                              <img src="{{preguntas[indice_preg].opc_c_img}}" style="width: 150px;">
+                             </span>
+                          </div>    
+                        </div>
+
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('D')"> 
+                          <div class="row"> 
+                            <span  class=" col-sm-2 card-body label label-default">D.</span>
+                            <span
+                             class=" col-sm-10 card-body label label-default" ng-bind-html="preguntas[indice_preg].opc_d"> </span>
+
+                             <span class="col-sm-12 ">
+                              <img src="{{preguntas[indice_preg].opc_d_img}}" style="width: 150px;">
+                             </span>
+                          </div>    
+                        </div>
+
+                      </div>
+                    </div>
+                </div>
+
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                  
+              </div>
+            </li>
+            
+          </ul>
+
+           <ul class="todo-list" ng-show="preguntas[indice_preg].tipo == 'Falso-Verdadero'">
+            <li>
+             
+             
+               <h4 ng-bind-html="preguntas[indice_preg].definicion"></h4>
+            
+                <div class="row">
+                   <div class="col-sm-12"> 
+                      <div class="row">
+                        
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('Verdadero')">  
+                          <span class=" card-body label label-default" 
+                            >Verdadero</span> 
+                          </div>  
+
+                        <div class="col-sm-6 card opcion-pregunta" ng-click="OpenModalP_respuestas('Falso')">
+                          <span 
+                               class="card-body label label-default">Falso</span>
+                          </div>
+
+
+                      </div>
+                    </div>
+                </div>
+
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                  
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- /.box-body -->
+        
+      
+      <!-- /.box -->
+
+    </section>
+    <!-- right col -->
+  </div>
+  <!-- /.row (main row) -->
+     
+ 
+</div>
+
