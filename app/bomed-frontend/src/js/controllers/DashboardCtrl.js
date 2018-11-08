@@ -12,7 +12,6 @@ angular.module('app')
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
 			$scope.prueba = result.data[0];
-			console.log('hola', $scope.USER.prueba_id);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
 
