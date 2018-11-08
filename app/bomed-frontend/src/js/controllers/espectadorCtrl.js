@@ -6,7 +6,6 @@ angular.module('app')
       $state.go('app.main');
   }
 
-  MySocket.emit('Estoy_en_espectador');
 	
 	MySocket.on('llevelos_espectadoresU', function(data){
     $state.go('app.main.espectador.participantes');

@@ -9,7 +9,8 @@ angular.module('app')
   }
   
   if(localStorage.sc_puesto){
-  	$scope.puesto = JSON.parse(localStorage.sc_puesto);
+    $scope.puesto = JSON.parse(localStorage.sc_puesto);
+    console.log($scope.puesto);
   }
 
   MySocket.on('limpie_pantalla', function(){

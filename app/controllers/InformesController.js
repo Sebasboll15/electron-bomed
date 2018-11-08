@@ -9,12 +9,17 @@ router.route('/borrar-examenes').put(putBorrarExamenes)
 
 
 
+function keysrt(key,desc) {
+    return function(a,b){
+        return desc ? ~~(a[key] < b[key]) : ~~(a[key] > b[key]);
+    }
+}
 
 function putCalcularExamenes(req, res) {
 
 
     consulta = "SELECT u.*, u.rowid FROM respuestas r " + 
-        "INNER JOIN usuarios u ON u.id=r.usuario_id  " + 
+        "INNER JOIN usuarios u ON u.rowid=r.usuario_id  " + 
         "INNER JOIN pruebas p ON p.id=u.prueba_id and p.actual=1 " +
         "GROUP BY usuario_id";
     
@@ -29,7 +34,8 @@ function putCalcularExamenes(req, res) {
         }
         
         Promise.all(promesas_respu).then(function(respu){
-            res.json(usuarios);
+            respuesta = usuarios.sort(keysrt('tiempo', false));
+            res.json(respuesta);
         });
         
     }, function(error){
@@ -40,16 +46,18 @@ function putCalcularExamenes(req, res) {
     function traer_puntajes(i){
         
         consulta = "SELECT * FROM respuestas r " +
-            "INNER JOIN usuarios u ON u.id=r.usuario_id and u.rowid=? and r.correcta=1 " +
+            "INNER JOIN usuarios u ON u.id=r.usuario_id and u.rowid=? " +
             "GROUP BY preg_id";
         
         promesa = db.query(consulta, [usuarios[i].rowid]).then (function(puntaje){
 
-            usuarios[i].puntaje = puntaje.length;
+            usuarios[i].puntaje = 0;
             
             for (let j = 0; j < puntaje.length; j++) {
                 usuarios[i].tiempo += parseInt(puntaje[j].duracion);
-                console.log(puntaje[j]);
+                if (puntaje[j].correcta == 1) {
+                    usuarios[i].puntaje += 1;
+                }
             }
         }, function(error){
             console.log(error);
