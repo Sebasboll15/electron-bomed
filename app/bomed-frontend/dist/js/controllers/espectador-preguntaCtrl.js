@@ -1,6 +1,7 @@
 angular.module('app')
 .controller('espectador-preguntaCtrl', function($scope, USER, $filter, $http, $location, $anchorScroll,toastr, MySocket, $state, USER){
-  $scope.pregunta = {};
+  $scope.pregunta   = {};
+  $scope.pathImg    = location.protocol + '//' + location.hostname + ':8787/images/';
   
   if(localStorage.sc_pregunta){
   	$scope.pregunta = JSON.parse(localStorage.sc_pregunta);

@@ -18,7 +18,8 @@
              
                 <h4 ng-bind-html="pregunta.definicion"></h4>
                 <span class="col-sm-12 ">
-                  <img src="{{pregunta.defini_img}}" style="width: 150px;">
+                  <img ng-show="pregunta.defini_img != '' && pregunta.defini_img != undefined && pregunta.defini_img != 'undefined' " 
+                    ng-src="{{pathImg + pregunta.defini_img}}" style="width: 150px;">
                 </span>
                 <div class="row">
                    <div class="col-sm-12"> 
@@ -27,7 +28,7 @@
                         <div class="col-sm-6 card opcion-pregunta" ng-click="seleccionarOpcion('A')"  ng-class="{ 'clt-conect-right': opcion_a == 1, 'clt-conect-wrong': opcion_a == 0}">  
                           <span class=" card-body label label-default">A. {{pregunta.opc_a}}  </span> 
                           <span class="col-sm-12 ">
-                              <img ng-show="pregunta.opc_a_img != '' || pregunta.opc_a_img != undefined " src="{{pregunta.opc_a_img}}" style="width: 150px;">
+                              <img ng-show="pregunta.opc_a_img != '' && pregunta.opc_a_img != undefined && pregunta.opc_a_img != 'undefined' " ng-src="{{pathImg + pregunta.opc_a_img}}" style="width: 150px;">
                           </span>
                         </div>  
 
@@ -35,7 +36,7 @@
                           <span 
                                class="card-body label label-default">B. {{pregunta.opc_b}}</span>
                           <span class="col-sm-12 ">
-                              <img ng-show="pregunta.opc_b_img != '' || pregunta.opc_b_img != undefined " src="{{pregunta.opc_b_img}}" style="width: 150px;">
+                              <img ng-show="pregunta.opc_b_img != '' && pregunta.opc_b_img != undefined && pregunta.opc_b_img != 'undefined' " ng-src="{{pathImg + pregunta.opc_b_img}}" style="width: 150px;">
                           </span>
                           </div>
 
@@ -43,7 +44,7 @@
                           <span  
                              class="card-body label label-default">C. {{pregunta.opc_c}}</span>
                           <span class="col-sm-12 ">
-                              <img src="{{pregunta.opc_c_img}}" ng-show="pregunta.opc_c_img != '' || pregunta.opc_c_img != undefined "style="width: 150px;">
+                              <img ng-src="{{pathImg + pregunta.opc_c_img}}" ng-show="pregunta.opc_c_img != '' && pregunta.opc_c_img != undefined  && pregunta.opc_c_img != 'undefined'" style="width: 150px;">
                           </span>
                         </div>
 
@@ -51,7 +52,7 @@
                           <span 
                              class="card-body label label-default">D. {{pregunta.opc_d}}</span>
                           <span class="col-sm-12 ">
-                              <img src="{{pregunta.opc_d_img}}" ng-show="pregunta.opc_d_img != '' || pregunta.opc_d_img != undefined "style="width: 150px;">
+                              <img ng-src="{{pathImg + pregunta.opc_d_img}}" ng-show="pregunta.opc_d_img != '' && pregunta.opc_d_img != undefined  && pregunta.opc_d_img != 'undefined'" style="width: 150px;">
                           </span>
                         </div>
 

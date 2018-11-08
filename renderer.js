@@ -10,11 +10,22 @@ var cors            = require('cors');
 var http            = require('http').Server(app);
 var io              = require('socket.io')(http);
 var bodyParser      = require('body-parser');
+var img_folder    	= require('os').homedir();
+
+
+process.env.JWT_SECRET = 'FB2ywB21v60UosPDYcO7HiVQkQZcFhbQ';
+
+if (!process.env.NODE_PORT) {
+	process.env.NODE_PORT = 8787;
+}
+
+
 
 app.use(cors());
 app.use(bodyParser.json()); // Para recibir json desde Angular
 app.use("/app/bomed-frontend/dist", express.static(path.join(__dirname, 'app/bomed-frontend/dist')));
 app.use("/images", express.static(path.join(__dirname, 'app/images')));
+app.use("/images", express.static(path.join(img_folder + '/images_bomed')));
 app.use('/api', require('./app/controllers/routes'));
 
 
