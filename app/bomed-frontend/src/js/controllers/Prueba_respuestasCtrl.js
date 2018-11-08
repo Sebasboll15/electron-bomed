@@ -5,7 +5,9 @@ angular.module('app')
 	$scope.respuesta_llevada={};
 	$scope.indice_preg = 0;
 	$scope.esperando = false;
-	$scope.free_till_question = -1;
+	$scope.free_till_question = -1;  
+	$scope.pathImg    = location.protocol + '//' + location.hostname + ':8787/images/';
+	
    
 	$scope.USER        	= USER;
 

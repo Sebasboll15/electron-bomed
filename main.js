@@ -18,6 +18,16 @@ if (isDev) {
 
 
 // PARA LAS IMÁGENES
+var fs          	= require('fs');
+var img_folder    = require('os').homedir();
+
+if (!fs.existsSync(img_folder + '/images_bomed')){
+  fs.mkdirSync(img_folder + '/images_bomed');
+}
+
+
+
+// PARA LAS IMÁGENES
 var fs            = require('fs');
 var img_folder    = require('os').homedir();
 
