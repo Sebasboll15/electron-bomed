@@ -1,0 +1,132 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-desktop"></i> Control
+          </div>
+          <div class="card-body">
+          
+
+              
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-header">
+                        Conectados
+                        <a href="" class="btn btn-default" ng-click="actualizarClientes()" uib-tooltip="Actualizar clientes">
+                          <i class="fa fa-refresh"></i>
+                        </a>
+                      </div>
+                      <div class="card-body row">
+                      
+
+                          <div class="card col-sm-4 clt-conect mgb-3" ng-repeat="cliente in clientes" 
+                            ng-click="OpenModalUser(cliente)" ng-class="{ 'clt-conect-right': cliente.answered==1, 'clt-conect-wrong': cliente.answered==0  }">
+                            
+                            <div class="card-body p-2 clearfix">
+                              <i class="fa fa-user p-3 font-2xl mr-3 float-left"
+                                ng-class="{'bg-primary': cliente.logged, 'bg-info': !cliente.logged }"></i>
+                              <div class="h5 text-primary mb-0 mt-0">{{cliente.user_data.nombres}} {{cliente.user_data.apellidos}}</div>
+                              <div class="text-muted text-uppercase font-weight-bold font-xs">{{cliente.nombre_punto}}</div>
+                              <div class="text-muted text-uppercase font-weight-bold font-xs" ng-show="cliente.user_data.tipo == 'Usuario'">Respondidas: {{cliente.respondidas}}</div>
+                            </div>
+                          </div>
+                                        
+
+                      </div>
+                      
+                      
+                      <div class="card-footer btn-group">
+                        
+                        <button type="button" ng-click="show_participantes()"  class="btn btn-info btn-sm" uib-tooltip="Mostrar participantes a los espectadores"><i class="fa fa-users"></i>Participantes</button>
+                        
+                        <button type="button" ng-click="limpiar_pantalla()"  class="btn btn-danger btn-sm" uib-tooltip="Limpiar la pantalla de espectadores"><i class=""></i>Vacíar</button>
+                        
+                        <button type="button" ng-click="next_question()"  class="btn btn-primary btn-sm" uib-tooltip="Enviar siguiente pregunta"><i class=""></i>Siguiente pregunta</button>
+                        
+                        <label class="col-md-3 col-form-label" style="background-color: #ccc;">Pregunta actual:  {{preg_actual}}</label>
+                      </div>
+                      
+                      
+                      <div class="card-footer">
+                        
+                        {{ free_till_question }}
+                        
+                        <input type="number" ng-model="free_till_question_new">
+                        
+                        <button type="button" ng-click="liberar_preg_till(free_till_question_new)" class="btn btn-primary btn-sm" 
+                          uib-tooltip="Enviar siguiente pregunta">
+                          <i class=""></i>Liberar hasta
+                        </button>
+                      </div>
+                      
+                      <br>
+                      
+                      <button type="button" ng-click="empezar_examen()"  class="btn btn-primary btn-sm" uib-tooltip="Iniciar prueba"><i class="fa fa-fighter-jet"></i>Iniciar examen</button>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" uib-tooltip="Para seleccionar la pregunta a mostrar">
+                <div class="col-lg-12">
+                    <div class="card card-preguntas">
+                      <div class="card-header">
+                        Preguntas
+                      </div>
+                      <div class="body">
+                        
+                        <div ng-repeat="pregunta in preguntas" class="pre-conect col-sm-12" ng-click="OpenModalPreg(pregunta)" ng-bind-html="pregunta.definicion">
+
+                        </div>         
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+                 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-preguntas">
+                      <div class="card-header" uib-tooltip="Para mostrar los puntajes">
+                        Puntajes
+                        <button class="btn btn-default" ng-click="calcular_puntajes()">Calcular</button>
+                        <button class="btn btn-default" ng-click="mostrar_puestos()" ng-show="mostrar_puestosUsuarios">Mostrar puestos</button>
+                      </div>
+                      <div class="body">
+                        <div class="row" ng-repeat="examen in examenes">
+                            <div class="pre-conect col-sm-6">
+                                {{ $index+1 }}. {{ examen.nombres }} {{ examen.apellidos }}
+                            </div>    
+                            <div class="pre-conect col-sm-3">
+                                Puntaje: {{ examen.puntaje }}
+                            </div>  
+                            <div class="pre-conect col-sm-1">
+                                {{ examen.tiempo }}s
+                            </div>      
+                            <div class="btn-group pre-conect col-sm-2">
+                                <button class="btn btn-danger btn-sm" uib-tooltip="Eliminar respuestas"  ng-click="eliminar_respuestas(examen)" tooltip-append-to-body="true">
+                                  <i class="fa fa-times"></i>
+                                </button>
+                                <button class="btn btn-primary btn-sm" uib-tooltip="Mostrar puesto"  ng-click="mandar_puesto(examen, $index+1)" tooltip-append-to-body="true">
+                                  <i class="fa fa-user"></i>
+                                </button>
+                            </div>    
+                        </div>
+                             
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+                            
+
+          </div>
+        </div>
+    </div>
+</div>

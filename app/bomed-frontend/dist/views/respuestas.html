@@ -1,0 +1,77 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-envelope-open"></i> Respuestas
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-sm">
+            <thead>
+                 <th>Id</th>
+                 <th>Pregunta</th>
+                 <th>Usuario</th> 
+                 <th>Opción elegida</th> 
+                 <th>Opción correcta</th>
+                 <th>Duración</th>
+                 <th style="min-width: 100px;">Opciones</th>
+            </thead>
+             
+             <tbody> 
+               <tr  ng-repeat="r in respuestas">
+                    
+                    <th scope="row">{{r.rowid}}</th>
+                    
+                    <td>
+                     
+
+                      <span>pregunta {{r.preg_id}}</span>
+                     
+                        
+                     
+                    </td>
+                    
+                    <td>
+                     
+                      <span>{{r.usuario_id}}</span>
+                    
+                    </td>
+                    
+                    <td>
+                      
+                      <span>{{r.opcion_elegida}}</span>
+
+                    </td>
+                     
+                     <td>
+                      
+                      <span>{{r.correcta}}</span>
+
+                    </td>
+                    <td>
+
+                      <span>{{r.duracion}}</span>
+                    
+                    </td>
+                    
+                    <td style="padding: 0px;">
+                      
+                      <span>
+                        
+                        <button class="btn-xs btn btn-danger fa fa-close" ng-click="eliminar_ans(r.rowid)" uib-tooltip="Eliminar"></button> 
+                        
+
+                      </span>
+                        
+                    </td>
+                
+               </tr>
+             </tbody> 
+          </table>
+
+         </div>   
+      </div>
+    </div>
+  </div>
+
+</div>

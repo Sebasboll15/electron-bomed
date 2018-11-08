@@ -1,0 +1,197 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-address-book"></i> Usuarios
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-sm">
+            <thead>
+             <tr>
+               <th>Id</th>
+               <th>Nombres</th>
+               <th>Apellidos</th>
+               <th>Sexo</th> 
+               <th>Username</th>
+               <th>Inscrito a:</th>
+               <th>Tipo</th>
+               <th style="min-width: 100px;">Opciones</th>
+            </tr>
+           </thead>
+             
+             <tbody> 
+               
+               <tr  ng-repeat="u in usuarios">
+                    <th scope="row">{{u.rowid}}</th>
+                    
+                    <td>
+                      <span >{{u.nombres}}</span>
+                    </td>
+                    
+                    <td>
+                      <span >{{u.apellidos}}</span>  
+                     </td>
+                    
+                    <td>
+                      <span>{{u.sexo}}</span>
+                    </td>
+                   
+                    <td>
+                      <span>{{u.username}}</span>
+                      
+                    </td>
+                   
+                    <td >
+                      <span >Prueba {{u.prueba_id}}</span>   
+                    </td>
+
+                    <td>
+                      <span>{{u.tipo}}</span>
+                    </td>
+                    
+                    <td style="padding: 0px;">
+                          
+
+                         
+                            <span>
+                               <div class="btn-group">
+                                  
+                                  <button class="btn-sm btn btn-danger fa fa-close" uib-tooltip="Eliminar"  ng-click="abrirModal_eliminar(u.rowid)"></button> 
+                                  
+                                  <button ng-click="editarU(u)"  uib-tooltip="Editar" class="btn-sm btn btn-info fa fa-pencil"></button> 
+                                  
+
+                                 <button ng-click="abrirModal(u)"  class="btn-sm btn btn-secondary fa fa-edit "  uib-tooltip="Cambiar contraseña"></button> 
+                               </div>
+                            </span>
+
+                    </td>
+                
+               </tr>
+             </tbody> 
+          </table>
+
+          <button type="button" class="btn btn-info btn-lg btn-block" ng-show="mostrar_boton"  ng-click="mostrar_crear()">Crear</button>
+                  <div  ng-show="mostrando_crear" id="crear-usuario-div">
+                                                  
+                            <div class="card">
+                              <div class="card-header">
+                                <h3><strong>Crea el usuario</strong> </h3>
+                              </div>
+                              <div class="card-body">
+                                   <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Nombres:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-nombres-crear" ng-model="crea.nombres"  class="form-control" placeholder="Nombres">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Apellidos:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-apellidos-crear" ng-model="crea.apellidos"  class="form-control" placeholder="Apellidos">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label"><h5>Sexo:</h5></label>
+                                      <div class="col-md-9 col-form-label">
+                                        <div class="form-check form-check-inline mr-1 " ng-model="crea.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" id="sexo_crear1">
+                                          <img src="img/male1.png" class="img-genero" style="width: 100px;" for="inline-masculino-crear">
+                                        </div>
+                                        <div class="form-check form-check-inline mr-1" ng-model="crea.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }" id="sexo_crear2"  ng-click="caja_genero2('F')">
+                                           <img src="img/female1.png" class="img-genero" style="width: 100px;" for="inline-femenino-crear">
+                                         
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Username:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-username-crear" ng-model="crea.username"  class="form-control" placeholder="Username">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Password:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="password" id="text-input-password-crear" ng-model="crea.password"  class="form-control" placeholder="Password">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Confirme password:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="password" id="text-input-passwordn-crear" ng-model="crea.passwordn"  class="form-control" placeholder="Confirme password">
+                                      </div>
+                                    </div>
+
+                              </div>
+                              <div class="card-footer">
+                                <button type="button" class="btn btn-primary" ng-click="insertarUsuarios(crea)"><i class="fa fa-dot-circle-o"></i>&nbsp; Crear</button>
+
+
+                                <button type="button" class="btn btn-danger" ng-click="salir_crear()"><i class="fa fa-ban"></i>&nbsp; Cerrar</button>
+                                
+                              </div>
+                        </div>
+                      </div> 
+                  <div  ng-show="mostrando_editar" id="editar-usuario-div">
+                                                  
+                            <div class="card">
+                              <div class="card-header">
+                                <h3><strong>Edita el usuario</strong> </h3>
+                              </div>
+                              <div class="card-body">
+                                   <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Nombres:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-nombres-editar" ng-model="usuario.nombres"  class="form-control" placeholder="Nombres">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Apellidos:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-apellidos-editar" ng-model="usuario.apellidos"  class="form-control" placeholder="Apellidos">
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label"><h5>Sexo:</h5></label>
+                                      <div class="col-md-9 col-form-label">
+                                         <div class="form-check form-check-inline mr-1 " ng-model="usuario.sexo"  value="M" type= "radio" ng-class="{ 'caja-genero': color_seleccion1==true  }" ng-click="caja_genero1('M')" id="sexo_editar1">
+                                          <img src="img/male1.png" class="img-genero" for="inline-masculino-editar">
+                                        </div>
+                                        <div class="form-check form-check-inline mr-1" ng-model="usuario.sexo" value="F" type = "radio" ng-class="{ 'caja-genero': color_seleccion2==true  }" id="sexo_editar2"  ng-click="caja_genero2('F')">
+                                           <img src="img/female1.png" class="img-genero" for="inline-femenino-editar">
+                                         
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                      <label class="col-md-3 col-form-label" for="text-input"><h5>Username:</h5></label>
+                                      <div class="col-md-9">
+                                       <input type="text" id="text-input-username-editar" ng-model="usuario.username"  class="form-control" placeholder="Username">
+                                      </div>
+                                    </div>
+                              </div>
+                              <div class="card-footer">
+                                <button type="button" class="btn btn-primary" ng-click="editarUsuario(usuario)"><i class="fa fa-dot-circle-o"></i>&nbsp; Guardar cambios</button>
+
+
+                                <button type="button" class="btn btn-danger" ng-click="salir_editar()"><i class="fa fa-ban"></i>&nbsp; Cerrar</button>
+                                
+                              </div>
+                        </div>
+                      </div> 
+         </div>             
+      </div>
+    </div>
+  </div>
+
+</div>
