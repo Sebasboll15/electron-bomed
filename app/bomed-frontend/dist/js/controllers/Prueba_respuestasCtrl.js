@@ -41,7 +41,7 @@ angular.module('app')
 			if ($scope.timeleft > 0) {
 				$scope.esperando = false;	
 			}
-			console.log($scope.esperando, $scope.esperando_preg);
+
 			if($scope.timeleft <= 0){
 				$scope.seleccionarOpcion('');
 				$interval.cancel($scope.downloadTimer);
@@ -106,33 +106,30 @@ angular.module('app')
 				toastr.info('Respuesta correcta');
 			}
 		}
-
-		if ($scope.indice_preg == $scope.preguntas.length) {
-			$scope.esperando_preg 	= true;
-			$scope.esperando 		= true;
-			toastr.success('Prueba terminada');
-			$state.go('app.main');
-			location.reload();
-		}
-
-
+		
 
 		MySocket.emit('contesto_mal/bien', {correcta: correcta});     
 
 		$http.get('::Prueba_en_curso/insertar', {params: {preg_id: $scope.preguntas[$scope.indice_preg].rowid, usuario_id: USER.rowid, opcion_elegida: opcion, correcta: correcta, duracion: $scope.tiempo }  }).then (function(result){
-		 
+					 
 			
-			console.log('Se insertaron los datos con exito', result);
+			console.log('$scope.indice_preg+1', $scope.indice_preg+1, $scope.preguntas.length);
+			if (($scope.indice_preg+1) == $scope.preguntas.length) {
+				$interval.cancel($scope.downloadTimer);
+				$scope.esperando_preg 	= true;
+				$scope.esperando 		= true;
+				toastr.success('Prueba terminada');
+				$state.go('app.main', {}, {reload: true});
+			}
+
+
 			
 			if ($scope.prueba.dirigido == 'Dirigido') {
 				
-				
 				if ( $scope.free_till_question <= ($scope.indice_preg + 1) ) {
-					console.log($scope.free_till_question, $scope.indice_preg + 1);
 					$scope.esperando 	  = true;
 					$scope.esperando_preg = true;
 				}else{
-					console.log($scope.free_till_question, $scope.indice_preg + 1, 'siguiente');
 					$scope.siguiente_preg(true);
 				}
 				$interval.cancel($scope.downloadTimer);
